@@ -33,7 +33,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-decoration: none;
    
 }
@@ -52,6 +52,8 @@
 
 .navbar-item.active a {
   color: white;
+  pointer-events: none;
+  cursor: default; /* Optional: shows it’s not clickable */
 }
 
 .menu-anim {
