@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="navbar-logo">
+    <img src="logo.png" alt="logo" /> <!--images now in rootpublic folder-->
+  </div>
+  <ul class="navbar-items">
+    <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/" >
+        <span class="menu-anim">
+          <span class="blue-stripe"></span>
+          <span class="white-stripe"></span>
+        </span>
+        <span class="menu-text">who</span>
+      </a>
+    </li>
+    <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/what" >
+        <span class="menu-anim">
+          <span class="blue-stripe"></span>
+          <span class="white-stripe"></span>
+        </span>
+        <span class="menu-text">what</span>
+      </a>
+    </li>
+  </ul>
+</nav>
