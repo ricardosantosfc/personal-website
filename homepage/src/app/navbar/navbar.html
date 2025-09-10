@@ -1,7 +1,43 @@
 <nav class="navbar">
-  <div class="navbar-logo">
-    <img src="logo.png" alt="logo" /> <!--images now in rootpublic folder-->
-  </div>
+
+   <div class="navbar-logo composed-logo">
+  <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="8" height="12" fill="#912727"/>
+  </svg>
+
+  <svg class="logo-part part2" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="3" height="3" fill="#3D6082"/>
+  </svg>
+
+  <svg class="logo-part part3" width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0H7V7H5.5L0 0Z" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part4" width="10" height="3" viewBox="0 0 10 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0H10V3H0V0Z" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part5" width="2" height="6" viewBox="0 0 2 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="2" height="6" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part6" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 6H0L1 9H13L14 6L11 0H9.5L12 6Z" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 0H1L0 3H6V0Z" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part8" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="3" height="2" fill="white"/>
+  </svg>
+
+  <svg class="logo-part part9" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="3" height="3" fill="#3D6082"/>
+  </svg>
+</div>
+
   <ul class="navbar-items">
     <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> <!-- so only exactlythis is active-->
       <a routerLink="/" >

@@ -145,3 +145,31 @@
   opacity: 1;
   transition-delay: 0s;
 }
+
+
+.composed-logo {
+  position: relative;
+  height: 40px;   
+  bottom:  -15px;
+}
+
+/*figma based  positions*/
+.part1 { left: 0px; top: 0px; } /* 8 width, 12 height*/
+.part2 { left: 5px; top: -7.5px; } /* 3x3 */
+.part3 { left: 12px; top: 5px; } /*r bottom, starts after 3 of r top */
+.part4 { left: 9px; top: -4px; } /*r top, start 1 after part1, 10 lenght**/
+.part5 { left: 19px; top: -1px; } /*r middle, start after part 4, widhe =2*/
+.part6 { left: 22px; top: 3px; } /*duck tail, starts after 2 middle r*/
+.part7 { left: 31px; top: -2px; } /* duck head 6 widht, start after 9, 2 on top of tail*/
+.part8 { left: 38px; top: 1px; } /*duck beak 3 whidht, staarts after1*/
+.part9 { left: 41px; top: 9px; }
+
+.logo-part {
+  position: absolute;
+  transition: transform 0.3s ease, fill 0.3s ease;
+  cursor: pointer;
+}
+
+.logo-part:hover {
+  transform: translateY(-3px) scale(1.05);
+}
