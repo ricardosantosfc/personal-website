@@ -11,7 +11,7 @@ import { Game } from "../game/game";
 })
 export class Navbar {
 
-  /* in mobile do not check hovering, and css query(hover ) none , in mobile maybe just keep the beak fill blinking*/
+  /* in mobile do not check hovering, and css query(hover ) none , in mobile maybe just keep the beak fill blinking slowly*/
   isGameActive = signal(false);
   hovering = signal(false);
   
@@ -19,7 +19,7 @@ export class Navbar {
     this.isGameActive.update((isGameActive) => !isGameActive); /* might have to change to enable/disable but for now ok */
   }
 
-  isHovering() {
+  isHovering() { /* and also might be too fast trigger warning */
     this.hovering.update((hovering) => !hovering); /* too expensiver perfomance wise maybe */
   }
   
