@@ -1,5 +1,10 @@
 <nav class="navbar">
 
+  @if(isGameActive()){
+    <app-game></app-game>
+    <button (click)="setGameActive()">X</button>
+  }@else {
+  
    <div class="navbar-logo composed-logo">
   <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="8" height="12" fill="#912727"/>
@@ -21,19 +26,21 @@
     <rect width="2" height="6" fill="white"/>
   </svg>
 
-  <svg class="logo-part part6" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- S -->
+
+  <svg class="logo-part part6" (mouseenter)="isHovering()" (mouseleave)="isHovering()"  width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 6H0L1 9H13L14 6L11 0H9.5L12 6Z" fill="white"/>
   </svg>
 
-  <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="logo-part part7" (mouseenter)="isHovering()" (mouseleave)="isHovering()"  width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6 0H1L0 3H6V0Z" fill="white"/>
   </svg>
 
-  <svg class="logo-part part8" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="logo-part part8" [class.orange] = "hovering()" (click)="setGameActive()" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="3" height="2" fill="var(--fillColor)"/>
   </svg>
-
-  <svg class="logo-part part9" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <svg class="logo-part part9" (mouseenter)="isHovering()" (mouseleave)="isHovering()" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="3" height="3" fill="#3D6082"/>
   </svg>
 </div>
@@ -58,4 +65,6 @@
       </a>
     </li>
   </ul>
+  
+}
 </nav>

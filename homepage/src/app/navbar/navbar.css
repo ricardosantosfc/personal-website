@@ -8,6 +8,7 @@
     border-radius: 6px;
 }
 
+
 @media screen and (min-width: 768px) { /* scale to 130 zoom autoamitcally*/
     .navbar {
      zoom: 130%;
@@ -171,7 +172,7 @@
 .part5 { left: 19px; top: -1px; } /*r middle, start after part 4, widhe =2*/
 .part6 { left: 22px; top: 3px; } /*duck tail, starts after 2 middle r*/
 .part7 { left: 31px; top: -2px; } /* duck head 6 widht, start after 9, 2 on top of tail*/
-.part8 { left: 38px; top: 1px; --fillColor: white ; } /*duck beak 3 whidht, staarts after1*/
+.part8 { left: 38px; top: 1px; --fillColor: white ; cursor: pointer; } /*duck beak 3 whidht, staarts after1*/
 .part9 { left: 41px; top: 9px; }
 
 .logo-part {
@@ -179,14 +180,16 @@
 
 }
 
-.part6, .part7, .part8{
+.part1, .part2, .part3, .part4, .part5{
   transition: transform 0.3s ease, fill 0.3s ease;
-  cursor: pointer;
+  
 }
-.part6:hover, .part7:hover, .part8:hover {
+
+.part1:hover, .part2:hover, .part3:hover, .part4:hover, .part5:hover {
   transform: translateY(-3px) scale(1.05);
 }
 
-.part8:hover {
+
+.part8.orange { /*maybe animate like prmmpt?*/
      --fillColor: #ED5F13 ;
 }
