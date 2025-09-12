@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 interface Obstacle {
   x: number;
   y: number;
+  hasSpawnedNext: boolean;
 }
 @Component({
   selector: 'app-game',
@@ -32,6 +33,7 @@ export class Game {
   private obstacleWidth = 0; // 20 per figma
 
   private obstaclesToDestroyCount = 0;
+  private spawningBaseTimeout = 200;
 
   obstacles: Obstacle[] = [];
   currObstacleSpeed = 3.0; // px per frame
@@ -107,14 +109,14 @@ export class Game {
 
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth; //20 per figmas
-      this.spawnObstacles();
+      this.spawnObstacles(this.currObstacleSpeed);
       this.animate();
     };
     
   }
 
-  spawnObstacles() {
-    this.spawnInterval = setInterval(() => {
+  spawnObstacles(speed: number) {
+    this.spawnInterval = setTimeout(() => {
 
       //gen random 0 or 1 to place on bottom or top lane
       const minCeiled = Math.ceil(0);
@@ -124,10 +126,11 @@ export class Game {
       const newObstacle: Obstacle = {
         x: this.width,
         y: random == 0 ? this.initialDuckPosY - 4 : this.initialDuckPosY - 4 - 56, //w offset to anchor them on the lanes
+        hasSpawnedNext : false
       };
 
       this.obstacles.push(newObstacle);
-    }, 1000); // every second
+    },this.spawningBaseTimeout/ speed); // will decrease prportionally with the obstacles speed increase
   }
 
   animate() {
@@ -146,6 +149,10 @@ export class Game {
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
 
+        if(obstacle.x < this.width / 1.13 && obstacle.hasSpawnedNext === false){ //review, 
+          this.spawnObstacles(this.currObstacleSpeed);
+          obstacle.hasSpawnedNext = true;
+        }
         if (obstacle.x + this.obstacleWidth < 0) {
           this.obstaclesToDestroyCount++; //curr index 0 obstacle
           this.score++;
