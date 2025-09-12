@@ -144,7 +144,7 @@ export class Game {
       this.ctx!.fillStyle = "#ffffffff";
       this.ctx!.textBaseline = "top";
       this.ctx!.textAlign = "left";
-      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", 10, 0);
+      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", 10, 10);
 
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
@@ -189,7 +189,7 @@ export class Game {
     this.ctx!.font = "50px Nunito";
     this.ctx!.fillStyle = "#ffffffff";
     this.ctx!.textAlign = "center";
-    this.ctx!.fillText("Ya blew it!!", this.width/2, 0);
+    this.ctx!.fillText("Ya blew it!!", this.width/2, 10);
 
      this.ctx!.font = "30px Nunito";
     this.ctx!.fillStyle = "#ffffffff";
@@ -199,7 +199,7 @@ export class Game {
     this.ctx!.font = "20px Nunito";
     this.ctx!.fillStyle = "#ffffffff";
     this.ctx!.textBaseline = "bottom";
-    this.ctx!.fillText("Click anywhere to play again", this.width/2, this.height);
+    this.ctx!.fillText("Click anywhere to play again", this.width/2, this.height -10);
   }
 
 
