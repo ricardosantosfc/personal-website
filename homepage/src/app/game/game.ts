@@ -52,15 +52,15 @@ export class Game {
 
   //hande click inside canvas
   handleClick() {
-    if(this.isGameRunning){
+    if (this.isGameRunning) {
       this.moveDuck();
-    }else{
+    } else {
       this.canvasRef.nativeElement.style.cursor = "default";
       this.ctx!.clearRect(0, 0, this.width, this.height);
       this.startGame();
       this.isGameRunning = true;
     }
-    
+
   }
 
   ngAfterViewInit() {
@@ -91,7 +91,7 @@ export class Game {
   }
 
   startGame() {
-    this.currObstacleSpeed= this.initialObstacleSpeed;
+    this.currObstacleSpeed = this.initialObstacleSpeed;
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
     this.drawLanes(this.width, this.height); //not needed as already in animate
@@ -112,7 +112,7 @@ export class Game {
       this.spawnObstacles(this.currObstacleSpeed);
       this.animate();
     };
-    
+
   }
 
   spawnObstacles(speed: number) {
@@ -126,11 +126,11 @@ export class Game {
       const newObstacle: Obstacle = {
         x: this.width,
         y: random == 0 ? this.initialDuckPosY - 4 : this.initialDuckPosY - 4 - 56, //w offset to anchor them on the lanes
-        hasSpawnedNext : false
+        hasSpawnedNext: false
       };
 
       this.obstacles.push(newObstacle);
-    },this.spawningBaseTimeout/ speed); // will decrease prportionally with the obstacles speed increase
+    }, this.spawningBaseTimeout / speed); // will decrease prportionally with the obstacles speed increase
   }
 
   animate() {
@@ -149,7 +149,7 @@ export class Game {
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
 
-        if(obstacle.x < this.width / 1.13 && obstacle.hasSpawnedNext === false){ //review, 
+        if (obstacle.x < this.width / 1.13 && obstacle.hasSpawnedNext === false) { //review, 
           this.spawnObstacles(this.currObstacleSpeed);
           obstacle.hasSpawnedNext = true;
         }
@@ -167,11 +167,11 @@ export class Game {
       });
 
       //clear out of canvas obstacles if any. count should at most be 1, but to account for frame loss..
-      if(this.obstaclesToDestroyCount!==0){
-          this.obstacles.splice(0,this.obstaclesToDestroyCount);
-          this.obstaclesToDestroyCount = 0;
-        }
-      
+      if (this.obstaclesToDestroyCount !== 0) {
+        this.obstacles.splice(0, this.obstaclesToDestroyCount);
+        this.obstaclesToDestroyCount = 0;
+      }
+
       this.currObstacleSpeed += 0.01;
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
@@ -181,25 +181,27 @@ export class Game {
     this.isGameRunning = false;
     cancelAnimationFrame(this.animationFrameId);
     clearInterval(this.spawnInterval);
-    this.obstacles.length = 0;
+    setTimeout(() => { // stop the canvas for some time before trnasitioning imeddiatly to gameover screen
+      this.obstacles.length = 0;
 
-    this.canvasRef.nativeElement.style.cursor = "pointer";
-    this.ctx!.clearRect(0, 0, this.width, this.height);
+      this.ctx!.clearRect(0, 0, this.width, this.height);
 
-    this.ctx!.font = "50px Nunito";
-    this.ctx!.fillStyle = "#ffffffff";
-    this.ctx!.textAlign = "center";
-    this.ctx!.fillText("Ya blew it!!", this.width/2, 10);
+      this.ctx!.font = "50px Nunito";
+      this.ctx!.fillStyle = "#ffffffff";
+      this.ctx!.textAlign = "center";
+      this.ctx!.fillText("Ya blew it!!", this.width / 2, 10);
 
-     this.ctx!.font = "30px Nunito";
-    this.ctx!.fillStyle = "#ffffffff";
-    this.ctx!.textBaseline = "middle";
-    this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", this.width/2, this.height/2);
+      this.ctx!.font = "30px Nunito";
+      this.ctx!.fillStyle = "#ffffffff";
+      this.ctx!.textBaseline = "middle";
+      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", this.width / 2, this.height / 2);
 
-    this.ctx!.font = "20px Nunito";
-    this.ctx!.fillStyle = "#ffffffff";
-    this.ctx!.textBaseline = "bottom";
-    this.ctx!.fillText("Click anywhere to play again", this.width/2, this.height -10);
+      this.ctx!.font = "20px Nunito";
+      this.ctx!.fillStyle = "#ffffffff";
+      this.ctx!.textBaseline = "bottom";
+      this.ctx!.fillText("Click anywhere to play again", this.width / 2, this.height - 10);
+      this.canvasRef.nativeElement.style.cursor = "pointer";
+    }, 400);
   }
 
 
