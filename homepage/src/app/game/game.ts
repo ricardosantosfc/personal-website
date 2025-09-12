@@ -2,7 +2,6 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 interface Obstacle {
   x: number;
   y: number;
-  toRemove: boolean;
 }
 @Component({
   selector: 'app-game',
@@ -31,6 +30,8 @@ export class Game {
 
   private obstacleImg = new Image();
   private obstacleWidth = 0; // 20 per figma
+
+  private obstaclesToDestroyCount = 0;
 
   obstacles: Obstacle[] = [];
   obstacleSpeed = 3.0; // px per frame
@@ -87,6 +88,7 @@ export class Game {
   }
 
   startGame() {
+    this.obstaclesToDestroyCount = 0;
     this.score = 0;
     this.drawLanes(this.width, this.height); //not needed as already in animate
     this.duckImg.onload = () => {
@@ -120,7 +122,6 @@ export class Game {
       const newObstacle: Obstacle = {
         x: this.width,
         y: random == 0 ? this.initialDuckPosY - 4 : this.initialDuckPosY - 4 - 56, //w offset to anchor them on the lanes
-        toRemove: false
       };
 
       this.obstacles.push(newObstacle);
@@ -140,12 +141,11 @@ export class Game {
       this.ctx!.textAlign = "left";
       this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", 10, 0);
 
-      this.obstacles.forEach((obstacle, index) => {
+      this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.obstacleSpeed;
 
-
         if (obstacle.x + this.obstacleWidth < 0) {
-          obstacle.toRemove = true;
+          this.obstaclesToDestroyCount++; //curr index 0 obstacle
           this.score++;
         } else {
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
@@ -157,11 +157,11 @@ export class Game {
         }
       });
 
-      this.obstacles.forEach((obstacle, index) => { //review this, maybe not perf optimal
-        if(obstacle.toRemove ===true){
-          this.obstacles.splice(index,1);
+      //clear out of canvas obstacles if any
+      if(this.obstaclesToDestroyCount!==0){
+          this.obstacles.splice(0,this.obstaclesToDestroyCount);
+          this.obstaclesToDestroyCount = 0;
         }
-      });
       
       //this.obstacleSpeed += 0.01;
       this.animationFrameId = requestAnimationFrame(() => this.animate());
@@ -220,10 +220,6 @@ export class Game {
     } else {
       this.currDuckPosY += 56
     }
-  }
-
-  incScore() {
-    this.score++;
   }
 
 }
