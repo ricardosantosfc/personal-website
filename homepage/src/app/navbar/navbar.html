@@ -1,8 +1,10 @@
-<nav class="navbar">
+<nav class="navbar" [class.game-active] = "isGameActive()">
 
   @if(isGameActive()){
-    <app-game></app-game>
-    <button (click)="setGameActive()">X</button>
+    <div class="game-wrapper">
+      <app-game></app-game>
+      <button class="btn-close-game" (click)="setGameActive()">X</button>
+    </div>
   }@else {
   
     <!---hovering over any svg = part8.orange-->

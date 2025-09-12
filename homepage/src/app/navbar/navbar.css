@@ -8,6 +8,33 @@
     border-radius: 6px;
 }
 
+.navbar.game-active{ /* might need additional class for mobile to accomodate tap buttons*/
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  background-color: #000;
+  padding: 2em 2em;
+  border-radius: 6px;
+  position: relative; 
+
+}
+
+.game-wrapper {
+  position: relative;
+  zoom:100%;
+  width: 100%;
+  background-color: #1c1c1c;
+}
+
+.btn-close-game {
+  position: absolute;
+  top: 0;
+  right: 0; 
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
 
 @media screen and (min-width: 768px) { /* scale to 130 zoom autoamitcally*/
     .navbar {

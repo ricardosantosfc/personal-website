@@ -17,6 +17,7 @@ export class Navbar {
   hoverTimeout = 0;
   
   setGameActive() {
+    this.hovering.set(false);
     this.isGameActive.update((isGameActive) => !isGameActive); /* might have to change to enable/disable but for now ok */
   }
 
