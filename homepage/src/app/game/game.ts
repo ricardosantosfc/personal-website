@@ -25,8 +25,8 @@ export class Game {
   private duckImg = new Image();
   private currDuckPosY = 0;
   private initialDuckPosY = 0;
-  private duckPosX = 10; //x offset, w = 51, so occupies 10-61, but for good measure o it programmatically
-  private duckEndPosX = 0;
+  private duckPosX = 10; //x offset, w = 51, 
+  private duckEndPosX = 0; //so occupies 10-61, but for good measure do it programmatically
 
   private obstacleImg = new Image();
   private obstacleWidth = 0; // 20 per figma
@@ -34,7 +34,8 @@ export class Game {
   private obstaclesToDestroyCount = 0;
 
   obstacles: Obstacle[] = [];
-  obstacleSpeed = 3.0; // px per frame
+  currObstacleSpeed = 3.0; // px per frame
+  initialObstacleSpeed = 3.0;
   spawnInterval: any;
   animationFrameId = 0;
 
@@ -88,6 +89,7 @@ export class Game {
   }
 
   startGame() {
+    this.currObstacleSpeed= this.initialObstacleSpeed;
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
     this.drawLanes(this.width, this.height); //not needed as already in animate
@@ -142,7 +144,7 @@ export class Game {
       this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", 10, 0);
 
       this.obstacles.forEach((obstacle): void => {
-        obstacle.x -= this.obstacleSpeed;
+        obstacle.x -= this.currObstacleSpeed;
 
         if (obstacle.x + this.obstacleWidth < 0) {
           this.obstaclesToDestroyCount++; //curr index 0 obstacle
@@ -157,13 +159,13 @@ export class Game {
         }
       });
 
-      //clear out of canvas obstacles if any
+      //clear out of canvas obstacles if any. count should at most be 1, but to account for frame loss..
       if(this.obstaclesToDestroyCount!==0){
           this.obstacles.splice(0,this.obstaclesToDestroyCount);
           this.obstaclesToDestroyCount = 0;
         }
       
-      //this.obstacleSpeed += 0.01;
+      this.currObstacleSpeed += 0.01;
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
   }
