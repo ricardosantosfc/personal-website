@@ -1,7 +1,7 @@
 <nav class="navbar" [class.game-active] = "isGameActive()">
 
   @if(isGameActive()){
-    <div class="game-wrapper">
+    <div class="game-wrapper" animate.enter="enter-animation">
       <app-game></app-game>
       <button class="btn-close-game" (click)="setGameActive()">X</button>
     </div>
