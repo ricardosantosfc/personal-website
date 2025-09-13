@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
+import { GameService } from '../game-service';
 interface Obstacle {
   x: number;
   y: number;
@@ -13,7 +14,10 @@ interface Obstacle {
 
 export class Game {
 
+  private gameService = inject(GameService);
+
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+  maxScore=0;
   score = 0;
   ctx!: CanvasRenderingContext2D | null;
   width = 0;
@@ -70,6 +74,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
   }
 
   ngAfterViewInit() {
+    this.maxScore = this.gameService.getMaxScore();
     const canvas = this.canvasRef.nativeElement;
     const ctx = canvas.getContext('2d');
     const dpi = window.devicePixelRatio || 1;
@@ -151,7 +156,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
       this.ctx!.fillStyle = "#ffffffff";
       this.ctx!.textBaseline = "top";
       this.ctx!.textAlign = "left";
-      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", 10, 10);
+      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, 10, 10);
 
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
@@ -187,6 +192,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
   gameOver() {
     this.hasDrawnGameOverCanvas = false;
     this.isGameRunning = false;
+    this.maxScore = this.gameService.updateMaxScore(this.score);
     cancelAnimationFrame(this.animationFrameId);
     clearInterval(this.spawnInterval);
     this.ctx!.drawImage(this.duckGameOverImg, this.duckPosX, this.currDuckPosY); //drawn on top of duck img
@@ -203,7 +209,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
       this.ctx!.font = "30px Nunito";
       this.ctx!.fillStyle = "#ffffffff";
       this.ctx!.textBaseline = "middle";
-      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + "0", this.width / 2, this.height / 2);
+      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, this.width / 2, this.height / 2);
 
       this.ctx!.font = "20px Nunito";
       this.ctx!.fillStyle = "#ffffffff";
@@ -220,7 +226,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
     const midY1 = height / 2 - 28;
     const midY2 = height / 2 + 28;
 
-    this.ctx!.fillStyle = "#292e32ff";
+    this.ctx!.fillStyle = "rgba(23, 27, 30, 1)";
     this.ctx!.beginPath(); // Start a new path
     this.ctx!.rect(0, 0, width, height); // Add a rectangle to the current path
     this.ctx!.fill(); // Render the path
