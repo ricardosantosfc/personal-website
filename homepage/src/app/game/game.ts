@@ -20,16 +20,19 @@ export class Game {
   height = 0;
 
   isGameRunning = true;
+  hasDrawnGameOverCanvas = false; //quick fix to disallow controls as long as gameover canvas isnt draw. might be overkill.review
 
   private controlSet = new Set(['w', 's', 'ArrowDown', 'ArrowUp', " "]) //will override space and key up down scrolling
 
   private duckImg = new Image();
+  private duckGameOverImg = new Image();
   private currDuckPosY = 0;
   private initialDuckPosY = 0;
   private duckPosX = 10; //x offset, w = 51, 
   private duckEndPosX = 0; //so occupies 10-61, but for good measure do it programmatically
 
   private obstacleImg = new Image();
+  private obstacleOffsetPosY = 2.5; // to "anchor" obstacles in lanes
   private obstacleWidth = 0; // 20 per figma
 
   private obstaclesToDestroyCount = 0;
@@ -44,8 +47,8 @@ export class Game {
   //handle controls
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (this.controlSet.has(event.key) && this.isGameRunning) {
-      this.moveDuck();
+    if (this.controlSet.has(event.key)) { //will override space and key up down scrolling
+      this.handleClick();
     }
 
   }
@@ -55,10 +58,13 @@ export class Game {
     if (this.isGameRunning) {
       this.moveDuck();
     } else {
-      this.canvasRef.nativeElement.style.cursor = "default";
+      if(this.hasDrawnGameOverCanvas){
+this.canvasRef.nativeElement.style.cursor = "default";
       this.ctx!.clearRect(0, 0, this.width, this.height);
       this.startGame();
       this.isGameRunning = true;
+      }
+      
     }
 
   }
@@ -103,9 +109,10 @@ export class Game {
       this.currDuckPosY = this.initialDuckPosY;
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY, nw, nh);
     };
-    this.duckImg.src = 'duck.svg';
+    this.duckImg.src = 'duck_eye_stroke.svg';
 
-    this.obstacleImg.src = 'obstacle.svg';
+    this.duckGameOverImg.src = 'duck_sad_stroke.svg'; //review . see if ok to do here
+    this.obstacleImg.src = 'obstacle9.svg';
 
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth; //20 per figmas
@@ -125,7 +132,7 @@ export class Game {
 
       const newObstacle: Obstacle = {
         x: this.width,
-        y: random == 0 ? this.initialDuckPosY - 4 : this.initialDuckPosY - 4 - 56, //w offset to anchor them on the lanes
+        y: random == 0 ? this.initialDuckPosY - this.obstacleOffsetPosY : this.initialDuckPosY - this.obstacleOffsetPosY - 56, //w offset to anchor them on the lanes
         hasSpawnedNext: false
       };
 
@@ -160,7 +167,7 @@ export class Game {
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
         }
 
-        if ((this.currDuckPosY - 4 == obstacle.y) && (this.duckPosX < obstacle.x && obstacle.x < this.duckEndPosX)) {
+        if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX < obstacle.x && obstacle.x < this.duckEndPosX)) {
           this.gameOver();
           return;
         }
@@ -178,9 +185,11 @@ export class Game {
   }
 
   gameOver() {
+    this.hasDrawnGameOverCanvas = false;
     this.isGameRunning = false;
     cancelAnimationFrame(this.animationFrameId);
     clearInterval(this.spawnInterval);
+    this.ctx!.drawImage(this.duckGameOverImg, this.duckPosX, this.currDuckPosY); //drawn on top of duck img
     setTimeout(() => { // stop the canvas for some time before trnasitioning imeddiatly to gameover screen
       this.obstacles.length = 0;
 
@@ -199,15 +208,22 @@ export class Game {
       this.ctx!.font = "20px Nunito";
       this.ctx!.fillStyle = "#ffffffff";
       this.ctx!.textBaseline = "bottom";
-      this.ctx!.fillText("Click anywhere to play again", this.width / 2, this.height - 10);
+      this.ctx!.fillText("Click or press w, s, space, \u2191, or \u2193 to play again", this.width / 2, this.height - 10);
       this.canvasRef.nativeElement.style.cursor = "pointer";
-    }, 400);
+      this.hasDrawnGameOverCanvas = true;
+    }, 500);
+    
   }
 
 
   drawLanes(width: number, height: number) {
     const midY1 = height / 2 - 28;
     const midY2 = height / 2 + 28;
+
+    this.ctx!.fillStyle = "#292e32ff";
+    this.ctx!.beginPath(); // Start a new path
+    this.ctx!.rect(0, 0, width, height); // Add a rectangle to the current path
+    this.ctx!.fill(); // Render the path
 
     this.ctx!.lineWidth = 10;
     this.ctx!.strokeStyle = "#3D6082";
