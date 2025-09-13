@@ -105,14 +105,12 @@ this.canvasRef.nativeElement.style.cursor = "default";
     this.currObstacleSpeed = this.initialObstacleSpeed;
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
-    this.drawLanes(this.width, this.height); //not needed as already in animate
     this.duckImg.onload = () => {
       const nh = this.duckImg.naturalHeight; //37.8 per figma
       const nw = this.duckImg.naturalWidth; //51
       this.duckEndPosX = nw;
       this.initialDuckPosY = ((this.height - nh) / 2) + 5;
       this.currDuckPosY = this.initialDuckPosY;
-      this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY, nw, nh);
     };
     this.duckImg.src = 'duck_eye_stroke.svg';
 
