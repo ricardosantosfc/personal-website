@@ -37,8 +37,14 @@
 .game-wrapper {
   position: relative;
   zoom:100%;
-  width: 100%;
+  width: 70%; 
   background-color: #1c1c1c;
+}
+
+@media (width <= 720px) {
+  .game-wrapper {
+    width: 100%;
+  }
 }
 
 .btn-close-game {
