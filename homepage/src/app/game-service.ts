@@ -14,10 +14,8 @@ export class GameService {
   }
   
   updateMaxScore(currScore: number): number {
-    console.log(this.maxScore);
     if (this.maxScore < currScore) {
       this.maxScore = currScore;
-
     }
     return this.maxScore
   }
