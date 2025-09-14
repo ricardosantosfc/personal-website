@@ -28,23 +28,35 @@ export class Game {
 
   private controlSet = new Set(['w', 's', 'ArrowDown', 'ArrowUp', " "]) //will override space and key up down scrolling
 
+  private skyImg = new Image();
+  private waterImg = new Image();
+  private waterImg2 = new Image();
+  private waterImg3 = new Image();
+  private offsetSkyWaterY = 15; //push water up
+  private frameCount = 0;
+
+  private shadowImg = new Image();
+
   private duckImg = new Image();
   private duckGameOverImg = new Image();
   private currDuckPosY = 0;
   private initialDuckPosY = 0;
-  private duckPosX = 10; //x offset, w = 51, 
+  private duckPosX = 100; //x offset, w = 51, //also needs to be proportional to the canvas width
   private duckEndPosX = 0; //so occupies 10-61, but for good measure do it programmatically
 
   private obstacleImg = new Image();
-  private obstacleOffsetPosY = 2.5; // to "anchor" obstacles in lanes
+  private obstacleOffsetPosY = 0; // 2.5 for barrels // to "anchor" obstacles in lanes
   private obstacleWidth = 0; // 20 per figma
+  private obstacleFrontHitboxOffset = 25; //for duck obstacles, increase htibox when htting the front of the obstacle
+  private obstacleBackHitboxOffset = -15; //for duck obstacles, decrease hitbox when hitting the backof the obstacle (so beak still gets a pass)
 
   private obstaclesToDestroyCount = 0;
-  private spawningBaseTimeout = 200;
+  private spawningBaseTimeout = 500;
 
   obstacles: Obstacle[] = [];
   currObstacleSpeed = 3.0; // px per frame
   initialObstacleSpeed = 3.0;
+  speedIncrease = 0.005; //0.01
   spawnInterval: any;
   animationFrameId = 0;
 
@@ -72,6 +84,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
     }
 
   }
+  
 
   ngAfterViewInit() {
     this.maxScore = this.gameService.getMaxScore();
@@ -88,7 +101,8 @@ this.canvasRef.nativeElement.style.cursor = "default";
     // Set canvas internal resolution
     canvas.width = this.width * dpi;
     canvas.height = this.height * dpi;
-
+    //console.log(this.duckPosX/canvas.width);// 0.059844404548174746 as normal canvaswidht/100
+    this.duckPosX = canvas.width * 0.0598; //this needs tobe done after a resize, after a game over
     // Scale drawing context
     ctx?.scale(dpi, dpi);
 
@@ -97,26 +111,34 @@ this.canvasRef.nativeElement.style.cursor = "default";
 
     if (ctx) {
       this.ctx = ctx;
+      //this.showControls() -> then on lcick ws,aup or down, start spawing obstacles
       this.startGame();
     }
   }
 
   startGame() {
+    this.frameCount = 0;
     this.currObstacleSpeed = this.initialObstacleSpeed;
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
     this.duckImg.onload = () => {
       const nh = this.duckImg.naturalHeight; //37.8 per figma
       const nw = this.duckImg.naturalWidth; //51
-      this.duckEndPosX = nw;
-      this.initialDuckPosY = ((this.height - nh) / 2) + 5;
+      this.initialDuckPosY = ((this.height - nh) / 2) + 55;
+      this.duckEndPosX = this.duckPosX + nw; //this is wh in eeded offsets, it wasnt being assigned correctly
       this.currDuckPosY = this.initialDuckPosY;
     };
     this.duckImg.src = 'duck_eye_stroke.svg';
+    this.shadowImg.src = "shadow7.svg"
+    this.skyImg.src = 's4 5.png';
+    this.waterImg.src = 's1 5.png'
+    this.waterImg2.src = 's2 5.png'
+    this.waterImg3.src = 's3 5.png'
 
     this.duckGameOverImg.src = 'duck_sad_stroke.svg'; //review . see if ok to do here
-    this.obstacleImg.src = 'obstacle9.svg';
+    this.obstacleImg.src = 'obstacle12.svg';
 
+    // on first command, 
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth; //20 per figmas
       this.spawnObstacles(this.currObstacleSpeed);
@@ -148,6 +170,7 @@ this.canvasRef.nativeElement.style.cursor = "default";
     if (this.isGameRunning) {
       this.ctx!.clearRect(0, 0, this.width, this.height);
       this.drawLanes(this.width, this.height);
+      this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight+36);
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
       this.ctx!.font = "20px Nunito";
@@ -167,11 +190,14 @@ this.canvasRef.nativeElement.style.cursor = "default";
           this.obstaclesToDestroyCount++; //curr index 0 obstacle
           this.score++;
         } else {
+          this.ctx!.drawImage(this.shadowImg, obstacle.x, obstacle.y + this.shadowImg.naturalHeight+36);
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
+          
         }
 
-        if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX < obstacle.x && obstacle.x < this.duckEndPosX)) {
+        if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX- this.obstacleFrontHitboxOffset < obstacle.x && obstacle.x < this.duckEndPosX + this.obstacleBackHitboxOffset)) {
           this.gameOver();
+          this.isGameRunning = false;
           return;
         }
       });
@@ -182,14 +208,14 @@ this.canvasRef.nativeElement.style.cursor = "default";
         this.obstaclesToDestroyCount = 0;
       }
 
-      this.currObstacleSpeed += 0.01;
+      this.currObstacleSpeed += this.speedIncrease;
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
   }
 
   gameOver() {
     this.hasDrawnGameOverCanvas = false;
-    this.isGameRunning = false;
+    
     this.maxScore = this.gameService.updateMaxScore(this.score);
     cancelAnimationFrame(this.animationFrameId);
     clearInterval(this.spawnInterval);
@@ -224,23 +250,21 @@ this.canvasRef.nativeElement.style.cursor = "default";
     const midY1 = height / 2 - 28;
     const midY2 = height / 2 + 28;
 
-    this.ctx!.fillStyle = "rgba(23, 27, 30, 1)";
-    this.ctx!.beginPath(); // Start a new path
-    this.ctx!.rect(0, 0, width, height); // Add a rectangle to the current path
-    this.ctx!.fill(); // Render the path
-
-    this.ctx!.lineWidth = 10;
-    this.ctx!.strokeStyle = "#3D6082";
-
-    this.ctx!.beginPath();
-    this.ctx!.moveTo(0, midY1);
-    this.ctx!.lineTo(width, midY1);
-    this.ctx!.stroke();
-
-    this.ctx!.beginPath();
-    this.ctx!.moveTo(0, midY2);
-    this.ctx!.lineTo(width, midY2);
-    this.ctx!.stroke();
+  this.ctx!.drawImage(this.skyImg, 0,0, width, midY1 + 1 - this.offsetSkyWaterY);
+   
+   if(this.frameCount <= 12){
+    this.ctx!.drawImage(this.waterImg, 0,height, width, midY1-height-this.offsetSkyWaterY);
+    this.frameCount++;
+   }else if(this.frameCount<=24){
+     this.ctx!.drawImage(this.waterImg2, 0,height, width, midY1-height-this.offsetSkyWaterY);
+      this.frameCount++;
+   }else if(this.frameCount<=36){
+     this.ctx!.drawImage(this.waterImg3, 0,height, width, midY1-height-this.offsetSkyWaterY);
+      this.frameCount++;
+      if(this.frameCount==37){
+        this.frameCount = 0;
+      }
+    }
 
   }
 
