@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
 import { GameService } from '../game-service';
 import { GameState } from '../game-state';
+
 interface Obstacle {
   x: number;
   y: number;
@@ -18,11 +19,13 @@ export class Game {
   private gameService = inject(GameService);
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
-  private maxScore = 0;
-  private score = 0;
+
   private ctx!: CanvasRenderingContext2D | null;
   private width = 0;
   private height = 0;
+
+  private maxScore = 0;
+  private score = 0;
 
   private gameState = GameState.Loading;
 
@@ -33,7 +36,7 @@ export class Game {
   private waterImg2 = new Image();
   private waterImg3 = new Image();
   private offsetSkyWaterY = 15; //push water up
-  private frameCount = 0;
+  private backgroundFrameCount = 0;
 
   private shadowImg = new Image();
 
@@ -53,12 +56,13 @@ export class Game {
   private obstaclesToDestroyCount = 0;
   private spawnTimer = 500;
 
-  obstacles: Obstacle[] = [];
-  currObstacleSpeed = 3.0; // px per frame
-  initialObstacleSpeed = 3.0;
-  speedIncrease = 0.005; //0.01
-  spawnTimeoutId: any;
-  animationFrameId = 0;
+  private obstacles: Obstacle[] = [];
+  private currObstacleSpeed = 3.0; // px per frame
+  private initialObstacleSpeed = 3.0;
+  private speedIncrease = 0.005; //0.01
+  private spawnTimeoutId: any;
+
+  private animationFrameId = 0;
 
 
 
@@ -83,7 +87,7 @@ export class Game {
 
   }
 
-  //hande click inside canvas
+  //hande click inside canvas and controlset.has
   handleClick() {
 
     if (this.gameState === GameState.Running) {
@@ -102,9 +106,7 @@ export class Game {
 
     }
 
-
   }
-
 
   ngAfterViewInit() {
 
@@ -129,8 +131,7 @@ export class Game {
     canvas.width = this.width * dpi;
     canvas.height = this.height * dpi;
 
-
-    //console.log(this.duckPosX/this.width); //0.059844404548174746 as normal canvaswidht ->100 for canva.width, for this.widht  0.1048
+    //console.log(this.duckPosX/this.width); // for this.widht  0.1048
     //console.log(this.spawnTimer/canvas.width); 0.2992 as canvaswidth ->500
 
     // setting duckPosX on resize means postionDucktoo
@@ -148,7 +149,7 @@ export class Game {
     }
   }
 
- 
+
   loadAssets() {
 
     this.duckImg.src = 'duck_eye_stroke.svg';
@@ -162,7 +163,7 @@ export class Game {
     this.waterImg2.src = 's2 5.png'
     this.waterImg3.src = 's3 5.png'
 
-    this.duckGameOverImg.src = 'duck_sad_stroke.svg'; //review . see if ok to do here
+    this.duckGameOverImg.src = 'duck_sad_stroke.svg';
     this.obstacleImg.src = 'obstacle12.svg';
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth;
@@ -172,33 +173,18 @@ export class Game {
 
   }
 
-   positionDuck(){
+  positionDuck() {
     const nh = this.duckImg.naturalHeight; //37.8 per figma
-      const nw = this.duckImg.naturalWidth; //51
-      this.initialDuckPosY = ((this.height - nh) / 2) + 55;
-      this.duckEndPosX = this.duckPosX + nw; //this is wh in eeded offsets, it wasnt being assigned correctly
-      this.currDuckPosY = this.initialDuckPosY;
+    const nw = this.duckImg.naturalWidth; //51
+    this.initialDuckPosY = ((this.height - nh) / 2) + 55;
+    this.duckEndPosX = this.duckPosX + nw; 
+    this.currDuckPosY = this.initialDuckPosY;
   }
-
-  getResponsiveFontSize(baseFontSize: number): number { //based on canvas prop, r
-    const baseWidth = 954.95;
-    const baseHeight = 389.99;
-
-    const widthScale = this.width / baseWidth;
-    const heightScale = this.height / baseHeight;
-    const scale = Math.min(widthScale, heightScale);
-
-    const minFont = 10;
-    const maxFont = 36;
-
-    return Math.max(minFont, Math.min(baseFontSize * scale, maxFont));
-  }
-
 
   showControls() {
     this.gameState = GameState.ShowingControls;
 
-    this.drawLanes(this.width, this.height);
+    this.drawBackground(this.width, this.height);
     this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
     this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
@@ -215,7 +201,7 @@ export class Game {
     this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
     this.ctx!.textBaseline = "middle";
     this.ctx!.textAlign = "center";
-    this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height/2);
+    this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height / 2);
 
 
     responsiveFontSize = this.getResponsiveFontSize(20);
@@ -228,19 +214,14 @@ export class Game {
 
   startGame() {
 
-    this.frameCount = 0;
+    this.backgroundFrameCount = 0;
     this.currObstacleSpeed = this.initialObstacleSpeed;
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
 
-
-    // on first command, 
-    //20 per figmas
     this.gameState = GameState.Running;
-
     this.spawnObstacles(this.currObstacleSpeed);
     this.animate();
-
 
   }
 
@@ -266,7 +247,7 @@ export class Game {
 
     if (this.gameState === GameState.Running) {
       this.ctx!.clearRect(0, 0, this.width, this.height);
-      this.drawLanes(this.width, this.height);
+      this.drawBackground(this.width, this.height);
       this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
@@ -279,7 +260,7 @@ export class Game {
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
 
-        if (obstacle.hasSpawnedNext === false && obstacle.x < this.width / 1.13) { //review, 
+        if (obstacle.hasSpawnedNext === false && obstacle.x < this.width / 1.13) {
           this.spawnObstacles(this.currObstacleSpeed);
           obstacle.hasSpawnedNext = true;
         }
@@ -310,12 +291,12 @@ export class Game {
   }
 
   gameOver() {
-    this.gameState = GameState.GameOver;
 
+    this.gameState = GameState.GameOver;
     this.maxScore = this.gameService.updateMaxScore(this.score);
     cancelAnimationFrame(this.animationFrameId);
     clearInterval(this.spawnTimeoutId);
-    this.ctx!.drawImage(this.duckGameOverImg, this.duckPosX, this.currDuckPosY); //drawn on top of duck img
+    this.ctx!.drawImage(this.duckGameOverImg, this.duckPosX, this.currDuckPosY); //drawn on top of duck img, no need to clear
     setTimeout(() => { // stop the canvas for some time before trnasitioning imeddiatly to gameover screen
       this.obstacles.length = 0;
 
@@ -331,7 +312,7 @@ export class Game {
 
   showGameOverCanvas() {
 
-    this.ctx!.fillStyle = "#ffffffff"; 
+    this.ctx!.fillStyle = "#ffffffff";
     var responsiveFontSize = this.getResponsiveFontSize(43);
     //also need to set it here in case of a reszie
     this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
@@ -353,23 +334,22 @@ export class Game {
   }
 
 
-  drawLanes(width: number, height: number) {
+  drawBackground(width: number, height: number) {
     const midY1 = height / 2 - 28;
-    const midY2 = height / 2 + 28;
 
     this.ctx!.drawImage(this.skyImg, 0, 0, width, midY1 + 1 - this.offsetSkyWaterY);
 
-    if (this.frameCount <= 12) {
+    if (this.backgroundFrameCount <= 12) {
       this.ctx!.drawImage(this.waterImg, 0, height, width, midY1 - height - this.offsetSkyWaterY);
-      this.frameCount++;
-    } else if (this.frameCount <= 24) {
+      this.backgroundFrameCount++;
+    } else if (this.backgroundFrameCount <= 24) {
       this.ctx!.drawImage(this.waterImg2, 0, height, width, midY1 - height - this.offsetSkyWaterY);
-      this.frameCount++;
-    } else if (this.frameCount <= 36) {
+      this.backgroundFrameCount++;
+    } else if (this.backgroundFrameCount <= 36) {
       this.ctx!.drawImage(this.waterImg3, 0, height, width, midY1 - height - this.offsetSkyWaterY);
-      this.frameCount++;
-      if (this.frameCount == 37) { //needs to be done imeddiatly so next frame is already
-        this.frameCount = 0;
+      this.backgroundFrameCount++;
+      if (this.backgroundFrameCount == 37) { //needs to be done imeddiatly so next frame is already
+        this.backgroundFrameCount = 0;
       }
     } //frameCount is inc on resizes but not problematic
 
@@ -382,6 +362,20 @@ export class Game {
     } else {
       this.currDuckPosY += 56
     }
+  }
+
+  getResponsiveFontSize(baseFontSize: number): number { //based on canvas prop, r
+    const baseWidth = 954.95;
+    const baseHeight = 389.99;
+
+    const widthScale = this.width / baseWidth;
+    const heightScale = this.height / baseHeight;
+    const scale = Math.min(widthScale, heightScale);
+
+    const minFont = 10;
+    const maxFont = 36;
+
+    return Math.max(minFont, Math.min(baseFontSize * scale, maxFont));
   }
 
 }
