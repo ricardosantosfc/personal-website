@@ -170,20 +170,7 @@
     transition-delay: 0.2s;
 }
 
-.navbar-item:hover .blue-stripe {
-    transform: translateY(0);
-    opacity: 1;
-}
 
-.navbar-item:hover .white-stripe {
-    transform: scaleX(1);
-    opacity: 1;
-}
-
-.navbar-item:hover .menu-text::after {
-    transform: scaleX(1);
-    transform: scaleY(2.5);
-}
 
 .navbar-item:not(:hover) .blue-stripe,
 .navbar-item:not(:hover) .white-stripe,
@@ -236,6 +223,23 @@
   
 }
 
+@media (any-hover: hover) {
+
+  .navbar-item:hover .blue-stripe {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.navbar-item:hover .white-stripe {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.navbar-item:hover .menu-text::after {
+    transform: scaleX(1);
+    transform: scaleY(2.5);
+}
+
 .part1:hover, .part2:hover, .part3:hover, .part4:hover, .part5:hover, .part6:hover,
 .part7:hover, .part9:hover { /* to only 1-5?*/
   transform: translateY(-3px) scale(1.05);
@@ -244,6 +248,8 @@
 .part8:hover{ 
   transform: scale(1.25); cursor: pointer;
 }
+}
+
 
 .part8 rect {
   transition: fill 0.4s ease;

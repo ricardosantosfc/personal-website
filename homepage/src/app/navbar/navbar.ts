@@ -11,15 +11,39 @@ import { Game } from "../game/game";
 })
 export class Navbar {
 
-  /* in mobile do not check hovering, and css query(hover ) none , in mobile maybe just keep the beak fill blinking slowly*/
+  isTouchOnly = false; 
   isGameActive = signal(false);
   hovering = signal(false);
   hoverTimeout = 0;
-  
+
+  // somewhat hacky, but works - review for programatically setting up needed event handlers
+  // atm 2 event listners: one for the part8, 1 for the full logo
+  // on hover able dvices, full logo click is neglected
+  // on non hover able dvices, part 8 logo click is neglected, so is only processed by full logo
+  // alternatively, set only S logo clickable instead of whole logo on non hover, 
+  ngOnInit(){
+    this.isTouchOnly = !window.matchMedia('(any-hover: hover)').matches;
+  }
+
+  handleLogoPart8Click(){ 
+    if(this.isTouchOnly=== false ){
+      this.setGameActive();
+    }
+  }
+
+  handleLogoClick(){
+
+    if(this.isTouchOnly===true){
+      this.setGameActive();
+    }
+  }
+
   setGameActive() {
+    console.log("setgameactive")
     this.hovering.set(false);
     this.isGameActive.update((isGameActive) => !isGameActive); /* might have to change to enable/disable but for now ok */
   }
+
 
   isHovering(state: boolean) {
     clearTimeout(this.hoverTimeout);

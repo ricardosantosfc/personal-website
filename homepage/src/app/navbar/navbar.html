@@ -8,7 +8,7 @@
   }@else {
   
     <!---hovering over any svg = part8.orange-->
-   <div class="navbar-logo composed-logo" (mouseenter)="isHovering(true)" (mouseleave)="isHovering(false)">
+   <div class="navbar-logo composed-logo" (click)="handleLogoClick()" (mouseenter)="isHovering(true)" (mouseleave)="isHovering(false)">
   <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="8" height="12" fill="#912727"/>
   </svg>
@@ -39,7 +39,7 @@
     <path d="M6 0H1L0 3H6V0Z" fill="white"/>
   </svg>
 
-  <svg class="logo-part part8" [class.orange] = "hovering()" (click)="setGameActive()" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="logo-part part8" [class.orange] = "hovering()" (click)="handleLogoPart8Click()" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="3" height="2" fill="var(--fillColor)"/>
   </svg>
   

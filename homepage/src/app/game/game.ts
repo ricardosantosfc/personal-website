@@ -187,7 +187,7 @@ export class Game {
     this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
     this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
-    console.log(this.height);
+    //console.log(this.height);
     //fontScale = baseFontSize / baseCanvasWidth; // 0.02095 fro 955
 
     this.ctx!.font = "20px VT323";
