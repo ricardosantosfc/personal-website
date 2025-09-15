@@ -93,12 +93,8 @@ export class Game {
     if (this.gameState === GameState.Running) {
       this.moveDuck();
 
-    } else if (this.gameState === GameState.ShowingControls) {
-      this.ctx!.clearRect(0, 0, this.width, this.height);
-      this.startGame();
-
-
-    } else if (this.gameState === GameState.ShowingGameOverCanvas) {
+    } else if (this.gameState === GameState.ShowingGameOverCanvas ||
+      this.gameState === GameState.ShowingControls) {
 
       this.canvasRef.nativeElement.style.cursor = "default";
       this.ctx!.clearRect(0, 0, this.width, this.height);
@@ -176,12 +172,11 @@ export class Game {
     const nh = this.duckImg.naturalHeight; //37.8 per figma
     const nw = this.duckImg.naturalWidth; //51
     this.initialDuckPosY = ((this.height - nh) / 2) + 55;
-    this.duckEndPosX = this.duckPosX + nw; 
+    this.duckEndPosX = this.duckPosX + nw;
     this.currDuckPosY = this.initialDuckPosY;
   }
 
   showControls() {
-    this.gameState = GameState.ShowingControls;
 
     this.drawBackground(this.width, this.height);
     this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
@@ -208,6 +203,9 @@ export class Game {
     this.ctx!.textBaseline = "bottom";
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("🖯, 🖢, 🠝, 🠟, w, s, or space to play", this.width / 2, this.height - 10);
+
+    this.gameState = GameState.ShowingControls;
+    this.canvasRef.nativeElement.style.cursor = "pointer";
 
   }
 
