@@ -39,7 +39,7 @@ export class Navbar {
   }
 
   setGameActive() {
-    console.log("setgameactive")
+
     this.hovering.set(false);
     this.isGameActive.update((isGameActive) => !isGameActive); /* might have to change to enable/disable but for now ok */
   }

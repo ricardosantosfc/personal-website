@@ -68,7 +68,7 @@ export class Game {
 
   @HostListener('window:resize')
   onResize() {
-    console.log("resize");
+
     this.scaleCanvas();
     //and if non animating = non running, redraw canvas
     if (this.gameState === GameState.ShowingGameOverCanvas) {
