@@ -152,24 +152,23 @@ export class Game {
 
   loadAssets() {
 
-    this.duckImg.src = 'duck_eye_stroke.svg';
+    this.duckImg.src = 'duck.svg';
     this.duckImg.onload = () => {
       this.positionDuck();
     };
 
-    this.shadowImg.src = "shadow7.svg"
-    this.skyImg.src = 's4 5.png';
-    this.waterImg.src = 's1 5.png'
-    this.waterImg2.src = 's2 5.png'
-    this.waterImg3.src = 's3 5.png'
+    this.shadowImg.src = "shadow.svg"
+    this.skyImg.src = 'sky.png';
+    this.waterImg.src = 'water1.png'
+    this.waterImg2.src = 'water2.png'
+    this.waterImg3.src = 'water3.png'
 
-    this.duckGameOverImg.src = 'duck_sad_stroke.svg';
-    this.obstacleImg.src = 'obstacle12.svg';
+    this.duckGameOverImg.src = 'duck_game_over.svg';
+    this.obstacleImg.src = 'obstacle_grey.svg';
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth;
       this.showControls();
     };
-
 
   }
 
