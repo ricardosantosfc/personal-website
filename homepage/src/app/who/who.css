@@ -13,7 +13,7 @@
 
 .game-wrapper {
   position: relative;
-  width: 512px;
+  width: 1024px;
   background-color: #ffffff;
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
@@ -24,9 +24,19 @@
 canvas {
   background-color: rgb(66, 66, 66);
   display: block;
-  width: 512px;
+  width: 1024px;
   height: 480px;
   cursor: pointer;
+}
+
+@media (width <= 768px) {
+  .game-wrapper {
+    width: 512px;
+    padding: none;
+  }
+  canvas{
+    width: 512px;
+  }
 }
 
 .background {
