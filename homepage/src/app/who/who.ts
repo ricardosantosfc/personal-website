@@ -23,7 +23,7 @@ export class Who {
   onResize() {
 
     this.scaleCanvas();
-
+    this.ctx!.drawImage(this.spritesheetImg, 512, 32, 512, 512, 0, 0, 512, 512)
   }
 
     ngAfterViewInit() {
