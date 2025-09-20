@@ -23,7 +23,7 @@ export class Who {
   onResize() {
 
     this.scaleCanvas();
-    this.ctx!.drawImage(this.spritesheetImg, 512, 32, 512, 512, 0, 0, 512, 512)
+     this.ctx!.drawImage(this.spritesheetImg, 512, 32, 512, 512, (this.width-512)/2, 0, 512, 512)
   }
 
     ngAfterViewInit() {
@@ -58,8 +58,8 @@ export class Who {
   loadAssets() {
 
     this.spritesheetImg.src = 'spritesheet512.png';
-    this.spritesheetImg.onload = () => {
-      this.ctx!.drawImage(this.spritesheetImg, 512, 32, 512, 512, 0, 0, 512, 512) //can play with gamew rapper heigth and here sy
+    this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart
+      this.ctx!.drawImage(this.spritesheetImg, 512, 32, 512, 512, (this.width-512)/2, 0, 512, 512) //can play with gamew rapper heigth and here sy
       this.canvasIsAcceptingClicks = true;
     };
 
