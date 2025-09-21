@@ -1,7 +1,33 @@
-<div class = "content">
-<div class="game-wrapper">
-    <div class="background">
-        <canvas #canvas (click)="handleClick()"></canvas>
+<div class="content">
+    <div class="game-wrapper">
+        <div class="background">
+            <div class="button-container" [class.not-shown]="!isButtonShown()">
+                <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsResumeShown()"
+                    href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
+                    (click)="handleChoiceButtonClick(10)">
+                    Take the resume</a>
+                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsResumeShown()"
+                    (click)="handleChoiceButtonClick(11)">Don't take it</button>
+                <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsEndShown()"
+                    href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
+                    (click)="handleChoiceButtonClick(17)">Can you give me your resume?</a>
+                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                    (click)="handleChoiceButtonClick(18)">How can I contact you?</button>
+                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                    (click)="handleChoiceButtonClick(19)">Anything you've been working on lately?</button>
+                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                    (click)="handleChoiceButtonClick(20)">Can you please introduce yourself again?.</button>
+                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                    (click)="handleChoiceButtonClick(14)">No, not right now.</button>
+            </div>
+            <canvas #canvas></canvas>
+
+            <div class="dialog-box" [class.not-shown]="!isDialogueShown()" (click)="handleClick()">
+                <div class="dialog-box-name" [class.not-shown]="!isNameShown()"> Ricardo Santos</div>
+                <p class="dialog-text">{{currDialogText()}} </p>
+
+
+            </div>
+        </div>
     </div>
-</div>
 </div>

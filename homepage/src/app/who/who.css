@@ -13,7 +13,8 @@
 
 .game-wrapper {
   position: relative;
-  width: 1024px;
+  width: 80%;
+  
   background-color: #ffffff;
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
@@ -21,24 +22,109 @@
   margin-bottom: 1em;
 }
 
+@media (width <= 768px) { /* fill whole screen*/
+  .game-wrapper {
+    width: 100%;
+  }
+  .dialog-box{
+    background-color: rgba(0, 0, 0, 0.957) !important;
+  }
+}
+
 canvas {
-  background-color: rgb(66, 66, 66);
   display: block;
-  width: 1024px;
+  width: 100%; /* fill whole wrwaper*/
   height: 480px;
+ 
+}
+
+
+
+.background {
+  background-image: url("/bkg5.png");
+  background-size:     cover;   
+  background-repeat: no-repeat;
+  background-position: top;
+ 
+}
+
+
+.dialog-box {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  right: 1em;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.858);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace; 
+  font-size: 1.1rem;
+  border: 0.1em solid #ffffff;
+  border-radius: 6px;
+  border-top-left-radius: 0px;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
-@media (width <= 768px) {
-  .game-wrapper {
-    width: 512px;
-    padding: none;
-  }
-  canvas{
-    width: 512px;
-  }
+.dialog-box-name {
+  opacity: 1;
+  position: absolute;
+  top: -1.9em;
+  left: -1.5px;
+  padding: 0.3em 0.6em;
+  background-color: #000;
+  border: 0.1em solid #fff;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-size: 1.3rem;
+cursor: default;
 }
 
-.background {
-  background-color: rgb(56, 56, 56);
+.not-shown{
+ display: none;
+  cursor: default;
+  pointer-events: none;
+}
+/* Text inside */
+.dialog-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1em;
+}
+
+
+
+.btn-resume {
+ 
+  color: white;
+  border: 0.1em solid white;
+  border-radius: 4px;
+  font-size: 1.2rem;
+   font-family: 'Press Start 2P', monospace; 
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-resume:hover {
+  
+  background-color: rgb(229, 229, 229);
+  color: black;
+}
+
+.btn-yes{
+  background-color: black;
+}
+
+.btn-no{
+  background-color: black;
 }
