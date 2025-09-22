@@ -1,7 +1,7 @@
 <div class="content">
     <div class="game-wrapper">
         <div class="background">
-            <div class="button-container" [class.not-shown]="!isButtonShown()" [class.resume-btn-container]="isButtonsResumeShown()">
+            <div class="button-container" [class.not-shown]="!isButtonShown()">
                 <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsResumeShown()"
                     href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
                     (click)="handleChoiceButtonClick(10)">

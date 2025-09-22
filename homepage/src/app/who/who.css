@@ -45,6 +45,7 @@ canvas {
   background-size:     cover;   
   background-repeat: no-repeat;
   background-position: top;
+  justify-items: center;
  
 }
 
@@ -118,10 +119,6 @@ cursor: default;
   
 }
 
-.button-container.resume-btn-container{
-   left: 50%;
-  transform: translateX(-50%);
-}
 
 .btn-resume {
  text-align: center;
