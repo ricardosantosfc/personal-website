@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
+import { WhoService } from '../who-service';
 
 interface Dialogs {
   text: string;
@@ -94,7 +95,7 @@ export class Who {
       nextDialogIndex: 10
     },
     {
-      text: "Thanks! ",
+      text: "Here you go! Thank you. ",
       spriteAlternations: 2,
       sprites: [19, 20],
       endSprite: 30,
@@ -115,7 +116,7 @@ export class Who {
       nextDialogIndex: 13
     },
     {
-      text: "Thank you for visiting my website! ",
+      text: "Thanks for visiting my website!",
       spriteAlternations: 3,
       sprites: [25, 26],
       endSprite: 26,
@@ -130,48 +131,57 @@ export class Who {
       nextDialogIndex: 15
     },
     {
-      text: "...", //----------------------------- back to 15
+      text: "...", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
       spriteAlternations: 0,
       sprites: [19],
       endSprite: 30,
       nextDialogIndex: 16
     },
     {
-      text: "Hi again! is there something I can help you with?", //------btns again
+      text: "Hi again! is there anything I can help you with?", //------btns again
       spriteAlternations: 7,
       sprites: [5, 6],
       endSprite: 6,
       nextDialogIndex: 16
     },
     {
-     text: "Sure! Here!",
+      text: "Sure! Here!",
       spriteAlternations: 1,
-      sprites: [13,17, 18, 19, 20],
+      sprites: [13, 17, 18, 19, 20],
       endSprite: 30,
       nextDialogIndex: 15
     },
     {
-     text: "You can reach me out by mail or through linkedin, throuh the icaons down below.",
-     spriteAlternations: 6,
+      text: "You can reach out to me via mail or through LinkedIn. They're both embbeded in the icons below.",
+      spriteAlternations: 6,
       sprites: [7, 8],
-      endSprite: 30,
+      endSprite: 8,
       nextDialogIndex: 15
     },
     {
-     text: " Well, besides working on this website, I've been learning React and Three.js. I've also been refreshing my SQL skills.",
-     spriteAlternations: 9,
+      text: "Well, besides working on this website, I've been learning React and Three.js. I've also been refreshing my SQL skills.",
+      spriteAlternations: 12,
       sprites: [9, 10],
-      endSprite: 30,
+      endSprite: 10,
+      nextDialogIndex: 20
+    },
+    {
+      text: "If you'd like to know about my past projects, check out the what tab.",
+      spriteAlternations: 8,
+      sprites: [31, 32],
+      endSprite: 32,
       nextDialogIndex: 15
     },
     {
-     text: " Sure thing!",
-     spriteAlternations: 3,
+      text: "Sure, no problem!",
+      spriteAlternations: 3,
       sprites: [25, 26],
       endSprite: 26,
       nextDialogIndex: 2
     },
   ];
+
+  private whoService = inject(WhoService);
 
   isButtonShown = signal(false);
   isButtonsResumeShown = signal(false);
@@ -184,7 +194,7 @@ export class Who {
   private spritesheetImg = new Image();
 
   private currDialogIndex = 0;
-  currDialogText = signal("...");
+  currDialogText = signal("");
   private isCanvasAcceptingClicks = false;
   private frameCount = 0;
   private currAlternatingTimes = -1;
@@ -196,19 +206,22 @@ export class Who {
   onResize() {
 
     this.scaleCanvas();
-    if (this.currDialogIndex === -1) { //aslo review
-      this.ctx!.drawImage(this.spritesheetImg, 0, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
+
+    if (this.isAnimating === false) { //must redraw curr end sprite
+      const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
+      this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
     }
-    else {
-      if (this.isAnimating === false) { //must redraw curr end sprite
-        const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
-        this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
-      }
-    }
+
 
   }
 
   ngAfterViewInit() {
+
+    if (this.whoService.hasInitialDialogEnded() === true) {
+      this.currDialogIndex = 15;
+      this.isNameShown.set(true);
+    }
+    this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
     this.scaleCanvas();
     this.loadAssets();
   }
@@ -242,7 +255,8 @@ export class Who {
 
     this.spritesheetImg.src = 'spritesheet512.png';
     this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart
-      this.ctx!.drawImage(this.spritesheetImg, 0, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512) //can play with gamew rapper heigth and here sy
+      const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
+      this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512) //can play with gamew rapper heigth and here sy
       this.isCanvasAcceptingClicks = true;
     };
 
@@ -257,7 +271,7 @@ export class Who {
         this.isDialogueShown.set(false);
         this.isButtonShown.set(true);
         this.isButtonsResumeShown.set(true);
-      }else if (this.currDialogIndex === 16) {
+      } else if (this.currDialogIndex === 16) {
         this.isCanvasAcceptingClicks = false;
         this.isNameShown.set(false);
         this.isDialogueShown.set(false);
@@ -267,6 +281,8 @@ export class Who {
         this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
         if (this.currDialogIndex == 2) {
           this.isNameShown.set(true);
+        } else if (this.currDialogIndex === 15 && this.whoService.hasInitialDialogEnded() === false) {
+          this.whoService.updateInitialDialogEnded();
         }
         this.isCanvasAcceptingClicks = false;
         this.showDialog();
@@ -294,14 +310,12 @@ export class Who {
     this.currDialogSpriteIndex = 0;
     this.animate();
     this.isAnimating = true;
-    this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
+    //if (this.dialogs[this.currDialogIndex].text.length != 0) {
+      this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
+ 
+
 
     this.isCanvasAcceptingClicks = true; // on 8 shouldnt be allowed
-
-
-    //dialog count
-    // number of times to 
-
   }
 
   animate() { //somewhat contrived, review
