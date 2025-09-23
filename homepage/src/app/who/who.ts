@@ -7,6 +7,7 @@ interface Dialogs {
   sprites: number[]; //spirtes?: 
   endSprite: number; //the sprite on which to end the animation
   nextDialogIndex: number; //index of the nex t dialog
+  enableButtons?: number;
 }
 @Component({
   selector: 'app-who',
@@ -92,7 +93,8 @@ export class Who {
       spriteAlternations: 5,
       sprites: [17, 18],
       endSprite: 18,
-      nextDialogIndex: 10
+      nextDialogIndex: 10,
+      enableButtons: 0
     },
     {
       text: "Here you go! Thank you. ",
@@ -133,8 +135,8 @@ export class Who {
     {
       text: "", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
       spriteAlternations: 0,
-      sprites: [30],
-      endSprite: 30,
+      sprites: [37],
+      endSprite: 37, //empty sprite
       nextDialogIndex: 16
     },
     {
@@ -142,7 +144,8 @@ export class Who {
       spriteAlternations: 7,
       sprites: [5, 6],
       endSprite: 6,
-      nextDialogIndex: 16
+      nextDialogIndex: 16,
+      enableButtons: 1
     },
     {
       text: "Sure! Here!",
@@ -249,21 +252,19 @@ export class Who {
   loadAssets() {
 
 
-    this.spritesheetImg.src = 'spritesheet512.png';
+    this.spritesheetImg.src = 'spritesheet512_2.png';
     this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
 
       if (this.whoService.hasInitialDialogEnded() === true) {
         this.currDialogIndex = 15;
         this.isCanvasAcceptingClicks.set(true);
-         this.ctx!.clearRect(0, 0, this.width, this.height); 
-        return;
       } else {
-        this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
-        this.isDialogShown.set(true); 
+        this.currDialogText.set(this.dialogs[0].text);
+        this.isDialogShown.set(true);
         this.isDialogBoxAcceptingClicks = true;
+        this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
       }
- const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
-      this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512) //can play with gamew rapper heigth and here sy
+
     };
 
   }
@@ -271,26 +272,22 @@ export class Who {
   handleDialogBoxClick() {
 
     if (this.isDialogBoxAcceptingClicks === true) { //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
-      if (this.currDialogIndex === 9) {
+
+      if (this.dialogs[this.currDialogIndex].enableButtons !== undefined) { //enable buttons
         this.isDialogBoxAcceptingClicks = false;
-        this.disableDialogBox();
-        this.enableButtonsResume();
-      } else if (this.currDialogIndex === 16) {
-        this.isDialogBoxAcceptingClicks = false;
-        this.disableDialogBox();
-        this.enableButtonsEnd();
+        this.disableDialogBoxAndName();
+        this.enableChoiceButtons(this.dialogs[this.currDialogIndex].enableButtons!);
       } else {
         this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
-        console.log(this.currDialogIndex);
-        if (this.currDialogIndex == 2) {
+        if (this.currDialogIndex === 2) {
           this.isNameShown.set(true);
         } else if (this.currDialogIndex === 15) {
           if (this.whoService.hasInitialDialogEnded() === false) {
             this.whoService.updateInitialDialogEnded();
           }
-          this.disableDialogBox();
+          this.disableDialogBoxAndName();
           this.isCanvasAcceptingClicks.set(true);
-           this.ctx!.clearRect(0, 0, this.width, this.height); //this doesnt work if the animate is interrupted by clcik, 
+          this.ctx!.clearRect(0, 0, this.width, this.height);
           return;
         }
         this.isDialogBoxAcceptingClicks = false;
@@ -300,30 +297,31 @@ export class Who {
   }
 
   handleCanvasClick() {
-    this.enableDialogBox();
+    this.enableDialogBoxAndName();
     this.isCanvasAcceptingClicks.set(false);
     this.isDialogBoxAcceptingClicks = true;
     this.handleDialogBoxClick();
   }
 
-  enableDialogBox() {
+  enableDialogBoxAndName() {
     this.isNameShown.set(true);
     this.isDialogShown.set(true);
   }
 
-  disableDialogBox() {
+  disableDialogBoxAndName() {
     this.isNameShown.set(false);
     this.isDialogShown.set(false);
   }
 
-  enableButtonsResume() { //isButtonShown(0,1,2) replace single signal
-    this.isButtonShown.set(true);
-    this.isButtonsResumeShown.set(true);
-  }
+  enableChoiceButtons(category: number) { //isButtonShown(0,1,2) replace single signal
 
-  enableButtonsEnd() {
     this.isButtonShown.set(true);
-    this.isButtonsEndShown.set(true);
+    if (category === 0) {
+      this.isButtonsResumeShown.set(true);
+    } else {
+      this.isButtonsEndShown.set(true);
+    }
+
   }
 
 
@@ -334,7 +332,7 @@ export class Who {
     this.isButtonsEndShown.set(false);
     this.isButtonsResumeShown.set(false);
     this.isButtonShown.set(false);
-    this.enableDialogBox();
+    this.enableDialogBoxAndName();
 
   }
 
@@ -343,11 +341,7 @@ export class Who {
     this.currDialogSpriteIndex = 0;
     this.animate();
     this.isAnimating = true;
-    //if (this.dialogs[this.currDialogIndex].text.length != 0) {
     this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
-
-
-
     this.isDialogBoxAcceptingClicks = true; // on 8 shouldnt be allowed
   }
 
