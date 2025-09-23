@@ -133,7 +133,7 @@ export class Who {
     {
       text: "", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
       spriteAlternations: 0,
-      sprites: [19],
+      sprites: [30],
       endSprite: 30,
       nextDialogIndex: 16
     },
@@ -250,11 +250,13 @@ export class Who {
 
 
     this.spritesheetImg.src = 'spritesheet512.png';
-    this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart
+    this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
 
       if (this.whoService.hasInitialDialogEnded() === true) {
         this.currDialogIndex = 15;
         this.isCanvasAcceptingClicks.set(true);
+         this.ctx!.clearRect(0, 0, this.width, this.height); 
+        return;
       } else {
         this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
         this.isDialogShown.set(true); 
@@ -288,6 +290,8 @@ export class Who {
           }
           this.disableDialogBox();
           this.isCanvasAcceptingClicks.set(true);
+           this.ctx!.clearRect(0, 0, this.width, this.height); //this doesnt work if the animate is interrupted by clcik, 
+          return;
         }
         this.isDialogBoxAcceptingClicks = false;
         this.showDialog();
