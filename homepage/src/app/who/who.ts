@@ -186,6 +186,7 @@ export class Who {
 
   private whoService = inject(WhoService);
 
+  //state - showButtons, notInteracting, Interacting
   isButtonShown = signal(false);
   isButtonsResumeShown = signal(false);
   isButtonsEndShown = signal(false);
@@ -272,7 +273,7 @@ export class Who {
 
    //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
 
-      if (this.isInteracting() === false) {
+      if (this.isInteracting() === false) { //really wonky. refactoring needed
         this.enableDialogBoxAndName();
         this.isInteracting.set(true);
       }
