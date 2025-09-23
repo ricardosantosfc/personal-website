@@ -124,14 +124,14 @@ export class Who {
     },
 
     {
-      text: "If you have any further questions, just let me know!",
-      spriteAlternations: 4,
+      text: "Let me know if you have any further questions, I'll be here all day!",
+      spriteAlternations: 5,
       sprites: [27, 28],
       endSprite: 28,
       nextDialogIndex: 15
     },
     {
-      text: "...", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
+      text: "", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
       spriteAlternations: 0,
       sprites: [19],
       endSprite: 30,
@@ -152,21 +152,21 @@ export class Who {
       nextDialogIndex: 15
     },
     {
-      text: "You can reach out to me via mail or through LinkedIn. They're both embbeded in the icons below.",
+      text: "You can reach out to me via mail or LinkedIn. Just click on the icons down below.",
       spriteAlternations: 6,
       sprites: [7, 8],
       endSprite: 8,
       nextDialogIndex: 15
     },
     {
-      text: "Well, besides working on this website, I've been learning React and Three.js. I've also been refreshing my SQL skills.",
+      text: "Well, besides working on this website, I've been learning how to use React and Three.js. I've also been refreshing my SQL skills.",
       spriteAlternations: 12,
       sprites: [9, 10],
       endSprite: 10,
       nextDialogIndex: 20
     },
     {
-      text: "If you'd like to know about my past projects, check out the what tab.",
+      text: "If you'd like to learn about my past projects, click on the [𝘄𝗵𝗮𝘁] link up above.",
       spriteAlternations: 8,
       sprites: [31, 32],
       endSprite: 32,
@@ -187,7 +187,8 @@ export class Who {
   isButtonsResumeShown = signal(false);
   isButtonsEndShown = signal(false);
   isNameShown = signal(false);
-  isDialogueShown = signal(true);
+  isDialogShown = signal(false); //better to start as false so it doesnt flash when finished initial 
+  isCanvasAcceptingClicks = signal(false);
 
   private isAnimating = false; //to redraw ends sprite on resize if not
 
@@ -195,7 +196,7 @@ export class Who {
 
   private currDialogIndex = 0;
   currDialogText = signal("");
-  private isCanvasAcceptingClicks = false;
+  private isDialogBoxAcceptingClicks = false;
   private frameCount = 0;
   private currAlternatingTimes = -1;
   private currDialogSpriteIndex = -1;
@@ -217,11 +218,6 @@ export class Who {
 
   ngAfterViewInit() {
 
-    if (this.whoService.hasInitialDialogEnded() === true) {
-      this.currDialogIndex = 15;
-      this.isNameShown.set(true);
-    }
-    this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
     this.scaleCanvas();
     this.loadAssets();
   }
@@ -255,43 +251,77 @@ export class Who {
 
     this.spritesheetImg.src = 'spritesheet512.png';
     this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart
-      const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
+
+      if (this.whoService.hasInitialDialogEnded() === true) {
+        this.currDialogIndex = 15;
+        this.isCanvasAcceptingClicks.set(true);
+      } else {
+        this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
+        this.isDialogShown.set(true); 
+        this.isDialogBoxAcceptingClicks = true;
+      }
+ const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
       this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512) //can play with gamew rapper heigth and here sy
-      this.isCanvasAcceptingClicks = true;
     };
 
   }
 
-  handleClick() {
+  handleDialogBoxClick() {
 
-    if (this.isCanvasAcceptingClicks === true) { //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
+    if (this.isDialogBoxAcceptingClicks === true) { //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
       if (this.currDialogIndex === 9) {
-        this.isCanvasAcceptingClicks = false;
-        this.isNameShown.set(false);
-        this.isDialogueShown.set(false);
-        this.isButtonShown.set(true);
-        this.isButtonsResumeShown.set(true);
+        this.isDialogBoxAcceptingClicks = false;
+        this.disableDialogBox();
+        this.enableButtonsResume();
       } else if (this.currDialogIndex === 16) {
-        this.isCanvasAcceptingClicks = false;
-        this.isNameShown.set(false);
-        this.isDialogueShown.set(false);
-        this.isButtonShown.set(true);
-        this.isButtonsEndShown.set(true);
+        this.isDialogBoxAcceptingClicks = false;
+        this.disableDialogBox();
+        this.enableButtonsEnd();
       } else {
         this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
+        console.log(this.currDialogIndex);
         if (this.currDialogIndex == 2) {
           this.isNameShown.set(true);
-        } else if (this.currDialogIndex === 15 && this.whoService.hasInitialDialogEnded() === false) {
-          this.whoService.updateInitialDialogEnded();
+        } else if (this.currDialogIndex === 15) {
+          if (this.whoService.hasInitialDialogEnded() === false) {
+            this.whoService.updateInitialDialogEnded();
+          }
+          this.disableDialogBox();
+          this.isCanvasAcceptingClicks.set(true);
         }
-        this.isCanvasAcceptingClicks = false;
+        this.isDialogBoxAcceptingClicks = false;
         this.showDialog();
       }
     }
-
-
-
   }
+
+  handleCanvasClick() {
+    this.enableDialogBox();
+    this.isCanvasAcceptingClicks.set(false);
+    this.isDialogBoxAcceptingClicks = true;
+    this.handleDialogBoxClick();
+  }
+
+  enableDialogBox() {
+    this.isNameShown.set(true);
+    this.isDialogShown.set(true);
+  }
+
+  disableDialogBox() {
+    this.isNameShown.set(false);
+    this.isDialogShown.set(false);
+  }
+
+  enableButtonsResume() { //isButtonShown(0,1,2) replace single signal
+    this.isButtonShown.set(true);
+    this.isButtonsResumeShown.set(true);
+  }
+
+  enableButtonsEnd() {
+    this.isButtonShown.set(true);
+    this.isButtonsEndShown.set(true);
+  }
+
 
   handleChoiceButtonClick(nextDialogIndex: number) {
 
@@ -300,9 +330,8 @@ export class Who {
     this.isButtonsEndShown.set(false);
     this.isButtonsResumeShown.set(false);
     this.isButtonShown.set(false);
-    this.isNameShown.set(true);
-    this.isDialogueShown.set(true);
-    this.isCanvasAcceptingClicks = true;
+    this.enableDialogBox();
+
   }
 
   showDialog() {
@@ -311,11 +340,11 @@ export class Who {
     this.animate();
     this.isAnimating = true;
     //if (this.dialogs[this.currDialogIndex].text.length != 0) {
-      this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
- 
+    this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
 
 
-    this.isCanvasAcceptingClicks = true; // on 8 shouldnt be allowed
+
+    this.isDialogBoxAcceptingClicks = true; // on 8 shouldnt be allowed
   }
 
   animate() { //somewhat contrived, review

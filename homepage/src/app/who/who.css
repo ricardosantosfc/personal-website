@@ -35,9 +35,14 @@ canvas {
   display: block;
   width: 100%; /* fill whole wrwaper*/
   height: 480px;
+  pointer-events: none;
  
 }
 
+canvas.accepting-clicks{
+  cursor: pointer;
+  pointer-events:auto;
+}
 
 
 .background {
@@ -87,11 +92,12 @@ cursor: default;
   cursor: default;
   pointer-events: none;
 }
-/* Text inside */
+
 .dialog-text {
   margin: 0;
   white-space: pre-wrap;
 }
+
 
 /*
 .button-container {
