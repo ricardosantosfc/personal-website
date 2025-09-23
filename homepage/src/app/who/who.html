@@ -2,22 +2,22 @@
     <div class="game-wrapper">
         <div class="background" [class.background-image-me]="!isInteracting()">
             <div class="button-container" [class.not-shown]="!isButtonShown()">
-                <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsResumeShown()"
+                <a class="btn-resume " [class.not-shown]="!isButtonsResumeShown()"
                     href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
                     (click)="handleChoiceButtonClick(10)">
                     Take the resume</a>
-                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsResumeShown()"
+                <button class="btn-resume " [class.not-shown]="!isButtonsResumeShown()"
                     (click)="handleChoiceButtonClick(11)">Don't take it</button>
-                <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsEndShown()"
+                <a class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
                     (click)="handleChoiceButtonClick(17)">Can I get your resume?</a>
-                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(18)">How can I contact you?</button>
-                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(19)">What have you been working on lately?</button>
-                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(21)">Can you introduce yourself again?</button>
-                <button class="btn-resume btn-no" [class.not-shown]="!isButtonsEndShown()"
+                <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(14)">I don't need anything right now.</button>
             </div>
             <canvas #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click) = "handleCanvasClick()"></canvas>

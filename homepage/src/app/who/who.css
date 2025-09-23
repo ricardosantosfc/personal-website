@@ -140,18 +140,11 @@ transition: background-image 0.1s ease-in-out;
   padding: 0.5em 1.2em;
   cursor: pointer;
   text-decoration: none;
+   background-color: black;
 }
 
 .btn-resume:hover {
   
   background-color: rgb(229, 229, 229);
   color: black;
-}
-
-.btn-yes{
-  background-color: black;
-}
-
-.btn-no{
-  background-color: black;
 }
