@@ -191,7 +191,8 @@ export class Who {
   isButtonsEndShown = signal(false);
   isNameShown = signal(false);
   isDialogShown = signal(false); //better to start as false so it doesnt flash when finished initial 
-  isCanvasAcceptingClicks = signal(false);
+  isCanvasAcceptingClicks = signal(true);
+  isInteracting = signal(true);
 
   private isAnimating = false; //to redraw ends sprite on resize if not
 
@@ -199,7 +200,6 @@ export class Who {
 
   private currDialogIndex = 0;
   currDialogText = signal("");
-  private isDialogBoxAcceptingClicks = false;
   private frameCount = 0;
   private currAlternatingTimes = -1;
   private currDialogSpriteIndex = -1;
@@ -257,11 +257,10 @@ export class Who {
 
       if (this.whoService.hasInitialDialogEnded() === true) {
         this.currDialogIndex = 15;
-        this.isCanvasAcceptingClicks.set(true);
+        this.isInteracting.set(false);
       } else {
         this.currDialogText.set(this.dialogs[0].text);
         this.isDialogShown.set(true);
-        this.isDialogBoxAcceptingClicks = true;
         this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
       }
 
@@ -269,12 +268,15 @@ export class Who {
 
   }
 
-  handleDialogBoxClick() {
+  handleCanvasClick() {
 
-    if (this.isDialogBoxAcceptingClicks === true) { //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
+   //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
 
+      if (this.isInteracting() === false) {
+        this.enableDialogBoxAndName();
+        this.isInteracting.set(true);
+      }
       if (this.dialogs[this.currDialogIndex].enableButtons !== undefined) { //enable buttons
-        this.isDialogBoxAcceptingClicks = false;
         this.disableDialogBoxAndName();
         this.enableChoiceButtons(this.dialogs[this.currDialogIndex].enableButtons!);
       } else {
@@ -288,19 +290,13 @@ export class Who {
           this.disableDialogBoxAndName();
           this.isCanvasAcceptingClicks.set(true);
           this.ctx!.clearRect(0, 0, this.width, this.height);
+          this.isInteracting.set(false);
           return;
         }
-        this.isDialogBoxAcceptingClicks = false;
+        this.isCanvasAcceptingClicks.set(false);
         this.showDialog();
       }
-    }
-  }
-
-  handleCanvasClick() {
-    this.enableDialogBoxAndName();
-    this.isCanvasAcceptingClicks.set(false);
-    this.isDialogBoxAcceptingClicks = true;
-    this.handleDialogBoxClick();
+    
   }
 
   enableDialogBoxAndName() {
@@ -321,7 +317,7 @@ export class Who {
     } else {
       this.isButtonsEndShown.set(true);
     }
-
+    this.isCanvasAcceptingClicks.set(false);
   }
 
 
@@ -342,7 +338,7 @@ export class Who {
     this.animate();
     this.isAnimating = true;
     this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
-    this.isDialogBoxAcceptingClicks = true; // on 8 shouldnt be allowed
+    this.isCanvasAcceptingClicks.set(true); // on 8 shouldnt be allowed
   }
 
   animate() { //somewhat contrived, review

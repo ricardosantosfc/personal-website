@@ -76,7 +76,7 @@ transition: background-image 0.1s ease-in-out;
   border-radius: 6px;
   border-top-left-radius: 0px;
   box-sizing: border-box;
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .dialog-box-name {
@@ -91,13 +91,10 @@ transition: background-image 0.1s ease-in-out;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   font-size: 1.3rem;
-cursor: default;
 }
 
 .not-shown{
  display: none;
-  cursor: default;
-  pointer-events: none;
 }
 
 .dialog-text {

@@ -1,6 +1,6 @@
 <div class="content">
     <div class="game-wrapper">
-        <div class="background" [class.background-image-me]="isCanvasAcceptingClicks()">
+        <div class="background" [class.background-image-me]="!isInteracting()">
             <div class="button-container" [class.not-shown]="!isButtonShown()">
                 <a class="btn-resume btn-yes" [class.not-shown]="!isButtonsResumeShown()"
                     href="http://localhost:4200/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
@@ -22,7 +22,7 @@
             </div>
             <canvas #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click) = "handleCanvasClick()"></canvas>
 
-            <div class="dialog-box" [class.not-shown]="!isDialogShown()" (click)="handleDialogBoxClick()">
+            <div class="dialog-box" [class.not-shown]="!isDialogShown()">
                 <div class="dialog-box-name" [class.not-shown]="!isNameShown()"> Ricardo Santos</div>
                 <p class="dialog-text">{{currDialogText()}} </p>
 
