@@ -8,6 +8,7 @@
   padding: 1em 2em;
   border-radius: 6px;
   position: relative;
+
 }
 
 .game-wrapper {
@@ -33,7 +34,7 @@
 canvas {
   display: block;
   width: 100%; /* fill whole wrwaper*/
-  
+  height: 100%;
   pointer-events: none;
  
 }
@@ -43,7 +44,7 @@ canvas.accepting-clicks{
   pointer-events:auto;
 }
 
-
+/* height: 74vh; 480px*/
 .background {
   background-image: url("/bkg5.png");
   background-size:     cover;   
@@ -51,7 +52,7 @@ canvas.accepting-clicks{
   background-position: top;
   justify-items: center;
 width: 100%;
-height: 480px;
+height: 74vh;
 transition: background-image 0.1s ease-in-out; /* on firefox doesnt work*/
 display: grid;
 }

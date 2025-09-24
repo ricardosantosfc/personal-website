@@ -198,6 +198,7 @@ export class Who {
   private isAnimating = false; //to redraw ends sprite on resize if not
 
   private spritesheetImg = new Image();
+  private spriteSizeIncrease = 20;
 
   private currDialogIndex = 0;
   currDialogText = signal("");
@@ -214,7 +215,7 @@ export class Who {
 
     if (this.isAnimating === false) { //must redraw curr end sprite
       const currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
-      this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
+      this.drawSprite(currSpritePosX);
     }
 
 
@@ -255,6 +256,7 @@ export class Who {
 
     this.spritesheetImg.src = 'spritesheet512_2.png';
     this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
+    this.spritesheetImg.onload = () => { 
 
       if (this.whoService.hasInitialDialogEnded() === true) {
         this.currDialogIndex = 15;
@@ -262,42 +264,53 @@ export class Who {
       } else {
         this.currDialogText.set(this.dialogs[0].text);
         this.isDialogShown.set(true);
-        this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
+        this.drawSprite(0); 
       }
 
     };
 
   }
 
+  drawSprite(spritePosX: number) {
+//x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
+    /* this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 0, 512, 512, 
+              ((this.width - this.height)-10) / 2, -10, this.height+10, this.height+10)*/
+
+    this.ctx!.drawImage(this.spritesheetImg, 512 * spritePosX, 0, 512, 512,
+      ((this.width - this.height)- this.spriteSizeIncrease) / 2, -this.spriteSizeIncrease, 
+      this.height+this.spriteSizeIncrease, this.height + this.spriteSizeIncrease)
+  }
+
+
   handleCanvasClick() {
 
-   //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
+    //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
 
-      if (this.isInteracting() === false) { //really wonky. refactoring needed
-        this.enableDialogBoxAndName();
-        this.isInteracting.set(true);
-      }
-      if (this.dialogs[this.currDialogIndex].enableButtons !== undefined) { //enable buttons
-        this.disableDialogBoxAndName();
-        this.enableChoiceButtons(this.dialogs[this.currDialogIndex].enableButtons!);
-      } else {
-        this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
-        if (this.currDialogIndex === 2) {
-          this.isNameShown.set(true);
-        } else if (this.currDialogIndex === 15) {
-          if (this.whoService.hasInitialDialogEnded() === false) {
-            this.whoService.updateInitialDialogEnded();
-          }
-          this.disableDialogBoxAndName();
-          this.isCanvasAcceptingClicks.set(true);
-          this.ctx!.clearRect(0, 0, this.width, this.height);
-          this.isInteracting.set(false);
-          return;
+    if (this.isInteracting() === false) { //really wonky. refactoring needed
+      this.enableDialogBoxAndName();
+      this.isInteracting.set(true);
+    }
+    if (this.dialogs[this.currDialogIndex].enableButtons !== undefined) { //enable buttons
+      this.disableDialogBoxAndName();
+      this.enableChoiceButtons(this.dialogs[this.currDialogIndex].enableButtons!);
+    } else {
+      this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
+      if (this.currDialogIndex === 2) {
+        this.isNameShown.set(true);
+      } else if (this.currDialogIndex === 15) {
+        if (this.whoService.hasInitialDialogEnded() === false) {
+          this.whoService.updateInitialDialogEnded();
         }
-        this.isCanvasAcceptingClicks.set(false);
-        this.showDialog();
+        this.disableDialogBoxAndName();
+        this.isCanvasAcceptingClicks.set(true);
+        this.ctx!.clearRect(0, 0, this.width, this.height);
+        this.isInteracting.set(false);
+        return;
       }
-    
+      this.isCanvasAcceptingClicks.set(false);
+      this.showDialog();
+    }
+
   }
 
   enableDialogBoxAndName() {
@@ -351,7 +364,7 @@ export class Who {
     if (this.currAlternatingTimes > 0) {
 
       if ((this.frameCount) <= 10) {
-        this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
+        this.drawSprite(currSpritePosX);
         this.frameCount++;
         if (this.frameCount === 11) {
           this.frameCount = 0;
@@ -366,7 +379,7 @@ export class Who {
       }
     } else {
       currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
-      this.ctx!.drawImage(this.spritesheetImg, 512 * currSpritePosX, 32, 512, 512, (this.width - 512) / 2, 0, 512, 512)
+      this.drawSprite(currSpritePosX);
       this.isAnimating = false;
       //tirgger lcik here if ===6 after timeout
       return;
