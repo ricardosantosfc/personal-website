@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterLinkActive } from "@angular/router";
 import { Game } from "../game/game";
+import { SizeService } from '../size-service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +11,12 @@ import { Game } from "../game/game";
   styleUrl: './navbar.css'
 })
 export class Navbar {
-
+ @ViewChild('navbar') navbar!: ElementRef<HTMLDivElement>;
   isTouchOnly = false; 
   isGameActive = signal(false);
   hovering = signal(false);
   hoverTimeout = 0;
+  sizeService = inject(SizeService);
 
   // somewhat hacky, but works - review for programatically setting up needed event handlers
   // atm 2 event listners: one for the part8, 1 for the full logo
@@ -23,6 +25,10 @@ export class Navbar {
   // alternatively, set only S logo clickable instead of whole logo on non hover, 
   ngOnInit(){
     this.isTouchOnly = !window.matchMedia('(any-hover: hover)').matches;
+  }
+
+  ngAfterViewInit(){
+    this.sizeService.updateNavbarHeigth( this.navbar.nativeElement.parentElement!.offsetHeight) //non float
   }
 
   handleLogoPart8Click(){ 

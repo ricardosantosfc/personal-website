@@ -1,4 +1,4 @@
-<nav class="navbar" [class.game-active] = "isGameActive()">
+<nav class="navbar" #navbar [class.game-active] = "isGameActive()">
 
   @if(isGameActive()){
     <div class="game-wrapper" animate.enter="enter-animation">
