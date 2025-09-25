@@ -1,4 +1,4 @@
-<div class="content">
+<div class="who-content" #whoContent>
     <div class="game-wrapper">
         <div class="background" [class.background-image-me]="!isInteracting()">
             <div class="button-container" [class.not-shown]="!isButtonShown()">
@@ -30,6 +30,6 @@
             </div>
         </div>
     </div>
-    <div class="footer">     <app-footer></app-footer></div>
+    <div class="footer" #footer>     <app-footer></app-footer></div>
 
 </div>

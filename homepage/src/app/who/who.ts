@@ -20,6 +20,8 @@ interface Dialogs {
 export class Who {
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('whoContent') content!: ElementRef<HTMLDivElement>;
+    @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
 
   private ctx!: CanvasRenderingContext2D | null;
   private width = 0;
@@ -223,13 +225,21 @@ export class Who {
 
 
   }
-
+//16+32+16
   ngAfterViewInit() {
 
-    console.log(window.innerHeight);
-    const sizeCanvas = window.innerHeight - (this.sizeService.getNavbarHeight() + 16 + 32 + 16);
-    console.log(sizeCanvas);
-    console.log(this.sizeService.getNavbarHeight());
+    //only if it doesnt overflow already, should this be done (ex mobile)
+    //if size ocupied < window.innerheight do this, else do not
+    const sizeContent = this.content.nativeElement.offsetHeight;
+    console.log("size content "+ sizeContent);
+    const sizeCanvasLeft = window.innerHeight - (this.sizeService.getNavbarHeight() + sizeContent! +16);
+    console.log("size occupied " + (this.sizeService.getNavbarHeight() + sizeContent!+16))
+    console.log("full size  " +  window.innerHeight);
+    console.log(" size left " +sizeCanvasLeft);
+    console.log(" footer curr size = " + this.footer.nativeElement.offsetHeight)
+    console.log("new footer size " + this.footer.nativeElement.offsetHeight + sizeCanvasLeft);
+    const newfootersize = this.footer.nativeElement.offsetHeight + sizeCanvasLeft -16;
+    this.footer.nativeElement.style.height = `${newfootersize}px`
     this.scaleCanvas();
     this.loadAssets();
   }
