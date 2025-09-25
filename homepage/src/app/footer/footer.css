@@ -1,0 +1,16 @@
+.content{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.icon-link {
+  color: #939393;
+  transition: color 0.3s ease;
+}
+.icon{ /* ibggerin mobile*/
+    height: 2em;
+}
+
+.icon-link:hover {
+  color: rgb(255, 255, 255); /* GitHub red on hover */
+}
