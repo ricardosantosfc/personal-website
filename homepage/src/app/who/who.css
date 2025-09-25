@@ -29,6 +29,13 @@
   }
   .dialog-box{
     background-color: rgba(0, 0, 0, 0.957) !important;
+    font-size: 1em !important; 
+  }
+  .dialog-box-name{
+    font-size: 1.1em !important;
+  }
+  .btn-resume {
+    font-size: 1.1em !important;
   }
 }
 
