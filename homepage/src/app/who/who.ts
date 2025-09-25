@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { WhoService } from '../who-service';
+import { SizeService } from '../size-service';
+import { Footer } from "../footer/footer";
 
 interface Dialogs {
   text: string;
@@ -11,7 +13,7 @@ interface Dialogs {
 }
 @Component({
   selector: 'app-who',
-  imports: [],
+  imports: [Footer],
   templateUrl: './who.html',
   styleUrl: './who.css'
 })
@@ -155,7 +157,7 @@ export class Who {
       nextDialogIndex: 15
     },
     {
-      text: "You can reach out to me via mail or LinkedIn. Just click on the icons down below.",
+      text: "You can reach out to me through email or LinkedIn. Just click on the icons down below.",
       spriteAlternations: 6,
       sprites: [7, 8],
       endSprite: 8,
@@ -168,8 +170,8 @@ export class Who {
       endSprite: 10,
       nextDialogIndex: 20
     },
-    {
-      text: "If you'd like to learn about my past projects, click on the [𝘄𝗵𝗮𝘁] link up above.",
+    { /* 𝘄𝗵𝗮𝘁 might not be supportted by some dievices*/
+      text: "If you'd like to learn about my past projects, click on the [what] link up above.",
       spriteAlternations: 8,
       sprites: [31, 32],
       endSprite: 32,
@@ -185,6 +187,7 @@ export class Who {
   ];
 
   private whoService = inject(WhoService);
+  private sizeService = inject(SizeService);
 
   //state - showButtons, notInteracting, Interacting
   isButtonShown = signal(false);
@@ -198,7 +201,7 @@ export class Who {
   private isAnimating = false; //to redraw ends sprite on resize if not
 
   private spritesheetImg = new Image();
-  private spriteSizeIncrease = 20;
+  private spriteSizeIncrease = 80;
 
   private currDialogIndex = 0;
   currDialogText = signal("");
@@ -223,6 +226,10 @@ export class Who {
 
   ngAfterViewInit() {
 
+    console.log(window.innerHeight);
+    const sizeCanvas = window.innerHeight - (this.sizeService.getNavbarHeight() + 16 + 32 + 16);
+    console.log(sizeCanvas);
+    console.log(this.sizeService.getNavbarHeight());
     this.scaleCanvas();
     this.loadAssets();
   }
@@ -255,7 +262,6 @@ export class Who {
 
 
     this.spritesheetImg.src = 'spritesheet512_2.png';
-    this.spritesheetImg.onload = () => { //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
     this.spritesheetImg.onload = () => { 
 
       if (this.whoService.hasInitialDialogEnded() === true) {
@@ -352,7 +358,7 @@ export class Who {
     this.animate();
     this.isAnimating = true;
     this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
-    this.isCanvasAcceptingClicks.set(true); // on 8 shouldnt be allowed
+    this.isCanvasAcceptingClicks.set(true); // should be at the end of animate
   }
 
   animate() { //somewhat contrived, review
