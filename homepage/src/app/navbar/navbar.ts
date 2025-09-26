@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterLinkActive } from "@angular/router";
 import { Game } from "../game/game";
@@ -26,6 +26,12 @@ export class Navbar {
   ngOnInit(){
     this.isTouchOnly = !window.matchMedia('(any-hover: hover)').matches;
   }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.sizeService.updateNavbarHeigth( this.navbar.nativeElement.parentElement!.offsetHeight)
+  }
+
 
   ngAfterViewInit(){
     this.sizeService.updateNavbarHeigth( this.navbar.nativeElement.parentElement!.offsetHeight) //non float
