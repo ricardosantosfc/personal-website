@@ -3,6 +3,7 @@
     padding-bottom: 1em;
 }
 
+/*@media (any-hover: hover) {*/
 .icon-link {
   color: #939393;
   transition: color 0.3s ease;
@@ -11,6 +12,8 @@
     height: 2em;
 }
 
+@media (any-hover: hover) {
 .icon-link:hover {
-  color: rgb(255, 255, 255); /* GitHub red on hover */
+  color: rgb(255, 255, 255); 
+}
 }

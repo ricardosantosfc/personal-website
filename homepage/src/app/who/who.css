@@ -65,6 +65,12 @@ transition: background-image 0.1s ease-in-out; /* on firefox doesnt work*/
 display: grid;
 }
 
+@media (orientation: landscape) and (hover: none) { /* increas cnavas height on mobile landscape*/
+  .background {
+    height: 95vh;
+  }
+}
+
 .background-image-me{
   background-image: url("/bkg5me2.png");
   transition: background-image 0.1s ease-in-out;
@@ -154,4 +160,9 @@ display: grid;
   
   background-color: rgb(229, 229, 229);
   color: black;
+}
+
+.footer{
+  align-items:center;
+  display: flex;
 }
