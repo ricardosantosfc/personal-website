@@ -29,7 +29,7 @@ export class Game {
 
   private gameState = GameState.Loading;
 
-  private controlSet = new Set(['w', 's', 'ArrowDown', 'ArrowUp', " "]) //will override space and key up down scrolling
+  private controlSet = new Set(['w', 's', 'ArrowUp']) 
 
   private skyImg = new Image();
   private waterImg = new Image();
@@ -202,7 +202,7 @@ export class Game {
     this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
     this.ctx!.textAlign = "center";
-    this.ctx!.fillText("🖯, 🖢, 🠝, 🠟, w, s, or space to play", this.width / 2, this.height - 10);
+    this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play", this.width / 2, this.height - 10);
 
     this.gameState = GameState.ShowingControls;
     this.canvasRef.nativeElement.style.cursor = "pointer";
@@ -325,7 +325,7 @@ export class Game {
     responsiveFontSize = this.getResponsiveFontSize(20);
     this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
-    this.ctx!.fillText("🖯, 🖢, 🠝, 🠟, w, s, or space to play again", this.width / 2, this.height - 10);
+    this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play again", this.width / 2, this.height - 10);
     this.canvasRef.nativeElement.style.cursor = "pointer";
 
   }
