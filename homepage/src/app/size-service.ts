@@ -11,7 +11,7 @@ export class SizeService {
 }
   updateNavbarHeigth(height:number){
     this.navbarHeight = height;
-    console.log(this.navbarHeight);
+
   }
 
 }

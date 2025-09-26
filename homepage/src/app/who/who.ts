@@ -21,7 +21,7 @@ export class Who {
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('whoContent') content!: ElementRef<HTMLDivElement>;
-    @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
+  @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
 
   private ctx!: CanvasRenderingContext2D | null;
   private width = 0;
@@ -216,6 +216,14 @@ export class Who {
   @HostListener('window:resize')
   onResize() {
 
+    /** //needs debouncing
+     setTimeout(()=> {
+      this.resizeFooter();
+     },500);
+     */
+
+    this.footer.nativeElement.style.height = 'auto';
+    this.resizeFooter();
     this.scaleCanvas();
 
     if (this.isAnimating === false) { //must redraw curr end sprite
@@ -225,23 +233,23 @@ export class Who {
 
 
   }
-//16+32+16
-  ngAfterViewInit() {
 
-    //only if it doesnt overflow already, should this be done (ex mobile)
-    //if size ocupied < window.innerheight do this, else do not
-    const sizeContent = this.content.nativeElement.offsetHeight;
-    console.log("size content "+ sizeContent);
-    const sizeCanvasLeft = window.innerHeight - (this.sizeService.getNavbarHeight() + sizeContent! +16);
-    console.log("size occupied " + (this.sizeService.getNavbarHeight() + sizeContent!+16))
-    console.log("full size  " +  window.innerHeight);
-    console.log(" size left " +sizeCanvasLeft);
-    console.log(" footer curr size = " + this.footer.nativeElement.offsetHeight)
-    console.log("new footer size " + this.footer.nativeElement.offsetHeight + sizeCanvasLeft);
-    const newfootersize = this.footer.nativeElement.offsetHeight + sizeCanvasLeft -16;
-    this.footer.nativeElement.style.height = `${newfootersize}px`
+  //16+32+16
+  ngAfterViewInit() {
+    this.resizeFooter()
     this.scaleCanvas();
     this.loadAssets();
+  }
+
+  resizeFooter() {
+
+    const whoContentHeight = this.content.nativeElement.offsetHeight;
+    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 16); //includes margins
+
+    if (availableWindowHeight > 0) {
+      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 16; //remove margins
+      this.footer.nativeElement.style.height = `${newFooterHeight}px`
+    }
   }
 
   scaleCanvas() {
@@ -272,7 +280,7 @@ export class Who {
 
 
     this.spritesheetImg.src = 'spritesheet512_2.png';
-    this.spritesheetImg.onload = () => { 
+    this.spritesheetImg.onload = () => {
 
       if (this.whoService.hasInitialDialogEnded() === true) {
         this.currDialogIndex = 15;
@@ -280,7 +288,7 @@ export class Who {
       } else {
         this.currDialogText.set(this.dialogs[0].text);
         this.isDialogShown.set(true);
-        this.drawSprite(0); 
+        this.drawSprite(0);
       }
 
     };
@@ -288,13 +296,13 @@ export class Who {
   }
 
   drawSprite(spritePosX: number) {
-//x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
+    //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
     /* this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 0, 512, 512, 
               ((this.width - this.height)-10) / 2, -10, this.height+10, this.height+10)*/
 
     this.ctx!.drawImage(this.spritesheetImg, 512 * spritePosX, 0, 512, 512,
-      ((this.width - this.height)- this.spriteSizeIncrease) / 2, -this.spriteSizeIncrease, 
-      this.height+this.spriteSizeIncrease, this.height + this.spriteSizeIncrease)
+      ((this.width - this.height) - this.spriteSizeIncrease) / 2, -this.spriteSizeIncrease,
+      this.height + this.spriteSizeIncrease, this.height + this.spriteSizeIncrease)
   }
 
 
