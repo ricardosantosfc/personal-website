@@ -29,7 +29,7 @@ export class Game {
 
   private gameState = GameState.Loading;
 
-  private controlSet = new Set(['w', 's', 'ArrowUp']) 
+  private controlSet = new Set(['w', 's', 'ArrowUp']) //arrow up might still be problemtaic?
 
   private skyImg = new Image();
   private waterImg = new Image();
@@ -120,9 +120,15 @@ export class Game {
     // Get wrapper size — from the parent element!
     const parent = canvas.parentElement!;
     const parentRect = parent.getBoundingClientRect();
-    this.width = parentRect.width;
-    this.height = parentRect.height;
+    console.log("game canvas viewport " + window.innerHeight);
+    if(parentRect.height> window.innerHeight){ 
+      
+      console.log("heihgth canvas adjust")
+      canvas.style.height = `${window.innerHeight-20}px`
+    }
 
+      this.width = parentRect.width;
+    this.height = parentRect.height;
     // Set canvas internal resolution
     canvas.width = this.width * dpi;
     canvas.height = this.height * dpi;
@@ -198,7 +204,7 @@ export class Game {
     this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height / 2);
 
 
-    responsiveFontSize = this.getResponsiveFontSize(20);
+    responsiveFontSize = this.getResponsiveFontSize(25);
     this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
     this.ctx!.textAlign = "center";
@@ -317,12 +323,12 @@ export class Game {
     this.ctx!.textBaseline = "top";
     this.ctx!.fillText("Ya blew it!!", this.width / 2, 10);
 
-    var responsiveFontSize = this.getResponsiveFontSize(30);
+    var responsiveFontSize = this.getResponsiveFontSize(32);
     this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
     this.ctx!.textBaseline = "middle";
     this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, this.width / 2, this.height / 2);
 
-    responsiveFontSize = this.getResponsiveFontSize(20);
+    responsiveFontSize = this.getResponsiveFontSize(25);
     this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
     this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play again", this.width / 2, this.height - 10);

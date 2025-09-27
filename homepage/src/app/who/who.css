@@ -67,7 +67,7 @@ display: grid;
 
 @media (orientation: landscape) and (hover: none) { /* increas cnavas height on mobile landscape*/
   .background {
-    height: 95vh;
+    height: 93vh;
   }
 }
 
