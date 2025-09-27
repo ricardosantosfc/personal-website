@@ -316,12 +316,13 @@ export class Game {
   showGameOverCanvas() {
 
     this.ctx!.fillStyle = "#ffffffff";
-    var responsiveFontSize = this.getResponsiveFontSize(43);
+    var responsiveFontSize = this.getResponsiveFontSize(40);
     //also need to set it here in case of a reszie
     this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
     this.ctx!.textAlign = "center";
     this.ctx!.textBaseline = "top";
     this.ctx!.fillText("Ya blew it!!", this.width / 2, 10);
+    /**quit ducking around, ya quacked under pressure, etc etc */
 
     var responsiveFontSize = this.getResponsiveFontSize(32);
     this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
@@ -375,8 +376,8 @@ export class Game {
     const heightScale = this.height / baseHeight;
     const scale = Math.min(widthScale, heightScale);
 
-    const minFont = 10;
-    const maxFont = 36;
+    const minFont = 20;
+    const maxFont = 40;
 
     return Math.max(minFont, Math.min(baseFontSize * scale, maxFont));
   }
