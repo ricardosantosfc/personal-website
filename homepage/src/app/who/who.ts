@@ -241,13 +241,13 @@ export class Who {
     this.loadAssets();
   }
 
-  resizeFooter() {
+  resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
 
     const whoContentHeight = this.content.nativeElement.offsetHeight;
-    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 16); //includes margins
+    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
 
     if (availableWindowHeight > 0) {
-      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 16; //remove margins
+      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
       this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
   }
