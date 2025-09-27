@@ -54,6 +54,13 @@ export class Navbar {
 
     this.hovering.set(false);
     this.isGameActive.update((isGameActive) => !isGameActive); /* might have to change to enable/disable but for now ok */
+     //if landscape, open game -> potarait, close game , needs resize 
+    /* should trigger resize who if foote is speacial. but needs a debounce or gets the game navbar height
+    if(this.isGameActive() === false){
+      this.sizeService.updateNavbarHeigth(this.navbar.nativeElement.parentElement!.offsetHeight);
+      console.log(this.navbar.nativeElement.parentElement!.offsetHeight);
+    } */
+    
   }
 
 

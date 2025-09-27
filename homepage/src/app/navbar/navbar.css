@@ -86,7 +86,7 @@ zoom:100%;
 
 .navbar-items {
     display: flex;
-    gap: 2em;
+    gap: 2em; /*1em*/
     list-style: none;
     margin: 0;
     padding: 0;
@@ -96,7 +96,8 @@ zoom:100%;
 }
 
 .navbar-item a {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Anta", sans-serif;
+  font-weight: 400;
 }
 
 
