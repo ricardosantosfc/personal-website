@@ -19,13 +19,13 @@ export class What {
   onResize() {
 
     this.footer.nativeElement.style.height = 'auto';
-    this.resizeFooter();
+    //this.resizeFooter();
 
 
   }
 
     ngAfterViewInit() {
-    this.resizeFooter()
+    //this.resizeFooter()
 
   }
 

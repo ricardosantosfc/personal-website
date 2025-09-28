@@ -14,6 +14,103 @@
     font-weight: 500;
 }
 
+.project-wrapper {
+  position: relative;
+  min-width: 80%;
+  max-width: 100%;
+  background-color: #232323;
+  padding: 0.5rem 0.5rem;
+  border-radius: 6px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+.project-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column; 
+  gap: 2rem;
+  background-color: #0f0f0f;
+  padding: 2em;
+  justify-content: center;
+}
+
+
+.project-main {
+    margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+}
+
+.project-links{
+      display: flex;
+  gap: 1rem;
+  justify-content: flex-end; 
+}
+/*
+.project-content {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center; /* flex start befor
+  gap: 3.5rem;
+  background-color: #0f0f0f;
+  padding: 2em;
+
+  justify-content: center;
+}
+*/
+
+
+
+
+.project-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-text {
+  max-width: 60vh;
+}
+
+.project-title {
+    
+  font-size: 3em;
+  font-weight: 300;
+  
+}
+
+.project-info {
+    margin-top: 0.3em ;
+  font-size: 1.3em;
+  line-height: 1.6;
+  
+}
+
+
+
+/*@media (any-hover: hover) {*/
+.icon-link {
+  color: #939393;
+  transition: color 0.3s ease;
+}
+
+
+@media (any-hover: hover) {
+.icon-link:hover {
+  color: rgb(255, 255, 255); 
+}
+}
+
 .footer {
   align-items: center;
   display: flex;
