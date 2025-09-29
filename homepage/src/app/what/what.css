@@ -22,7 +22,7 @@
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 
@@ -112,8 +112,10 @@
 
 }
 
-.dots {
-  padding: 2em;
+
+
+.dot-container {
+  padding: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,6 +137,42 @@
 
 .dot:hover{
   background-color: #ffffff;
+}
+.button-container{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  display: flex;
+
+  gap: 2em;
+}
+
+.button{
+
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+  cursor: pointer;
+  padding: 0.6em 0.8em;
+  background-color: rgb(50, 50, 50);
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+.button-prev{
+padding-right: 1em;
+}
+
+.button-next{
+padding-left: 1em;
+}
+
+.button-img{
+  width: 1.3em;
+}
+
+.button:hover{
+  background-color: #e8e8e8;
+  
 }
 
 /*@media (any-hover: hover) {*/
