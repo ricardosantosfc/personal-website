@@ -76,7 +76,7 @@ export class What {
     //this.showProject(0);
     setTimeout(() => {
   this.resizeFooter();
-}, 50);
+}, 0.3);
     
 
 

@@ -52,7 +52,7 @@
 }
 
 .enter-animation {
-  animation: slide-fade 1s;
+  animation: slide-fade 0.5s;
   animation-fill-mode: backwards;
 }
 @keyframes slide-fade {
