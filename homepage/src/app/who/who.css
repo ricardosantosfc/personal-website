@@ -159,6 +159,8 @@ canvas.accepting-clicks {
   gap: 1em;
   justify-content: center;
   align-items: flex-start;
+  padding-left: 12px;
+  padding-right: 12px;
   max-width: 97%;
 
 
