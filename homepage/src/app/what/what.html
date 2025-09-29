@@ -1,22 +1,20 @@
-<div class="what-content" #whatContent>
-    <div class=project-wrapper>
-        <ul class=project-list>
-            <li class=" project-list-item">
-                <div class="project-content">
-                    <div class="project-main">
+<div class="what-content"  #whatContent>
+    <div class=project-wrapper  [class.enter-animation] = "isAnimating() ===true">
+        <ul class=project-list >
+            <li class=" project-list-item" >
+                <div class="project-content" >
+                    <div class="project-main" >
                         <div class="project-image-wrapper">
-                            <img src="project1.png" alt="project 1 imagr">
+                            <img src={{currImage()}} >
                         </div>
                         <div class="project-text">
-                            <div class="project-title"> saveDforest</div>
-                            <div class="project-info"> A serious game for promoting environmentally sustainable
-                                behaviors
-                                through empathy, embedded in a web app.
+                            <div class="project-title"> {{currTitle()}} </div>
+                            <div class="project-description"> {{currDescription()}}
                             </div>
                         </div>
                     </div>
-                    <div class=project-links>
-                        <a class="icon-link" href="https://savedforest-temp-test-2.onrender.com/" target="_blank"
+                    <div class=project-links> <!--noLink() .notShown-->
+                        <a class="icon-link" [class.not-shown]="!isLinkShown()" href={{currLink()}} target="_blank"
                             rel="noopener noreferrer">
                             <svg class="icon" width="48" height="46" viewBox="0 0 65 66" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +23,8 @@
                                     d="M28.8888 34.5556C29.7 35.6401 30.7349 36.5374 31.9234 37.1867C33.1118 37.836 34.4261 38.2222 35.7769 38.3189C37.1277 38.4156 38.4836 38.2207 39.7524 37.7474C41.0213 37.2741 42.1735 36.5334 43.131 35.5756L48.7977 29.9089C50.518 28.1277 51.47 25.742 51.4485 23.2657C51.427 20.7894 50.4337 18.4206 48.6826 16.6695C46.9315 14.9185 44.5628 13.9252 42.0865 13.9037C39.6101 13.8822 37.2245 14.8341 35.4432 16.5545L32.1943 19.7845M36.4443 30.7778C35.6331 29.6934 34.5982 28.796 33.4097 28.1467C32.2213 27.4974 30.907 27.1113 29.5562 27.0145C28.2054 26.9178 26.8496 27.1127 25.5807 27.586C24.3118 28.0593 23.1596 28.8 22.2021 29.7578L16.5354 35.4245C14.8151 37.2057 13.8631 39.5914 13.8846 42.0677C13.9062 44.544 14.8994 46.9128 16.6505 48.6639C18.4016 50.415 20.7704 51.4082 23.2467 51.4297C25.723 51.4513 28.1086 50.4993 29.8899 48.7789L33.1199 45.5489"
                                     stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
-                        <a class="icon-link" href="https://github.com/ricardosantosfc/saveDforest" target="_blank"
+                        </a><!--noGithub() .notShown-->
+                        <a class="icon-link" [class.not-shown]="!isGithubShown()" href={{currGithub()}} target="_blank"
                             rel="noopener noreferrer">
                             <svg class="icon" width="48" height="46" viewBox="0 0 78 76" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -43,6 +41,18 @@
             <!--other li-->
         </ul>
 
+    </div>
+    <button class="btn prev" (click)="handlePrevClick()">Prev</button>
+    <button class="btn next" (click)="handleNextClick()">Next</button>
+    <div class="dots">
+        @for (project of projects; track $index) {
+
+            @if($index === currProjectIndex){
+                <span class="dot dot-active" > </span>
+            }@else{
+                <span class="dot" (click)="toggleDot($index)"> </span>
+            }
+        }
     </div>
 
     <div class="footer" #footer> <app-footer></app-footer></div>

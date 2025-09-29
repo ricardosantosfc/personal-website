@@ -11,7 +11,7 @@
   position: relative;
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .project-wrapper {
@@ -34,7 +34,7 @@
 
 .project-content {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 2rem;
   background-color: #0f0f0f;
   padding: 2em;
@@ -43,7 +43,7 @@
 
 
 .project-main {
-    margin-top: 2em;
+  margin-top: 2em;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -51,11 +51,27 @@
   gap: 3.5rem;
 }
 
-.project-links{
-      display: flex;
-  gap: 1rem;
-  justify-content: flex-end; 
+.enter-animation {
+  animation: slide-fade 1s;
+  animation-fill-mode: backwards;
 }
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
 /*
 .project-content {
   display: flex;
@@ -83,20 +99,43 @@
 }
 
 .project-title {
-    
+
   font-size: 3em;
   font-weight: 300;
-  
+
 }
 
-.project-info {
-    margin-top: 0.3em ;
+.project-description {
+  margin-top: 0.3em;
   font-size: 1.3em;
   line-height: 1.6;
-  
+
 }
 
+.dots {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
+.dot {
+  cursor: pointer;
+  height: 1em;
+  width: 1em;
+  background-color: rgb(50, 50, 50);
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+.dot-active{
+  background-color: #ffffff;
+}
+
+.dot:hover{
+  background-color: #ffffff;
+}
 
 /*@media (any-hover: hover) {*/
 .icon-link {
@@ -104,11 +143,14 @@
   transition: color 0.3s ease;
 }
 
+.not-shown {
+  display: none;
+}
 
 @media (any-hover: hover) {
-.icon-link:hover {
-  color: rgb(255, 255, 255); 
-}
+  .icon-link:hover {
+    color: rgb(255, 255, 255);
+  }
 }
 
 .footer {
