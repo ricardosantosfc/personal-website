@@ -1,8 +1,8 @@
 <div class="what-content" #whatContent>
-    <div class=project-wrapper [class.enter-animation]="isAnimating() ===true">
+    <div class=project-wrapper [class.enter-animation]="isAnimatingEntrance() ===true">
         <ul class=project-list>
             <li class=" project-list-item">
-                <div class="project-content">
+                <div class="project-content" (mouseenter)="animateImages()"  (mouseleave)="stopAnimatingImages()">
                     <div class="project-main">
                         <div class="project-image-wrapper">
                             <img src={{currImage()}}>

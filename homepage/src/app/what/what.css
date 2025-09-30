@@ -23,8 +23,13 @@
   border-radius: 6px;
   margin-top: 1em;
   margin-bottom: 0.5em;
+  transition: box-shadow 0.3s ease;
 }
 
+.project-wrapper:hover {
+
+  box-shadow: 0px 10px 50px 2px  rgb(30, 30, 30);
+}
 
 .project-list {
   margin: 0;
@@ -106,8 +111,9 @@
 }
 
 .project-description {
+  font-weight: 300;
   margin-top: 0.3em;
-  font-size: 1.3em;
+  font-size: 1.25em;
   line-height: 1.6;
 
 }
@@ -132,7 +138,7 @@
   cursor: pointer;
   height: 1em;
   width: 1em;
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(70, 70, 70);
   transition: background-color 0.3s ease;
   border-radius: 6px;
 }
@@ -157,7 +163,7 @@
     cursor: pointer;
   padding: 0.5em;
   width: 1.3em;
-  color: rgb(50, 50, 50);
+  color: rgb(70, 70, 70);
   transition: color 0.3s ease;
 
 }

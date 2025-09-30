@@ -4,9 +4,9 @@ import { SizeService } from '../size-service';
 
 interface Project {
   id: number
-  image: string;
+  images: string[];
   title: string;
-  description: string; //times to alternate aimating between the sprites before end sprite
+  description: string; 
   github?: string;
   link?: string;
 }
@@ -22,7 +22,8 @@ export class What {
   projects: Project[] = [
     {
       id: 0,
-      image: "/projects/project1.png",
+      images: ["/projects/savedforest0 (5).png", "/projects/savedforest1.png", "/projects/savedforest2.png",
+        "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
       title: "saveDforest",
       description: "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
       github: "https://github.com/ricardosantosfc/saveDforest",
@@ -30,34 +31,37 @@ export class What {
     },
     {
       id: 1,
-      image: "/projects/project1.png",
+      images: ["/projects/homepage1 (10).png"],
       title: "Personal website",
       description: "My personal website, the one you're browsing right now.",
       github: "https://github.com/ricardosantosfc/homepage"
     },
-    {
-      id: 2,
-      image: "/projects/project1.png",
-      title: "test 3",
-      description: "test descrpiton.",
-      link: "https://github.com/ricardosantosfc/homepage"
-    },
+
   ];
 
   @ViewChild('whatContent') content!: ElementRef<HTMLDivElement>;
   @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-  currImage = signal("/projects/project1.png");
+  currImage = signal("/projects/savedforest0 (5).png");
+  currImagesToAnimate = 5;
+  currImageToAnimateIndex = 1;
+
+  private rotationStartDelay = 3000; 
+  private rotationStartTime = 0;
+  private pauseBetweenImages = 4000; 
+  lastImageSwitchTime = 0;
+
   currTitle = signal("saveDforest");
   currDescription = signal("A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.");
   currLink = signal("https://savedforest-temp-test-2.onrender.com/");
   currGithub = signal("https://github.com/ricardosantosfc/saveDforest");
   isLinkShown = signal(true);
   isGithubShown = signal(true);
-  isAnimating = signal(true);
+  isAnimatingEntrance = signal(true);
 
   currProjectIndex = 0;
+  private animationFrameId = 0;
 
 
 
@@ -75,9 +79,9 @@ export class What {
 
     //this.showProject(0);
     setTimeout(() => {
-  this.resizeFooter();
-}, 0.3);
-    
+      this.resizeFooter();
+    }, 0.3);
+
 
 
 
@@ -86,7 +90,8 @@ export class What {
 
   showProject(index: number) {
 
-    this.currImage.set(this.projects[index]!.image); //mightn need load
+    this.currImage.set(this.projects[index]!.images[0]); //mightn need load
+    this.currImagesToAnimate = this.projects[index]!.images.length - 1;
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
 
@@ -106,14 +111,13 @@ export class What {
   }
 
   showProjectWithAnimation(index: number) {
-    this.isAnimating.set(false);
+    this.isAnimatingEntrance.set(false);
 
     requestAnimationFrame(() => {
       this.showProject(index)
-      this.isAnimating.set(true);
+      this.isAnimatingEntrance.set(true);
     });
   }
-
 
 
   toggleDot(index: number) {
@@ -138,6 +142,50 @@ export class What {
       this.currProjectIndex--;
     }
     this.showProjectWithAnimation(this.currProjectIndex);
+  }
+
+
+  animateImages() {
+    if (this.currImagesToAnimate > 0) {
+      this.currImage.set(this.projects[this.currProjectIndex]!.images[1]);
+      this.rotationStartTime = performance.now();
+
+      this.animate(performance.now());
+
+    }
+
+  }
+
+  private animate(timestamp: number): void {
+    const elapsed = timestamp - this.rotationStartTime;
+
+    if (elapsed > this.rotationStartDelay) {
+      if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
+        if (this.currImageToAnimateIndex + 1 > this.currImagesToAnimate) {
+          this.currImageToAnimateIndex = 1;
+        } else {
+          this.currImageToAnimateIndex++;
+        }
+
+
+        this.currImage.set(this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]);
+        this.lastImageSwitchTime = timestamp;
+      }
+
+    }
+
+    this.animationFrameId = requestAnimationFrame((t) => this.animate(t));
+  }
+
+  stopAnimatingImages() {
+    if (this.currImagesToAnimate > 0) {
+      if (this.animationFrameId !== null) {
+        cancelAnimationFrame(this.animationFrameId);
+        //this.animationFrameId = null;
+      }
+      this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
+      this.currImageToAnimateIndex = 1;
+    }
   }
 
   resizeFooter() {
