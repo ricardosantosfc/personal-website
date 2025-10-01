@@ -19,10 +19,10 @@ interface Project {
 })
 export class What {
 
-  projects: Project[] = [
+  projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0 (5).png", "/projects/savedforest1.png", "/projects/savedforest2.png",
+      images: ["/projects/savedforest0.png", "/projects/savedforest1.png", "/projects/savedforest2.png",
         "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
       title: "saveDforest",
       description: "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
@@ -43,11 +43,12 @@ export class What {
   @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-  currImage = signal("/projects/savedforest0 (5).png");
+  currImage = signal("/projects/savedforest0.png");
   currImagesToAnimate = 5;
-  currImageToAnimateIndex = 1;
+  currImageToAnimateIndex = 0;
+  currOpacityImage = signal(1);
 
-  private rotationStartDelay = 3000; 
+  private rotationStartDelay = 0; 
   private rotationStartTime = 0;
   private pauseBetweenImages = 4000; 
   lastImageSwitchTime = 0;
@@ -147,7 +148,8 @@ export class What {
 
   animateImages() {
     if (this.currImagesToAnimate > 0) {
-      this.currImage.set(this.projects[this.currProjectIndex]!.images[1]);
+      
+      
       this.rotationStartTime = performance.now();
 
       this.animate(performance.now());
@@ -160,6 +162,7 @@ export class What {
     const elapsed = timestamp - this.rotationStartTime;
 
     if (elapsed > this.rotationStartDelay) {
+      this.currOpacityImage.set(0);
       if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
         if (this.currImageToAnimateIndex + 1 > this.currImagesToAnimate) {
           this.currImageToAnimateIndex = 1;
@@ -181,10 +184,11 @@ export class What {
     if (this.currImagesToAnimate > 0) {
       if (this.animationFrameId !== null) {
         cancelAnimationFrame(this.animationFrameId);
-        //this.animationFrameId = null;
+        this.animationFrameId = 0;
       }
       this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
-      this.currImageToAnimateIndex = 1;
+      this.currOpacityImage.set(1);
+      this.currImageToAnimateIndex = 0;
     }
   }
 

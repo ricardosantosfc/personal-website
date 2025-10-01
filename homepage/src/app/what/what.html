@@ -2,8 +2,8 @@
     <div class=project-wrapper [class.enter-animation]="isAnimatingEntrance() ===true">
         <div class="project-content" (mouseenter)="animateImages()" (mouseleave)="stopAnimatingImages()">
             <div class="project-main">
-                <div class="project-image-wrapper">
-                    <img src={{currImage()}}>
+                <div class="project-image-wrapper" [style.background-image]="'url(' + currImage() + ')'">
+                    <img src={{currImage()}} [style.opacity] = "currOpacityImage()">
                 </div>
                 <div class="project-text">
                     <div class="project-title"> {{currTitle()}} </div>
