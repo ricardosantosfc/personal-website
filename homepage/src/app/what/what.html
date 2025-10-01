@@ -1,6 +1,6 @@
 <div class="what-content" #whatContent>
     <div class=project-wrapper [class.enter-animation]="isAnimatingEntrance() ===true">
-        <div class="project-content" (mouseenter)="animateImages()" (mouseleave)="stopAnimatingImages()">
+        <div class="project-content" (transitionstart)="handleOpacityTransitionStart()" (transitionend)="handleOpacityTransitionEnd()" (mouseenter)="animateImages()" (mouseleave)="stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">
                     <img src={{currImage()}} [style.opacity] = "currOpacityImage()">

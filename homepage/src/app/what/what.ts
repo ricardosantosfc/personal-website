@@ -47,11 +47,12 @@ export class What {
   currImagesToAnimate = 5;
   currImageToAnimateIndex = 1;
   currOpacityImage = signal(1);
+  isChangingImage = false;
 
 
 
   private pauseBetweenImages = 7000;
-  lastImageSwitchTime = 0;
+  lastImageSwitchTime = -7000; //so as not to have a swtiching period on the first trnasition after ngafterviewinit
 
   currTitle = signal("saveDforest");
   currDescription = signal("A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.");
@@ -152,7 +153,7 @@ export class What {
 
 
 
-      this.animate(performance.now()); 
+      this.animate(performance.now());
 
     }
 
@@ -160,30 +161,13 @@ export class What {
 
   private animate(timestamp: number): void {
 
-    console.log(timestamp); 
-    
     if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
 
-      console.log("animating"); //also as its appearing, if mouse over and out, this isnt tirggered, and timestamp is messed
+      console.log("animating"); 
+      this.isChangingImage = true;
+
       this.currOpacityImage.set(0);
 
-      setTimeout(() => { //a bit janky rn, mightneed ontransitionend event 
- 
-        this.currImage.set(
-          this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]
-        );
-
-
-        this.currOpacityImage.set(1);
-
-
-        if (this.currImageToAnimateIndex + 1 > this.currImagesToAnimate) {
-          this.currImageToAnimateIndex = 1;
-        } else {
-          this.currImageToAnimateIndex++;
-        }
-
-      }, 500);
 
       this.lastImageSwitchTime = timestamp;
     }
@@ -191,18 +175,50 @@ export class What {
     this.animationFrameId = requestAnimationFrame((t) => this.animate(t));
   }
 
+
+  handleOpacityTransitionStart() {
+    if (this.isChangingImage === true) {
+      console.log("on the transition end next should change image")
+    }else{
+      console.log("next trnasition end no change")
+    }
+  }
+
+  handleOpacityTransitionEnd() {
+    if (this.isChangingImage === true) {
+      console.log("will change image now");
+      this.currImage.set(
+        this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]
+      );
+
+      if (this.currImageToAnimateIndex + 1 > this.currImagesToAnimate) {
+        this.currImageToAnimateIndex = 1;
+      } else {
+        this.currImageToAnimateIndex++;
+      }
+      this.isChangingImage = false;
+      this.currOpacityImage.set(1);
+
+    }else{
+      console.log("nochange this end");
+    }
+      
+    }
+  
+
   stopAnimatingImages() {
 
-      if (this.animationFrameId !== 0) {
-        cancelAnimationFrame(this.animationFrameId);
-        this.animationFrameId = 0;
-        this.currOpacityImage.set(0);
-        setTimeout(() => {
-          this.lastImageSwitchTime = 0;
-          this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
-          this.currOpacityImage.set(1);
-          this.currImageToAnimateIndex = 1;
-        }, 500);
+    if (this.animationFrameId !== 0) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = 0;
+      this.isChangingImage = false;
+      this.currOpacityImage.set(0);
+      setTimeout(() => {
+        this.lastImageSwitchTime = 0;
+        this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
+        this.currOpacityImage.set(1);
+        this.currImageToAnimateIndex = 1;
+      }, 500);
 
     }
   }
