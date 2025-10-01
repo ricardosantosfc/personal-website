@@ -92,7 +92,7 @@ export class What {
 
   showProject(index: number) {
 
-    this.currImage.set(this.projects[index]!.images[0]); //mightn need load
+    this.currImage.set(this.projects[index]!.images[0]); 
     this.currImagesToAnimate = this.projects[index]!.images.length - 1;
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
@@ -148,10 +148,8 @@ export class What {
 
 
   animateImages() {
-    console.log("mouse over");
+
     if (this.currImagesToAnimate > 0) {
-
-
 
       this.animate(performance.now());
 
@@ -159,34 +157,23 @@ export class What {
 
   }
 
-  private animate(timestamp: number): void {
+  private animate(timestamp: number): void { //lastImageSwitchTime might still need tiny adjustment on stop. 
 
     if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
 
-      console.log("animating"); 
       this.isChangingImage = true;
-
       this.currOpacityImage.set(0);
-
-
       this.lastImageSwitchTime = timestamp;
+
     }
 
     this.animationFrameId = requestAnimationFrame((t) => this.animate(t));
   }
 
 
-  handleOpacityTransitionStart() {
-    if (this.isChangingImage === true) {
-      console.log("on the transition end next should change image")
-    }else{
-      console.log("next trnasition end no change")
-    }
-  }
-
   handleOpacityTransitionEnd() {
+
     if (this.isChangingImage === true) {
-      console.log("will change image now");
       this.currImage.set(
         this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]
       );
@@ -199,21 +186,20 @@ export class What {
       this.isChangingImage = false;
       this.currOpacityImage.set(1);
 
-    }else{
-      console.log("nochange this end");
     }
-      
-    }
-  
+  }
+
 
   stopAnimatingImages() {
 
     if (this.animationFrameId !== 0) {
+
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = 0;
       this.isChangingImage = false;
+
       this.currOpacityImage.set(0);
-      setTimeout(() => {
+      setTimeout(() => { //easier to do this through timeout rather than trnastionevent listeners.
         this.lastImageSwitchTime = 0;
         this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
         this.currOpacityImage.set(1);
