@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
-import { Footer } from "../footer/footer";
 import { SizeService } from '../size-service';
+
 
 interface Project {
   id: number
@@ -13,7 +13,7 @@ interface Project {
 
 @Component({
   selector: 'app-what',
-  imports: [Footer],
+  imports: [],
   templateUrl: './what.html',
   styleUrl: './what.css'
 })
@@ -42,6 +42,7 @@ export class What {
   @ViewChild('whatContent') content!: ElementRef<HTMLDivElement>;
   @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
+
 
   currImage = signal("/projects/savedforest0.png");
   currImagesToAnimate = 5;
@@ -75,24 +76,39 @@ export class What {
     this.resizeFooter();
 
 
+
   }
 
   ngAfterViewInit() {
 
-    //this.showProject(0);
-    setTimeout(() => {
-      this.resizeFooter();
-    }, 0.3);
+    //this.showProject(0)
+    this.resizeFooter();
+
+  }
 
 
+  //log all viewchilds to see whats not being corrctly calculated
+  resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
+    
+ 
+    const whoContentHeight = this.content.nativeElement.offsetHeight;
 
+    console.log("who content heihgth = " + whoContentHeight);
+    console.log("footee heihgth = " +this.footer.nativeElement.offsetHeight);
 
+    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
+    
+    console.log("available window height = " +availableWindowHeight);
 
+    if (availableWindowHeight > 0) {
+      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
+      //this.footer.nativeElement.style.height = `${newFooterHeight}px`
+    }
   }
 
   showProject(index: number) {
 
-    this.currImage.set(this.projects[index]!.images[0]); 
+    this.currImage.set(this.projects[index]!.images[0]);
     this.currImagesToAnimate = this.projects[index]!.images.length - 1;
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
@@ -208,20 +224,5 @@ export class What {
 
     }
   }
-
-
-  resizeFooter() {
-
-    const whatContentHeight = this.content.nativeElement.offsetHeight;
-
-    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whatContentHeight! + 12); //includes margins
-
-    if (availableWindowHeight > 0) {
-      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
-
-      this.footer.nativeElement.style.height = `${newFooterHeight}px`
-    }
-  }
-
 
 }
