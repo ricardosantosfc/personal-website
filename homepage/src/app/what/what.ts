@@ -6,7 +6,7 @@ interface Project {
   id: number
   images: string[];
   title: string;
-  description: string; 
+  description: string;
   github?: string;
   link?: string;
 }
@@ -45,12 +45,12 @@ export class What {
 
   currImage = signal("/projects/savedforest0.png");
   currImagesToAnimate = 5;
-  currImageToAnimateIndex = 0;
+  currImageToAnimateIndex = 1;
   currOpacityImage = signal(1);
 
-  private rotationStartDelay = 0; 
-  private rotationStartTime = 0;
-  private pauseBetweenImages = 4000; 
+
+
+  private pauseBetweenImages = 7000;
   lastImageSwitchTime = 0;
 
   currTitle = signal("saveDforest");
@@ -147,50 +147,66 @@ export class What {
 
 
   animateImages() {
+    console.log("mouse over");
     if (this.currImagesToAnimate > 0) {
-      
-      
-      this.rotationStartTime = performance.now();
 
-      this.animate(performance.now());
+
+
+      this.animate(performance.now()); 
 
     }
 
   }
 
   private animate(timestamp: number): void {
-    const elapsed = timestamp - this.rotationStartTime;
 
-    if (elapsed > this.rotationStartDelay) {
+    console.log(timestamp); 
+    
+    if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
+
+      console.log("animating"); //also as its appearing, if mouse over and out, this isnt tirggered, and timestamp is messed
       this.currOpacityImage.set(0);
-      if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
+
+      setTimeout(() => { //a bit janky rn, mightneed ontransitionend event 
+ 
+        this.currImage.set(
+          this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]
+        );
+
+
+        this.currOpacityImage.set(1);
+
+
         if (this.currImageToAnimateIndex + 1 > this.currImagesToAnimate) {
           this.currImageToAnimateIndex = 1;
         } else {
           this.currImageToAnimateIndex++;
         }
 
+      }, 500);
 
-        this.currImage.set(this.projects[this.currProjectIndex]!.images[this.currImageToAnimateIndex]);
-        this.lastImageSwitchTime = timestamp;
-      }
-
+      this.lastImageSwitchTime = timestamp;
     }
 
     this.animationFrameId = requestAnimationFrame((t) => this.animate(t));
   }
 
   stopAnimatingImages() {
-    if (this.currImagesToAnimate > 0) {
-      if (this.animationFrameId !== null) {
+
+      if (this.animationFrameId !== 0) {
         cancelAnimationFrame(this.animationFrameId);
         this.animationFrameId = 0;
-      }
-      this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
-      this.currOpacityImage.set(1);
-      this.currImageToAnimateIndex = 0;
+        this.currOpacityImage.set(0);
+        setTimeout(() => {
+          this.lastImageSwitchTime = 0;
+          this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
+          this.currOpacityImage.set(1);
+          this.currImageToAnimateIndex = 1;
+        }, 500);
+
     }
   }
+
 
   resizeFooter() {
 

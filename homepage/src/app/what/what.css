@@ -26,9 +26,10 @@
   transition: box-shadow 0.3s ease;
 }
 
+
 .project-wrapper:hover {
 
-  box-shadow: 0px 10px 50px 2px  rgb(30, 30, 30);
+  box-shadow: 0px 10px 50px 2px  rgb(15, 15, 15)
 }
 
 .project-list {
@@ -57,7 +58,7 @@
 }
 
 .enter-animation {
-  animation: slide-fade 0.5s;
+  animation: slide-fade 1s;
   animation-fill-mode: backwards;
 }
 @keyframes slide-fade {
@@ -97,16 +98,10 @@
   width: 100%;
   height: auto;
   display: block;
-
+   transition: opacity 0.5s ease-in-out;
 }
 
-.project-image-wrapper {
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
 
 .project-text {
   max-width: 60vh;
