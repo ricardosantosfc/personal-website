@@ -87,10 +87,6 @@ export class What {
 
   }
 
-  onImageLoad(){
-    //this.resizeFooter();
-  }
-
   //log all viewchilds to see whats not being corrctly calculated
   resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
     
