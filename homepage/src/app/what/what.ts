@@ -25,8 +25,8 @@ export class What {
       images: ["/projects/savedforest0.png", "/projects/savedforest11.png", "/projects/savedforest2.png",
         "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
       title: "saveDforest",
-      description: 
-      "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.\n \n Developed with Unity, Angular, Express.js, Node.js and MongoDB.",
+      description:
+        "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.\n \n Developed with Unity, Angular, Express.js, Node.js and MongoDB.",
       github: "https://github.com/ricardosantosfc/saveDforest",
       link: "https://savedforest-temp-test-2.onrender.com/"
     },
@@ -51,8 +51,6 @@ export class What {
   currOpacityImage = signal(1);
   isChangingImage = false;
 
-
-
   private pauseBetweenImages = 7000;
   lastImageSwitchTime = -7000; //so as not to have a swtiching period on the first trnasition after ngafterviewinit
 
@@ -67,7 +65,7 @@ export class What {
   currProjectIndex = 0;
   private animationFrameId = 0;
 
-
+  private controlSet = new Set(['ArrowLeft', 'ArrowRight']) 
 
 
   @HostListener('window:resize')
@@ -76,9 +74,22 @@ export class What {
     this.footer.nativeElement.style.height = 'auto';
     this.resizeFooter();
 
+  }
 
+  //handle controls
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (this.controlSet.has(event.key)) {
+      this.stopAnimatingImages(); 
+       if (event.key === 'ArrowLeft') {
+        this.handlePrevClick();
+       }else{
+        this.handleNextClick();
+       }
+    }
 
   }
+
 
   ngAfterViewInit() {
 
@@ -89,7 +100,7 @@ export class What {
 
   //log all viewchilds to see whats not being corrctly calculated
   resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
-    
+
     const whoContentHeight = this.content.nativeElement.offsetHeight;
 
     const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
