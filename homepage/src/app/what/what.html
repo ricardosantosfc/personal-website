@@ -3,7 +3,7 @@
         <div class="project-content" (mouseenter)="animateImages()" (mouseleave)="stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">
-                    <img src={{currImage()}} [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
+                    <img src={{currImage()}} (load)="onImageLoad()" [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
                 </div>
                 <div class="project-text">
                     <div class="project-title"> {{currTitle()}} </div>

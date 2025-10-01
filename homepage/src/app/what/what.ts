@@ -22,10 +22,11 @@ export class What {
   projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0.png", "/projects/savedforest1.png", "/projects/savedforest2.png",
+      images: ["/projects/savedforest0.png", "/projects/savedforest11.png", "/projects/savedforest2.png",
         "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
       title: "saveDforest",
-      description: "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
+      description: 
+      "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.\n \n Developed with Unity, Angular, Express.js, Node.js and MongoDB.",
       github: "https://github.com/ricardosantosfc/saveDforest",
       link: "https://savedforest-temp-test-2.onrender.com/"
     },
@@ -86,23 +87,20 @@ export class What {
 
   }
 
+  onImageLoad(){
+    //this.resizeFooter();
+  }
 
   //log all viewchilds to see whats not being corrctly calculated
   resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
     
- 
     const whoContentHeight = this.content.nativeElement.offsetHeight;
 
-    console.log("who content heihgth = " + whoContentHeight);
-    console.log("footee heihgth = " +this.footer.nativeElement.offsetHeight);
-
     const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
-    
-    console.log("available window height = " +availableWindowHeight);
 
     if (availableWindowHeight > 0) {
       const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
-      //this.footer.nativeElement.style.height = `${newFooterHeight}px`
+      this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
   }
 

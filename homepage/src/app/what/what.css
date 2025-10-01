@@ -41,7 +41,7 @@
 .project-content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   background-color: #0f0f0f;
   padding: 2em;
   justify-content: center;
@@ -96,7 +96,7 @@
 
 .project-image-wrapper img {
   width: 100%;
-  height: auto;
+  height: 35vh;
   display: block;
    transition: opacity 0.5s ease-in-out;
 }
@@ -105,6 +105,7 @@
 
 .project-text {
   max-width: 60vh;
+
 }
 
 .project-title {
@@ -119,6 +120,7 @@
   margin-top: 0.3em;
   font-size: 1.25em;
   line-height: 1.6;
+    white-space: pre-line;
 
 }
 
