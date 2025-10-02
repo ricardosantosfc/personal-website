@@ -124,6 +124,23 @@
 
 }
 
+/*
+.project-stack{
+ padding-top: 2em;
+   display: flex;
+  gap: 10px;
+  flex-wrap: wrap
+}
+
+.stack-item{
+  font-size: 0.7em;
+  padding: 0.5em 0.5em;
+  border-radius: 6px;
+  background-color: #000000;
+}
+
+*/
+
 .control-container{
   display: flex;
   gap:0.5em;
