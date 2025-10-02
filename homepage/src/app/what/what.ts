@@ -22,17 +22,17 @@ export class What {
   projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0.png", "/projects/savedforest11.png", "/projects/savedforest2.png",
+      images: ["/projects/savedforest0.png", "/projects/savedforest1.png", "/projects/savedforest2.png",
         "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
       title: "saveDforest",
       description:
-        "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.\n \n Developed with Unity, Angular, Express.js, Node.js and MongoDB.",
+        "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
       github: "https://github.com/ricardosantosfc/saveDforest",
       link: "https://savedforest-temp-test-2.onrender.com/"
     },
     {
       id: 1,
-      images: ["/projects/homepage1 (10).png"],
+      images: ["/projects/homepage1.png"],
       title: "Personal website",
       description: "My personal website, the one you're browsing right now.",
       github: "https://github.com/ricardosantosfc/homepage"
@@ -51,8 +51,8 @@ export class What {
   currOpacityImage = signal(1);
   isChangingImage = false;
 
-  private pauseBetweenImages = 7000;
-  lastImageSwitchTime = -7000; //so as not to have a swtiching period on the first trnasition after ngafterviewinit
+  private pauseBetweenImages = 5000;
+  lastImageSwitchTime = -5000; //so as not to have a swtiching period on the first trnasition after ngafterviewinit
 
   currTitle = signal("saveDforest");
   currDescription = signal("A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.");

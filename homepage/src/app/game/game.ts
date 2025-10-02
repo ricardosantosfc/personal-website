@@ -160,10 +160,10 @@ export class Game {
     };
 
     this.shadowImg.src = "shadow.svg"
-    this.skyImg.src = 'sky.png';
-    this.waterImg.src = 'water1.png'
-    this.waterImg2.src = 'water2.png'
-    this.waterImg3.src = 'water3.png'
+    this.skyImg.src = 'skycompressed.png';
+    this.waterImg.src = 'water1compressed.png'
+    this.waterImg2.src = 'water2compressed.png'
+    this.waterImg3.src = 'water3compressed.png'
 
     this.duckGameOverImg.src = 'duck_game_over.svg';
     this.obstacleImg.src = 'obstacle_grey.svg';
