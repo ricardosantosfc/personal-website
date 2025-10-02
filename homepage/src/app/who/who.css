@@ -23,26 +23,6 @@
   margin-bottom: 1em;
 }
 
-@media (width <=768px) {
-
-  /* fill whole screen*/
-  .game-wrapper {
-    width: 100%;
-  }
-
-  .dialog-box {
-    background-color: rgba(0, 0, 0, 0.957) !important;
-    font-size: 1em !important;
-  }
-
-  .dialog-box-name {
-    font-size: 1.1em !important;
-  }
-
-  .btn-resume {
-    font-size: 1.1em !important;
-  }
-}
 
 canvas {
   display: block;
@@ -190,4 +170,25 @@ canvas.accepting-clicks {
 .footer {
   align-items: center;
   display: flex;
+}
+
+@media (max-width:768px) {
+
+  /* fill whole screen*/
+  .game-wrapper {
+    width: 100%;
+  }
+
+  .dialog-box {
+    background-color: rgba(0, 0, 0, 0.957) !important;
+    font-size: 1em !important;
+  }
+
+  .dialog-box-name {
+    font-size: 1.1em !important;
+  }
+
+  .btn-resume {
+    font-size: 1.1em !important;
+  }
 }

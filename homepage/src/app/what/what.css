@@ -29,7 +29,7 @@
 
 .project-wrapper:hover {
 
-  box-shadow: 0px 10px 50px 2px  rgb(15, 15, 15)
+  box-shadow: 0px 10px 50px 2px rgb(15, 15, 15)
 }
 
 .project-list {
@@ -42,7 +42,8 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  background-color: #151515; /*#0f0f0f*/
+  background-color: #151515;
+  /*#0f0f0f*/
   padding: 2em;
   justify-content: center;
 }
@@ -51,21 +52,26 @@
 .project-main {
   margin-top: 2em;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  /* wrap for mobile*/
   align-items: center;
   justify-content: center;
   gap: 3.5rem;
 }
 
+
+
 .enter-animation {
   animation: slide-fade 1s;
   animation-fill-mode: backwards;
 }
+
 @keyframes slide-fade {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -98,29 +104,33 @@
   width: 100%;
   height: 35vh;
   display: block;
-   transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 
 
 
 .project-text {
-  max-width: 60vh;
+  width: 60vh;
+  /* media queries required for this*/
+  /* max-width: 60vh*/
 
 }
 
 .project-title {
 
-  font-size: 3em;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  /*3em*/
   font-weight: 300;
 
 }
 
 .project-description {
   font-weight: 300;
-  margin-top: 0.3em;
-  font-size: 1.25em;
+  margin-top: 0.8rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  /* 1.25em*/
   line-height: 1.6;
-    white-space: pre-line;
+  white-space: pre-line;
 
 }
 
@@ -141,9 +151,9 @@
 
 */
 
-.control-container{
+.control-container {
   display: flex;
-  gap:0.5em;
+  gap: 0.5em;
   align-items: center;
   justify-content: center;
 }
@@ -166,14 +176,12 @@
   border-radius: 6px;
 }
 
-.dot-active{
+.dot-active {
   background-color: #ffffff;
 }
 
-.dot:hover{
-  background-color: #ffffff;
-}
-.button-container{
+
+.button-container {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   display: flex;
@@ -182,8 +190,8 @@
 }
 
 
-.button-img{
-    cursor: pointer;
+.button-img {
+  cursor: pointer;
   padding: 0.5em;
   width: 1.3em;
   color: rgb(70, 70, 70);
@@ -191,9 +199,7 @@
 
 }
 
-.button-img:hover{
-color: rgb(255, 255, 255);
-}
+
 
 
 /*@media (any-hover: hover) {*/
@@ -210,5 +216,34 @@ color: rgb(255, 255, 255);
   .icon-link:hover {
     color: rgb(255, 255, 255);
   }
+
+  .button-img:hover {
+    color: rgb(255, 255, 255);
+  }
+
+  .dot:hover {
+    background-color: #ffffff;
+  }
 }
 
+@media (max-width: 768px) and (orientation: portrait) {
+  .project-main {
+    flex-wrap: wrap;
+  }
+.project-image-wrapper img {
+    height: 20vh;
+
+  }
+
+  .project-text {
+  width: 60vw;
+  height: 35vh;
+  /* media queries required for this*/
+  /* max-width: 60vh*/
+
+}
+.project-main {
+  gap: 2.5rem;
+}
+
+}
