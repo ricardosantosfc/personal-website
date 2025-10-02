@@ -96,7 +96,7 @@ canvas.accepting-clicks {
   font-family: 'Consolas', monospace;
   font-size: 1.2em;
   /* smallerin mobile, maybe---------------------------------------------*/
-  border: 0.1em solid #ffffff;
+  border: 0.1em solid #d2d2d2;
   border-radius: 6px;
   border-top-left-radius: 0px;
   box-sizing: border-box;
@@ -110,7 +110,7 @@ canvas.accepting-clicks {
   left: -1.5px;
   padding: 0.3em 0.6em;
   background-color: #000;
-  border: 0.1em solid #fff;
+  border: 0.1em solid #d2d2d2;
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -171,7 +171,7 @@ canvas.accepting-clicks {
 .btn-resume {
   text-align: center;
   color: white;
-  border: 0.1em solid white;
+  border: 0.1em solid #d2d2d2;
   border-radius: 4px;
   font-size: 1.2rem;
   font-family: 'Consolas', monospace;
