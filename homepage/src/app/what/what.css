@@ -5,7 +5,7 @@
   /*justify-content: space-between;*/
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: var(--content-background);
   padding: 1em 2em;
   border-radius: 6px;
   position: relative;
@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  background-color: #1c1c1c; /*#151515*/
+  background-color: var(--grey-what-project-background); /*#151515*/
   /*#0f0f0f*/
   padding: 2em;
   justify-content: center;
@@ -177,7 +177,7 @@
 }
 
 .dot-active {
-  background-color: #e0e0e0;
+  background-color: var(--white-faded);
 }
 
 
@@ -204,7 +204,7 @@
 
 /*@media (any-hover: hover) {*/
 .icon-link {
-  color: #939393;
+  color: var(--grey-icons);
   transition: color 0.3s ease;
 }
 
@@ -214,15 +214,15 @@
 
 @media (any-hover: hover) {
   .icon-link:hover {
-    color: #e0e0e0;
+    color: var(--white-faded);
   }
 
   .button-img:hover {
-    color: #e0e0e0;
+    color: var(--white-faded);
   }
 
   .dot:hover {
-    background-color: #e0e0e0;
+    background-color: var(--white-faded);
   }
 }
 

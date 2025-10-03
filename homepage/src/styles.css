@@ -3,3 +3,15 @@
 body{
     background-color: rgb(50, 50, 50); /*37, 50, 229*/
 }
+
+:root {
+  --content-background: #0f0f0f;
+  --white-navbar: rgb(255, 255, 255);
+  --white-faded: #e0e0e0;
+  --grey-icons: #939393; 
+  --black-dialog: #131313;   /*#131313 #303030 */
+  --white-dialog: #e0e0e0;
+  --grey-what-project-background: #1c1c1c;
+}
+
+/*rever cor dialog box*/

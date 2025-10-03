@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
+    background-color: var(--content-background);
     padding: 1em 2em;
     border-radius: 6px;
 }
@@ -121,11 +121,11 @@ zoom:100%;
 
 .navbar-item:not(.active):hover a,
 .navbar-item:not(.active):active a {
-  color: white;
+  color: var(--white-navbar);
 }
 
 .navbar-item.active a {
-  color: white;
+  color: var(--white-navbar);
   pointer-events: none;
   cursor: default; /* Optional: shows it’s not clickable */
 }
@@ -156,7 +156,7 @@ zoom:100%;
     margin-right: 4px;
     width: 20px;
     height: 22px;
-    background-color: white;
+    background-color: var(--white-navbar);
     clip-path: polygon(0% 40%, 44.72% 40%, 87.39% 100%, 44.72% 100%);
     transform: scaleX(0);
     transform-origin: left;
@@ -177,7 +177,7 @@ zoom:100%;
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: white;
+    background-color: var(--white-navbar);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.2s ease;
@@ -224,7 +224,7 @@ zoom:100%;
 .part5 { left: 19px; top: -1px; } /*r middle, start after part 4, widhe =2*/
 .part6 { left: 22px; top: 3px; } /*duck tail, starts after 2 middle r*/
 .part7 { left: 31px; top: -2px; } /* duck head 6 widht, start after 9, 2 on top of tail*/
-.part8 { left: 38px; top: 1px; --fillColor: white ;} /*duck beak 3 whidht, staarts after1*/
+.part8 { left: 38px; top: 1px; --fillColor: var(--white-navbar);} /*duck beak 3 whidht, staarts after1*/
 .part9 { left: 41px; top: 9px; }
 
 .logo-part {

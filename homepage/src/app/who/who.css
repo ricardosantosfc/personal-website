@@ -5,7 +5,7 @@
   /*justify-content: space-between;*/
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: var(--content-background);
   padding: 1em 2em;
   border-radius: 6px;
   position: relative;
@@ -71,12 +71,12 @@ canvas.accepting-clicks {
   left: 1em;
   right: 1em;
   padding: 1em;
-  background-color: rgba(0, 0, 0, 0.858);
-  color: #e0e0e0;
+  background-color: var(--black-dialog);
+  color: var(--white-dialog);
   font-family: 'Consolas', monospace;
   font-size: 1.2em;
   /* smallerin mobile, maybe---------------------------------------------*/
-  border: 0.1em solid #d2d2d2;
+  border: 0.1em solid #303030;
   border-radius: 6px;
   border-top-left-radius: 0px;
   box-sizing: border-box;
@@ -89,8 +89,8 @@ canvas.accepting-clicks {
   top: -1.9em;
   left: -1.5px;
   padding: 0.3em 0.6em;
-  background-color: #000;
-  border: 0.1em solid #d2d2d2;
+  background-color: var(--black-dialog);
+  border: 0.1em solid #303030;
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -150,20 +150,20 @@ canvas.accepting-clicks {
 
 .btn-resume {
   text-align: center;
-  color: #e0e0e0;
-  border: 0.1em solid #d2d2d2;
+  color: var(--white-dialog);
+  border: 0.1em solid #303030;
   border-radius: 4px;
   font-size: 1.2rem;
   font-family: 'Consolas', monospace;
   padding: 0.5em 1.2em;
   cursor: pointer;
   text-decoration: none;
-  background-color: black;
+  background-color: var(--black-dialog);
 }
 
 .btn-resume:hover {
-
-  background-color: #e0e0e0;
+border: 0.1em solid #d2d2d2;
+  background-color: var(--white-faded);
   color: black;
 }
 
@@ -180,7 +180,7 @@ canvas.accepting-clicks {
   }
 
   .dialog-box {
-    background-color: rgba(0, 0, 0, 0.957) !important;
+    background-color: var(--content-background) !important;
     font-size: 1em !important;
   }
 
