@@ -9,7 +9,7 @@
   padding: 1em 2em;
   border-radius: 6px;
   position: relative;
-  color: #ffffff;
+  color: #dadada; /*#d2d2d2*/
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
@@ -177,7 +177,7 @@
 }
 
 .dot-active {
-  background-color: #ffffff;
+  background-color: #e0e0e0;
 }
 
 
@@ -214,15 +214,15 @@
 
 @media (any-hover: hover) {
   .icon-link:hover {
-    color: rgb(255, 255, 255);
+    color: #e0e0e0;
   }
 
   .button-img:hover {
-    color: rgb(255, 255, 255);
+    color: #e0e0e0;
   }
 
   .dot:hover {
-    background-color: #ffffff;
+    background-color: #e0e0e0;
   }
 }
 
