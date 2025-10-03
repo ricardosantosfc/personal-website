@@ -23,8 +23,8 @@ export class What {
   projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0.png", "/projects/savedforest1.png", "/projects/savedforest2.png",
-        "/projects/savedforest3.png", "/projects/savedforest4.png", "/projects/savedforest5.png"],
+      images: ["/projects/savedforest0.png", "/projects/savedforest11.png", "/projects/savedforest22.png",
+        "/projects/savedforest33.png", "/projects/savedforest44.png", "/projects/savedforest55.png"],
       title: "saveDforest",
       description:
         "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
@@ -36,7 +36,7 @@ export class What {
       id: 1,
       images: ["/projects/homepage1.png"],
       title: "Personal website",
-      description: "My personal website, the one you're browsing right now.",
+      description: "My personal website, which you're browsing right now.",
       //stack: ["Angular"],
       github: "https://github.com/ricardosantosfc/homepage"
     },
@@ -214,7 +214,7 @@ export class What {
   }
 
 
-  stopAnimatingImages() {
+  stopAnimatingImages() { //on swithc, enter animation automatically triggers a mouse leave, 
 
     if (this.animationFrameId !== 0) {
 
