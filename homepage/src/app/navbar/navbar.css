@@ -71,6 +71,17 @@ zoom:100%;
     }
 }
 
+@media screen and (max-width: 767px) and (orientation: portrait) { /* scale to 130 zoom autoamitcally*/
+    .navbar {
+         justify-content: center;
+        gap: clamp(1rem, 25vw, 6rem);
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 /*
 @media screen and (max-width: 767px) { /* scale to 130 zoom autoamitcally/
     .menu-anim {
