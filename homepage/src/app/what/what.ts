@@ -45,7 +45,10 @@ export class What {
 
   @ViewChild('whatContent') content!: ElementRef<HTMLDivElement>;
   @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
+  @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
+
+  initialProjectTextHeight = 0;
 
 
   currImage = signal("/projects/savedforest0.png");
@@ -104,6 +107,13 @@ export class What {
   //log all viewchilds to see whats not being corrctly calculated
   resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
 
+    //on ngviewafterinit, get auto set height of tallest project text, (whihc is currentyll first one; for future projects, search arrays)
+    //on show project, force that height
+    //if initial resize is done on landscape mode, on prortrait modes height will be a bit more than required, but not problematic
+    //but if reszie to landscaep is done while second is being shown, it will assuem that height (smaller), which can be problemitc ex iphone xr
+
+    this.initialProjectTextHeight = this.projectText.nativeElement.offsetHeight;
+
     const whoContentHeight = this.content.nativeElement.offsetHeight;
 
     const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
@@ -121,6 +131,8 @@ export class What {
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
 
+    this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px` //lock text height to tallest~
+    
     if (this.projects[index]?.link !== undefined) {
       this.currLink.set(this.projects[index]!.link!);
       this.isLinkShown.set(true);
@@ -133,7 +145,12 @@ export class What {
     } else {
       this.isGithubShown.set(false);
     }
+  //const isHoverable = window.matchMedia('(hover: hover)').matches;
 
+    //if (!isHoverable) {
+
+      //this.animateImages();
+  //}
   }
 
   showProjectWithAnimation(index: number) {
@@ -182,6 +199,7 @@ export class What {
   }
 
   private animate(timestamp: number): void { //lastImageSwitchTime might still need tiny adjustment on stop. 
+
 
     if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
 

@@ -5,7 +5,7 @@
                 <div class="project-image-wrapper">
                     <img src={{currImage()}} [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
                 </div>
-                <div class="project-text">
+                <div class="project-text" #projectText>
                     <div class="project-title"> {{currTitle()}} </div>
                     <div class="project-description"> {{currDescription()}}
                      <!---   <div class=project-stack>
