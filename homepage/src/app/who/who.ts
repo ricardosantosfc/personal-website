@@ -279,7 +279,7 @@ export class Who {
   loadAssets() {
 
 
-    this.spritesheetImg.src = 'spritesheet512_2compressed.png';
+    this.spritesheetImg.src = 'spritesheet512_3lowerhighlights.png';
     this.spritesheetImg.onload = () => {
 
       if (this.whoService.hasInitialDialogEnded() === true) {
