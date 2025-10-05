@@ -6,11 +6,11 @@ body{
 
 :root {
   --content-background: #0f0f0f;
-  --white-navbar: rgb(255, 255, 255);
+  --white-navbar: rgb(235, 235, 235);
   --white-faded: #e0e0e0;
   --grey-icons: #939393; 
   --black-dialog: #131313;   /*#131313 #303030 */
-  --white-dialog: #e0e0e0;
+  --white-dialog: #bcbcbc;
   --grey-what-project-background: #1c1c1c;
 }
 
