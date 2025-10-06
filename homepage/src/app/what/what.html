@@ -1,5 +1,5 @@
 <div class="what-content" #whatContent>
-    <div class=project-wrapper [class.enter-animation]="isAnimatingEntrance() ===true" (animationstart)="handleAnimationStart()">
+    <div class=project-wrapper [class.enter-animation]="isAnimatingEntrance() ===true" (animationstart)="handleEntranceAnimationStart()">
         <div class="project-content" (mouseenter)="animateImages()" (mouseleave)="stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">

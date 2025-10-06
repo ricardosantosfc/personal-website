@@ -48,7 +48,7 @@ export class What {
   @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-  initialProjectTextHeight = 0; //could be much better by having landscape and portrait, thne switch case, but much more coplex
+
 
 
   currImage = signal("/projects/savedforest0.png");
@@ -68,15 +68,18 @@ export class What {
   isGithubShown = signal(true);
   isAnimatingEntrance = signal(true);
 
+  currProjectTextHeight = -1; //could be much better by having landscape and portrait, thne switch case, but much more coplex
+
   currProjectIndex = 0;
   private animationFrameId = 0;
 
-  private controlSet = new Set(['ArrowLeft', 'ArrowRight']) 
+  private controlSet = new Set(['ArrowLeft', 'ArrowRight'])
 
 
   @HostListener('window:resize')
   onResize() {
 
+    this.checkProjectTextOverflow();
     this.footer.nativeElement.style.height = 'auto';
     this.resizeFooter();
 
@@ -86,26 +89,15 @@ export class What {
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     if (this.controlSet.has(event.key)) {
-      this.stopAnimatingImages(); 
-       if (event.key === 'ArrowLeft') {
+      this.stopAnimatingImages();
+      if (event.key === 'ArrowLeft') {
         this.handlePrevClick();
-       }else{
+      } else {
         this.handleNextClick();
-       }
+      }
     }
 
   }
-
-     handleAnimationStart(){ //also works here, instead of on animaton end
-    console.log("animation starts");
-    const isOverflowing = this.projectText.nativeElement.scrollHeight > this.projectText.nativeElement.clientHeight;
-    console.log("is overflowing on show project start" + isOverflowing);
-    if(isOverflowing){
-      this.initialProjectTextHeight = this.projectText.nativeElement.scrollHeight; 
-    this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px`
-    }
-  }
-
 
   ngAfterViewInit() {
 
@@ -114,32 +106,26 @@ export class What {
 
   }
 
-  //log all viewchilds to see whats not being corrctly calculated
-  resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em */
-
-    //on ngviewafterinit, get auto set height of tallest project text, (whihc is currentyll first one; for future projects, search arrays)
-    //on show project, force that height
-    //if initial resize is done on landscape mode, on prortrait modes height will be a bit more than required, but not problematic
-    //but if reszie to landscaep is done while second is being shown, it will assuem that height (smaller), which can be problemitc ex iphone xr
-
-    this.initialProjectTextHeight = this.projectText.nativeElement.offsetHeight;
-
+  checkProjectTextOverflow() { //when called by resize, not entirely accurate (due to no debounce prob), but not for less, so not that problematic. having one sperate for portrait and landscape would prob prevent this as well
     const isOverflowing = this.projectText.nativeElement.scrollHeight > this.projectText.nativeElement.clientHeight;
-    console.log("is overflowing on resize" + isOverflowing);
-    if(isOverflowing){
-      this.initialProjectTextHeight = this.projectText.nativeElement.scrollHeight; 
-      this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px`
-    }
-
-    const whoContentHeight = this.content.nativeElement.offsetHeight;
-
-    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
-
-    if (availableWindowHeight > 0) {
-      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
-      this.footer.nativeElement.style.height = `${newFooterHeight}px`
+    if (isOverflowing) {
+      this.currProjectTextHeight = this.projectText.nativeElement.scrollHeight;
+      this.projectText.nativeElement.style.height = `${this.currProjectTextHeight}px`
+      console.log("set project textheight on overflow to " + this.projectText.nativeElement.style.height)
     }
   }
+
+  handleEntranceAnimationStart() {
+    if (this.currProjectTextHeight === -1) {
+      this.currProjectTextHeight = this.projectText.nativeElement.offsetHeight; //keep initial
+      this.projectText.nativeElement.style.height = `${this.currProjectTextHeight}px` //lock height to inital (tallest one)
+      console.log("set initial project textheight to" + this.projectText.nativeElement.style.height)
+    } else {
+      this.checkProjectTextOverflow();
+    }
+
+  }
+
 
   showProject(index: number) {
 
@@ -148,8 +134,6 @@ export class What {
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
 
-    this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px` //lock text height to tallest~
-    
     if (this.projects[index]?.link !== undefined) {
       this.currLink.set(this.projects[index]!.link!);
       this.isLinkShown.set(true);
@@ -162,12 +146,12 @@ export class What {
     } else {
       this.isGithubShown.set(false);
     }
-  //const isHoverable = window.matchMedia('(hover: hover)').matches;
+    //const isHoverable = window.matchMedia('(hover: hover)').matches;
 
     //if (!isHoverable) {
 
-      //this.animateImages();
-  //}
+    //this.animateImages();
+    //}
   }
 
   showProjectWithAnimation(index: number) {
@@ -265,6 +249,18 @@ export class What {
         this.currImageToAnimateIndex = 1;
       }, 500);
 
+    }
+  }
+
+  resizeFooter() { /* 16 if margin top = 1em, 12 if margin top = 0.5em  -> bttr off in sizeService (contentHeight) : new footerheight*/
+
+    const whoContentHeight = this.content.nativeElement.offsetHeight;
+
+    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
+
+    if (availableWindowHeight > 0) {
+      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
+      this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
   }
 
