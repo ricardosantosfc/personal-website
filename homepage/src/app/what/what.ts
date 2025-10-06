@@ -109,7 +109,7 @@ export class What {
     if (isOverflowing) {
       this.currProjectTextHeight = this.projectText.nativeElement.scrollHeight;
       this.projectText.nativeElement.style.height = `${this.currProjectTextHeight}px`
-      console.log("set project textheight on overflow to " + this.projectText.nativeElement.style.height)
+
     }
   }
 
@@ -117,7 +117,7 @@ export class What {
     if (this.currProjectTextHeight === -1) {
       this.currProjectTextHeight = this.projectText.nativeElement.offsetHeight; //keep initial
       this.projectText.nativeElement.style.height = `${this.currProjectTextHeight}px` //lock height to inital (tallest one)
-      console.log("set initial project textheight to" + this.projectText.nativeElement.style.height)
+
     } else {
       this.checkProjectTextOverflow();
     }
