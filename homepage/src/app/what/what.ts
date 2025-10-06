@@ -195,12 +195,7 @@ export class What {
    animateImagesNoHover() {
 
     this.stopAnimatingImages() //first, stop animation if any, = behavior as when mouse leave due to enter animation being triggerd
-    
-    if (this.currImagesToAnimate > 0) {
-
-      this.animateImageSwitching(performance.now());
-
-    }
+    this.animateImages();
 
   }
 
