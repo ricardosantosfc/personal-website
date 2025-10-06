@@ -45,14 +45,14 @@ export class Who {
     },
     {
       text: "I'm a software engineer from Lisbon, Portugal.",
-      spriteAlternations: 4,
+      spriteAlternations: 5,
       sprites: [5, 6],
       endSprite: 6,
       nextDialogIndex: 3
     },
     {
       text: "I enjoy creating full-stack applications with rich, highly interactive frontends...", //apps interesctions diff
-      spriteAlternations: 6,
+      spriteAlternations: 9,
       sprites: [7, 8],
       endSprite: 8,
       nextDialogIndex: 4
@@ -66,28 +66,28 @@ export class Who {
     },
     {
       text: "That being said, I'm always up to learn new things, especially if they're out of my comfort zone!",
-      spriteAlternations: 9,
+      spriteAlternations: 10,
       sprites: [11, 12],
       endSprite: 12,
       nextDialogIndex: 6
     },
     {
       text: "When I'm not working on software, I'm likely making music, 3D modeling, watercolor painting, or sketching.",
-      spriteAlternations: 10,
+      spriteAlternations: 13,
       sprites: [33, 34],
       endSprite: 33,
       nextDialogIndex: 7
     },
     {
-      text: "Just give me a second please...",
-      spriteAlternations: 3,
+      text: "...Just give me a second please...",
+      spriteAlternations: 4,
       sprites: [13, 14],
       endSprite: 14,
       nextDialogIndex: 8
     },
     {
       text: "I have some copies of my resume here. ",
-      spriteAlternations: 5,
+      spriteAlternations: 7,
       sprites: [15, 16],
       endSprite: 16,
       nextDialogIndex: 9
@@ -109,7 +109,7 @@ export class Who {
     },
     {
       text: "No problem! If you change your mind, just ask and i'll give it to you. ", //oh right! you already have it
-      spriteAlternations: 3,
+      spriteAlternations: 8,
       sprites: [21, 22],
       endSprite: 22,
       nextDialogIndex: 12
@@ -131,7 +131,7 @@ export class Who {
 
     {
       text: "Let me know if you have any further questions, I'll be here all day!",
-      spriteAlternations: 5,
+      spriteAlternations: 7,
       sprites: [27, 28],
       endSprite: 28,
       nextDialogIndex: 15
@@ -160,14 +160,14 @@ export class Who {
     },
     {
       text: "You can reach out to me through email or LinkedIn. Just click on the icons down below.",
-      spriteAlternations: 6,
+      spriteAlternations: 8,
       sprites: [7, 8],
       endSprite: 8,
       nextDialogIndex: 15
     },
     {
       text: "Well, besides working on this website, I've been learning how to use React and Three.js. I've also been refreshing my SQL skills.",
-      spriteAlternations: 12,
+      spriteAlternations: 14,
       sprites: [9, 10],
       endSprite: 10,
       nextDialogIndex: 20
