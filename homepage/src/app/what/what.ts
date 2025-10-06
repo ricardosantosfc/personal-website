@@ -48,14 +48,12 @@ export class What {
   @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-
-
-
   currImage = signal("/projects/savedforest0.png");
   currImagesToAnimate = 5;
   currImageToAnimateIndex = 1;
   currOpacityImage = signal(1);
   isChangingImage = false;
+  hoverable = signal(true);
 
   private pauseBetweenImages = 5000;
   lastImageSwitchTime = -5000; //so as not to have a swtiching period on the first trnasition after ngafterviewinit
@@ -103,7 +101,7 @@ export class What {
 
     //this.showProject(0)
     this.resizeFooter();
-
+    this.hoverable.set(window.matchMedia('(hover: hover)').matches);
   }
 
   checkProjectTextOverflow() { //when called by resize, not entirely accurate (due to no debounce prob), but not for less, so not that problematic. having one sperate for portrait and landscape would prob prevent this as well
@@ -146,15 +144,10 @@ export class What {
     } else {
       this.isGithubShown.set(false);
     }
-    //const isHoverable = window.matchMedia('(hover: hover)').matches;
 
-    //if (!isHoverable) {
-
-    //this.animateImages();
-    //}
   }
 
-  showProjectWithAnimation(index: number) {
+  showProjectWithEntranceAnimation(index: number) {
     this.isAnimatingEntrance.set(false);
 
     requestAnimationFrame(() => {
@@ -166,7 +159,7 @@ export class What {
 
   toggleDot(index: number) {
     this.currProjectIndex = index;
-    this.showProjectWithAnimation(index);
+    this.showProjectWithEntranceAnimation(index);
   }
 
   handleNextClick() {
@@ -176,7 +169,7 @@ export class What {
     } else {
       this.currProjectIndex++;
     }
-    this.showProjectWithAnimation(this.currProjectIndex);
+    this.showProjectWithEntranceAnimation(this.currProjectIndex);
   }
 
   handlePrevClick() {
@@ -185,7 +178,7 @@ export class What {
     } else {
       this.currProjectIndex--;
     }
-    this.showProjectWithAnimation(this.currProjectIndex);
+    this.showProjectWithEntranceAnimation(this.currProjectIndex);
   }
 
 
@@ -193,13 +186,25 @@ export class What {
 
     if (this.currImagesToAnimate > 0) {
 
-      this.animate(performance.now());
+      this.animateImageSwitching(performance.now());
 
     }
 
   }
 
-  private animate(timestamp: number): void { //lastImageSwitchTime might still need tiny adjustment on stop. 
+   animateImagesNoHover() {
+
+    this.stopAnimatingImages() //first, stop animation if any, = behavior as when mouse leave due to enter animation being triggerd
+    
+    if (this.currImagesToAnimate > 0) {
+
+      this.animateImageSwitching(performance.now());
+
+    }
+
+  }
+
+  private animateImageSwitching(timestamp: number): void { //lastImageSwitchTime might still need tiny adjustment on stop. 
 
 
     if (timestamp - this.lastImageSwitchTime >= this.pauseBetweenImages) {
@@ -210,7 +215,7 @@ export class What {
 
     }
 
-    this.animationFrameId = requestAnimationFrame((t) => this.animate(t));
+    this.animationFrameId = requestAnimationFrame((t) => this.animateImageSwitching(t));
   }
 
 
