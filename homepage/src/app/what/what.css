@@ -178,6 +178,7 @@
 }
 
 .dot-active {
+   cursor: default;
   background-color: var(--white-faded);
 }
 
