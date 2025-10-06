@@ -48,7 +48,7 @@ export class What {
   @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-  initialProjectTextHeight = 0;
+  initialProjectTextHeight = 0; //could be much better by having landscape and portrait, thne switch case, but much more coplex
 
 
   currImage = signal("/projects/savedforest0.png");
@@ -96,6 +96,16 @@ export class What {
 
   }
 
+     handleAnimationStart(){ //also works here, instead of on animaton end
+    console.log("animation starts");
+    const isOverflowing = this.projectText.nativeElement.scrollHeight > this.projectText.nativeElement.clientHeight;
+    console.log("is overflowing on show project start" + isOverflowing);
+    if(isOverflowing){
+      this.initialProjectTextHeight = this.projectText.nativeElement.scrollHeight; 
+    this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px`
+    }
+  }
+
 
   ngAfterViewInit() {
 
@@ -113,6 +123,13 @@ export class What {
     //but if reszie to landscaep is done while second is being shown, it will assuem that height (smaller), which can be problemitc ex iphone xr
 
     this.initialProjectTextHeight = this.projectText.nativeElement.offsetHeight;
+
+    const isOverflowing = this.projectText.nativeElement.scrollHeight > this.projectText.nativeElement.clientHeight;
+    console.log("is overflowing on resize" + isOverflowing);
+    if(isOverflowing){
+      this.initialProjectTextHeight = this.projectText.nativeElement.scrollHeight; 
+      this.projectText.nativeElement.style.height = `${this.initialProjectTextHeight}px`
+    }
 
     const whoContentHeight = this.content.nativeElement.offsetHeight;
 
