@@ -122,6 +122,10 @@ export class What {
       this.checkProjectTextOverflow();
     }
 
+    if (!this.hoverable()) {
+      this.stopAnimatingImages() //first, stop animation if any, = behavior as when mouse leave due to enter animation being triggerd
+    }
+
   }
 
 
@@ -181,7 +185,6 @@ export class What {
     this.showProjectWithEntranceAnimation(this.currProjectIndex);
   }
 
-
   animateImages() {
 
     if (this.currImagesToAnimate > 0) {
@@ -192,12 +195,6 @@ export class What {
 
   }
 
-   animateImagesNoHover() {
-
-    this.stopAnimatingImages() //first, stop animation if any, = behavior as when mouse leave due to enter animation being triggerd
-    this.animateImages();
-
-  }
 
   private animateImageSwitching(timestamp: number): void { //lastImageSwitchTime might still need tiny adjustment on stop. 
 
