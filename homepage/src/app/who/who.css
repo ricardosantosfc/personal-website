@@ -73,7 +73,8 @@ canvas.accepting-clicks {
   padding: 1em;
   background-color: var(--black-dialog);
   color: var(--white-dialog);
-  font-family: 'Consolas', monospace;
+  font-family: 'Consolas', monospace; /*incosolata*/
+  letter-spacing: -0.7px;
   font-size: 1.2em;
   /* smallerin mobile, maybe---------------------------------------------*/
   border: 0.1em solid #303030;
@@ -155,6 +156,7 @@ canvas.accepting-clicks {
   border-radius: 4px;
   font-size: 1.2rem;
   font-family: 'Consolas', monospace;
+    letter-spacing: -0.7px;
   padding: 0.5em 1.2em;
   cursor: pointer;
   text-decoration: none;
