@@ -11,6 +11,8 @@
   position: relative;
   color: #dadada; /*#d2d2d2*/
   font-family: "Montserrat", sans-serif;
+   /* letter-spacing: 0.2px;*/
+    /* word-spacing: 1px; */   
   font-weight: 500;
 }
 
@@ -57,7 +59,7 @@
   /* wrap for mobile*/
   align-items: center;
   justify-content: center;
-  gap: 3.5rem;
+  column-gap: 3.5rem;
 }
 
 
@@ -112,8 +114,13 @@
 
 
 .project-text {
-  width: 60vh;
-  /* media queries required for this*/
+  width: 50vh;
+    align-self: flex-start;   
+  margin-top: 2rem;  
+  /*margin-top: -2vh;
+  /*top: -2vh; /* will overflow on wrap*/
+  /*position: relative;
+
   /* max-width: 60vh*/
 
 }
@@ -129,7 +136,7 @@
 .project-description {
   font-weight: 300;
   margin-top: 0.8rem;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   /* 1.25em*/
   line-height: 1.6;
   white-space: pre-line;
@@ -229,7 +236,7 @@
   }
 }
 
-@media (max-width: 768px) and (orientation: portrait) {
+@media (orientation: portrait) {
   .project-main {
     flex-wrap: wrap;
   }
@@ -238,8 +245,12 @@
 
   }
 
+  .project-text {
+    margin-top: 2.5rem;
+  }
+/*
 .project-main {
   gap: 2.5rem;
-}
+}*/
 
 }
