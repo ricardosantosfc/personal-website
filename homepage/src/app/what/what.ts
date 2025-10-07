@@ -23,7 +23,7 @@ export class What {
   projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0.png", "/projects/savedforest11.png", "/projects/savedforest22.png",
+      images: ["/projects/savedforest0stroke.png", "/projects/savedforest11.png", "/projects/savedforest22.png",
         "/projects/savedforest33.png", "/projects/savedforest44.png", "/projects/savedforest55.png"],
       title: "saveDforest",
       description:
@@ -34,7 +34,7 @@ export class What {
     },
     {
       id: 1,
-      images: ["/projects/homepage1.png"],
+      images: ["/projects/homepage1stroke.png"],
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
       //stack: ["Angular"],
@@ -48,7 +48,7 @@ export class What {
   @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
   private sizeService = inject(SizeService);
 
-  currImage = signal("/projects/savedforest0.png");
+  currImage = signal("/projects/savedforest0stroke.png");
   currImagesToAnimate = 5;
   currImageToAnimateIndex = 1;
   currOpacityImage = signal(1);
