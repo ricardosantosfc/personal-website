@@ -104,6 +104,7 @@
 
 
 .project-image-wrapper img {
+  /* box-sizing: border-box*/
   width: 100%;
   height: 35vh;
   object-fit: contain; 
@@ -114,6 +115,7 @@
 
 
 .project-text {
+  /* box-sizing: border-box*/
   width: 50vh;
     align-self: flex-start;   
   margin-top: 2rem;  
@@ -195,21 +197,23 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   display: flex;
-  gap: 0.3em;
+  gap: 0.5em;
 
 }
+
 
 
 .button-img {
+ padding: 8px;
+  background: none;
+  border: none;
   cursor: pointer;
-  padding: 0.5em;
-  width: 1.3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: rgb(70, 70, 70);
   transition: color 0.3s ease;
-
 }
-
-
 
 
 /*@media (any-hover: hover) {*/
