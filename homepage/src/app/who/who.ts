@@ -79,7 +79,7 @@ export class Who {
       nextDialogIndex: 7
     },
     {
-      text: "...Just give me a second please...",
+      text: "... Just give me a second please...",
       spriteAlternations: 4,
       sprites: [13, 14],
       endSprite: 14,

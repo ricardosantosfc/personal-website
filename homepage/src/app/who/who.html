@@ -20,16 +20,17 @@
                 <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(14)">I don't need anything right now.</button>
             </div>
-            <canvas #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click) = "handleCanvasClick()"></canvas>
+            <canvas #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click)="handleCanvasClick()"></canvas>
 
-            <div class="dialog-box" [class.not-shown]="!isDialogShown()">
+            <div class="dialog-container">
                 <div class="dialog-box-name" [class.not-shown]="!isNameShown()"> Ricardo Santos</div>
-                <p class="dialog-text">{{currDialogText()}} </p>
-
-
+                <div class="dialog-box" [class.not-shown]="!isDialogShown()">
+                    <p class="dialog-text">{{currDialogText()}} </p>
+                </div>
             </div>
+
         </div>
     </div>
-    <div class="footer" #footer>     <app-footer></app-footer></div>
+    <div class="footer" #footer> <app-footer></app-footer></div>
 
 </div>
