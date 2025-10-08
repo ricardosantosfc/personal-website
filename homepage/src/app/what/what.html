@@ -3,7 +3,7 @@
         <div class="project-content" (mouseenter)="hoverable() && animateImages()" (mouseleave)="hoverable() && stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">
-                    <img src={{currImage()}} [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
+                    <img alt="this image depicts a folder-like object with an icon that represents the project. Depending on the project and on the device used to access the website, this image may transition to a slideshow of screenshoots from the project." src={{currImage()}}  [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
                 </div>
                 <div class="project-text" #projectText > <!-- need to handle both title and description, more accurate on overflow-->
                     <div class="project-title"> {{currTitle()}} </div>
@@ -18,7 +18,7 @@
             </div>
             <div class=project-links> <!--noLink() .notShown-->
                 <a class="icon-link" [class.not-shown]="!isLinkShown()" href={{currLink()}} target="_blank"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer" aria-label="Visit this project through this link ">
                     <svg class="icon" width="48" height="46" viewBox="0 0 65 66" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <ellipse cx="32.5" cy="33" rx="32.5" ry="33" fill="currentColor" />
@@ -28,7 +28,7 @@
                     </svg>
                 </a><!--noGithub() .notShown-->
                 <a class="icon-link" [class.not-shown]="!isGithubShown()" href={{currGithub()}} target="_blank"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer" aria-label="Visit this project's GitHub repository through this link.">
                     <svg class="icon" width="48" height="46" viewBox="0 0 78 76" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -61,6 +61,17 @@
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.6 6L0 1.4L1.4 0L7.4 6L1.4 12L0 10.6L4.6 6Z" fill="currentColor" />
             </svg>
+            <!-- <button class="button-img" (click)="handlePrevClick()" aria-label="Show previous project">
+                <svg width="16" height="24" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12L0 6L6 0L7.4 1.4L2.8 6L7.4 10.6L6 12Z" fill="currentColor" />
+                </svg>
+            </button>
+
+            <button class="button-img" (click)="handleNextClick()" aria-label="Show next project">
+                <svg width="16" height="24" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.6 6L0 1.4L1.4 0L7.4 6L1.4 12L0 10.6L4.6 6Z" fill="currentColor" />
+                </svg>
+            </button>-->
         </div>
     </div>
     <div class=" footer" #footer></div>
