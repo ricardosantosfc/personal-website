@@ -20,12 +20,13 @@
                 <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(14)">I don't need anything right now.</button>
             </div>
-            <canvas #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click)="handleCanvasClick()"></canvas>
+            <canvas [attr.tabindex]="isCanvasAcceptingClicks() ? '0' : null"  aria-label="This is an interactable canvas which simulates a dialog between you and me." 
+            #canvas [class.accepting-clicks]="isCanvasAcceptingClicks()" (click)="handleCanvasClick()" (keydown)="handleCanvasKeydown($event)"></canvas>
 
             <div class="dialog-container">
                 <div class="dialog-box-name" [class.not-shown]="!isNameShown()"> Ricardo Santos</div>
                 <div class="dialog-box" [class.not-shown]="!isDialogShown()">
-                    <p class="dialog-text">{{currDialogText()}} </p>
+                    <p aria-live="polite" class="dialog-text">{{currDialogText()}} </p>
                 </div>
             </div>
 

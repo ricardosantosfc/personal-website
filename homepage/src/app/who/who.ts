@@ -234,6 +234,13 @@ export class Who {
 
   }
 
+  handleCanvasKeydown(event: KeyboardEvent): void {
+  if (event.code === 'Enter') {
+    event.preventDefault(); 
+    this.handleCanvasClick();
+  }
+}
+
   //16+32+16
   ngAfterViewInit() {
     this.resizeFooter()
