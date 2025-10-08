@@ -7,7 +7,7 @@ interface Project {
   images: string[];
   title: string;
   description: string;
-  //stack: string[];
+  stack: string[];
   github?: string;
   link?: string;
 }
@@ -28,7 +28,7 @@ export class What {
       title: "saveDforest",
       description:
         "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
-      //stack: ["Unity", "Angular", "Express.js", "Node.js", "MongoDB"],
+      stack: ["Unity", "Angular", "Express.js", "Node.js", "MongoDB"],
       github: "https://github.com/ricardosantosfc/saveDforest",
       link: "https://savedforest-temp-test-2.onrender.com/"
     },
@@ -37,7 +37,7 @@ export class What {
       images: ["/projects/homepage1stroke.png"],
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
-      //stack: ["Angular"],
+      stack: ["Angular"],
       github: "https://github.com/ricardosantosfc/homepage"
     },
 

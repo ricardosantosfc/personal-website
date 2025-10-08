@@ -137,15 +137,15 @@
 
 .project-description {
   font-weight: 300;
-  margin-top: 0.8rem;
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  margin-top: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   /* 1.25em*/
   line-height: 1.6;
   white-space: pre-line;
 
 }
 
-/*
+
 .project-stack{
  padding-top: 2em;
    display: flex;
@@ -156,11 +156,13 @@
 .stack-item{
   font-size: 0.7em;
   padding: 0.5em 0.5em;
-  border-radius: 6px;
-  background-color: #000000;
+  border-radius: 10px;
+  border: 2px solid #4a4a4a;
+  background-color: #2a2a2a;
+  
 }
 
-*/
+
 
 .control-container {
   display: flex;
@@ -252,6 +254,8 @@
   .project-text {
     margin-top: 2.5rem;
   }
+
+  
 /*
 .project-main {
   gap: 2.5rem;

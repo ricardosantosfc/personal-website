@@ -173,8 +173,8 @@ export class Who {
       nextDialogIndex: 20
     },
     { /* 𝘄𝗵𝗮𝘁 might not be supportted by some dievices*/
-      text: "If you'd like to learn about my past projects, click on the [what] link up above.",
-      spriteAlternations: 8,
+      text: "If you'd like to learn more about some of the projects i've worked on, click on the [what] link up above.",
+      spriteAlternations: 9,
       sprites: [31, 32],
       endSprite: 32,
       nextDialogIndex: 15
