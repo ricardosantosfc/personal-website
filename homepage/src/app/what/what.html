@@ -9,9 +9,9 @@
                     <div class="project-title"> {{currTitle()}} </div>
                     <div class="project-description" > {{currDescription()}}</div>
                     <div class=project-stack>
-                             @for(stackItem of projects[currProjectIndex].stack ; track $index){
-                                 <span class="stack-item"> {{ stackItem }}</span>
-                             }
+                             @for (stackItem of currStack(); track $index) {
+                            <span class="stack-item">{{ stackItem }}</span>
+                            }
                     </div> 
                 </div>
             </div>

@@ -60,6 +60,7 @@ export class What {
 
   currTitle = signal("saveDforest");
   currDescription = signal("A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.");
+  currStack = signal(["Unity", "Angular", "Express.js", "Node.js", "MongoDB"]);
   currLink = signal("https://savedforest-temp-test-2.onrender.com/");
   currGithub = signal("https://github.com/ricardosantosfc/saveDforest");
   isLinkShown = signal(true);
@@ -135,6 +136,7 @@ export class What {
     this.currImagesToAnimate = this.projects[index]!.images.length - 1;
     this.currTitle.set(this.projects[index]!.title);
     this.currDescription.set(this.projects[index]!.description);
+    this.currStack.set(this.projects[index]!.stack);
 
     if (this.projects[index]?.link !== undefined) {
       this.currLink.set(this.projects[index]!.link!);
