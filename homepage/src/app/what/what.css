@@ -253,14 +253,29 @@
   }
 
   .project-text {
-    margin-top: 1em;
+    margin-top: 1.3em;
     width: 100%;
   }
+}
 
+@media (orientation: landscape) and (max-height: 767px) { /*(max-aspect-ratio: 4/2)*/
+  .project-main {
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+.project-image-wrapper img {
+    height: 90vh; /* equals auto. em comes from padding of all : project content (4), wrapper(1), content(4), and body(1) */
+
+  }
+
+  .project-text {
+    margin-top: 1.3em;
+    width: 100%;
+  }
+}
   
 /*
 .project-main {
   gap: 2.5rem;
 }*/
 
-}
