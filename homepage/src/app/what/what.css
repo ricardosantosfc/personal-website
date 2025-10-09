@@ -248,7 +248,7 @@
     margin-top: 0;
   }
 .project-image-wrapper img {
-    height: auto;
+    height: calc((100vw - 10em) * (548/893)) /* equals auto. em comes from padding of all : project content (4), wrapper(1), content(4), and body(1) */
 
   }
 
