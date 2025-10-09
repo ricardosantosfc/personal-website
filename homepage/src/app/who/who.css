@@ -194,6 +194,8 @@ border: 0.1em solid #d2d2d2;
 
   .dialog-box {
     font-size: 1em !important;
+    letter-spacing: -0.1px;
+    line-height: 1.2;
   }
 
   .dialog-box-name {

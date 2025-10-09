@@ -264,7 +264,7 @@
     margin-top: 0;
   }
 .project-image-wrapper img {
-    height: 90vh; /* equals auto. em comes from padding of all : project content (4), wrapper(1), content(4), and body(1) */
+    height: 90vh; 
 
   }
 

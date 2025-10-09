@@ -125,7 +125,7 @@ zoom:100%;
 
 
 .navbar-item:not(.active) a {
-  color: grey;
+  color: var(--grey-icons);
   transition: color 0.3s ease;
 }
 
