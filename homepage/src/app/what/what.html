@@ -3,7 +3,7 @@
         <div class="project-content" (mouseenter)="hoverable() && animateImages()" (mouseleave)="hoverable() && stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">
-                    <img #img alt="this image depicts a folder-like object with an icon that represents the project. Depending on the project and on the device used to access the website, this image may transition to a slideshow of screenshoots from the project." src={{currImage()}}  [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
+                    <img alt="this image depicts a folder-like object with an icon that represents the project. Depending on the project and on the device used to access the website, this image may transition to a slideshow of screenshoots from the project." src={{currImage()}}  [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()">
                 </div>
                 <div class="project-text" #projectText > <!-- need to handle both title and description, more accurate on overflow-->
                     <div class="project-title"> {{currTitle()}} </div>

@@ -47,8 +47,6 @@ export class What {
   @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
   @ViewChild('projectText') projectText!: ElementRef<HTMLDivElement>;
 
-  @ViewChild('img') img!: ElementRef<HTMLImageElement>;
-
   private sizeService = inject(SizeService);
 
   currImage = signal("/projects/savedforest0stroke.png");
@@ -104,22 +102,7 @@ export class What {
   ngAfterViewInit() {
 
     //this.showProject(0)
-    /*
-    switch (screen.orientation.type) {
-      case "landscape-primary":
-      case "landscape-secondary":
-        console.log("landscpae");
-        this.resizeFooter();
-        break;
-      case "portrait-secondary":
-      case "portrait-primary":
-        console.log("portrait");
-        this.resizeFooterInitPortrait(); //and keep this in size service. on resize, if vw x vh ==, just use the ones dont calc
-        break; //because otherwise, if keep doing it, image size is alread known, so miscaluclates 
-      default:
-        console.log("The orientation API isn't supported in this browser :(");
-    }*/
-
+    
     this.resizeFooter();
     this.hoverable.set(window.matchMedia('(hover: hover)').matches);
   }
@@ -282,32 +265,5 @@ export class What {
     }
   }
 
-  resizeFooterInitPortrait() {
-
-    /* should only be done on ng afterview inti. for future resizes no problem */
-    console.log("text  width " + this.projectText.nativeElement.offsetWidth); // on portrait = img width (100%)
-    //if so, and as imags = 893x548
-
-    const imgHeight = this.projectText.nativeElement.offsetWidth * (548 / 893)
-    console.log("calculated js imgheight " + imgHeight);
-    console.log("img.offestheight css " + this.img.nativeElement.offsetHeight);
-
-    var whoContentHeight = this.content.nativeElement.offsetHeight;
-    if(this.img.nativeElement.offsetHeight === 0){ //when height = auto css
-      whoContentHeight += imgHeight;
-    }
-    
-
-    console.log(whoContentHeight + imgHeight);
-
-    //rest same as normalresize
-    const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
-
-    if (availableWindowHeight > 0) {
-      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
-      this.footer.nativeElement.style.height = `${newFooterHeight}px`
-    }
-
-  }
 
 }
