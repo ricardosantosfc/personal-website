@@ -118,7 +118,9 @@
   /* box-sizing: border-box*/
   width: 50vh;
     align-self: flex-start;   
-  margin-top: 2rem;  
+  margin-top: 2rem; 
+  display: flex; 
+  flex-direction: column;
   /*margin-top: -2vh;
   /*top: -2vh; /* will overflow on wrap*/
   /*position: relative;
@@ -150,7 +152,7 @@
  padding-top: 2em;
    display: flex;
   gap: 10px;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 
 .stack-item{
@@ -274,6 +276,41 @@
   }
 }
   
+/*for card like portrait in lasndscape - understand aspectratio min to applytryout*/
+/*
+@media (orientation: landscape) and (min-height: 768px) {  
+
+  .project-content {
+    gap: 1em;
+  }
+  .project-wrapper {
+    max-width: 40vw;
+    min-width: 5px;
+  }
+  .project-main {
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+.project-image-wrapper img {
+    height: 30vh; 
+
+  }
+
+  .project-text {
+    margin-top: 1.3em;
+    width: 100%;
+  }
+
+  .project-title{
+    align-self: center;
+  }
+
+  .project-stack{
+ padding-top: 1em;
+}
+}
+*/
+
 /*
 .project-main {
   gap: 2.5rem;

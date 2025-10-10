@@ -7,6 +7,11 @@
                 </div>
                 <div class="project-text" #projectText > <!-- need to handle both title and description, more accurate on overflow-->
                     <div class="project-title"> {{currTitle()}} </div>
+                   <!--- <div class=project-stack>
+                             @for (stackItem of currStack(); track $index) {
+                            <span class="stack-item">{{ stackItem }}</span>
+                            }
+                    </div> --> 
                     <div class="project-description" > {{currDescription()}}</div>
                     <div class=project-stack>
                              @for (stackItem of currStack(); track $index) {

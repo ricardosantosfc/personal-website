@@ -259,8 +259,8 @@ export class What {
 
     const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
 
-    if (availableWindowHeight > 0) {
-      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12; //remove margins
+    if (availableWindowHeight > 0) {  //remove margins 12
+      const newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12 //-0.6; // - for some dvcs, when css ladnscape card, like portrait, requires tiny 0. adjusment. review why
       this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
   }
