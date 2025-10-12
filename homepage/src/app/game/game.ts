@@ -191,21 +191,21 @@ export class Game {
     //console.log(this.height);
     //fontScale = baseFontSize / baseCanvasWidth; // 0.02095 fro 955
 
-    this.ctx!.font = "20px VT323";
+    this.ctx!.font = "20px VT323, monospace";
     this.ctx!.fillStyle = "#ffffffff";
     this.ctx!.textBaseline = "top";
     this.ctx!.textAlign = "left";
     this.ctx!.fillText("Score : " + 0 + "   " + "Max : " + this.maxScore, 10, 10);
 
     var responsiveFontSize = this.getResponsiveFontSize(40);
-    this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
     this.ctx!.textBaseline = "middle";
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height / 2);
 
 
     responsiveFontSize = this.getResponsiveFontSize(25);
-    this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play", this.width / 2, this.height - 10);
@@ -254,7 +254,7 @@ export class Game {
       this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
-      this.ctx!.font = "20px VT323";
+      this.ctx!.font = "20px VT323, monospace";
       this.ctx!.fillStyle = "#ffffffff";
       this.ctx!.textBaseline = "top";
       this.ctx!.textAlign = "left";
@@ -318,19 +318,19 @@ export class Game {
     this.ctx!.fillStyle = "#ffffffff";
     var responsiveFontSize = this.getResponsiveFontSize(40);
     //also need to set it here in case of a reszie
-    this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
     this.ctx!.textAlign = "center";
     this.ctx!.textBaseline = "top";
     this.ctx!.fillText("Ya blew it!!", this.width / 2, 10);
     /**quit ducking around, ya quacked under pressure, etc etc */
 
     var responsiveFontSize = this.getResponsiveFontSize(32);
-    this.ctx!.font = `${responsiveFontSize}px VT323`; //30px 30/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
     this.ctx!.textBaseline = "middle";
     this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, this.width / 2, this.height / 2);
 
     responsiveFontSize = this.getResponsiveFontSize(25);
-    this.ctx!.font = `${responsiveFontSize}px VT323`; //20px 20/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
     this.ctx!.textBaseline = "bottom";
     this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play again", this.width / 2, this.height - 10);
     this.canvasRef.nativeElement.style.cursor = "pointer";
