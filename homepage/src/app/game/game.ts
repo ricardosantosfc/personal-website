@@ -120,10 +120,10 @@ export class Game {
     // Get wrapper size — from the parent element!
     const parent = canvas.parentElement!;
     const parentRect = parent.getBoundingClientRect();
-    console.log("game canvas viewport " + window.innerHeight);
+    //console.log("game canvas viewport " + window.innerHeight);
     if(parentRect.height> window.innerHeight){ 
       
-      console.log("heihgth canvas adjust")
+      //console.log("heihgth canvas adjust")
       canvas.style.height = `${window.innerHeight-20}px`
     }
 
