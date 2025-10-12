@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { SizeService } from '../size-service';
+import { NgOptimizedImage } from '@angular/common';
 
 
 interface Project {
@@ -14,7 +15,7 @@ interface Project {
 
 @Component({
   selector: 'app-what',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './what.html',
   styleUrl: './what.css'
 })
@@ -207,7 +208,7 @@ export class What {
 
       this.isChangingImage = true;
       this.currOpacityImage.set(0);
-      this.lastImageSwitchTime = timestamp;
+      //this.lastImageSwitchTime = timestamp;
 
     }
 
@@ -227,7 +228,15 @@ export class What {
       } else {
         this.currImageToAnimateIndex++;
       }
+
+
+    }
+  }
+
+  handleImageLoad() {
+    if (this.isChangingImage) {
       this.isChangingImage = false;
+      this.lastImageSwitchTime = performance.now();
       this.currOpacityImage.set(1);
 
     }
