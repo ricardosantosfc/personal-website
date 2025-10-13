@@ -312,7 +312,7 @@
 @media (orientation: landscape) and (min-width: 1920px) {  
 
   .project-content {
-    gap: 1em;
+    gap: 2em;
   }
   .project-wrapper {
     max-width: 40vw;
@@ -320,10 +320,13 @@
   }
   .project-main {
     flex-wrap: wrap;
-    margin-top: 0;
+
   }
 .project-image-wrapper img {
-    height: 45vh; 
+    max-height: 65vh; 
+   
+  width: auto;
+     aspect-ratio: 893 / 548;
 
   }
 

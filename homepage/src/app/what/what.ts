@@ -270,9 +270,7 @@ export class What {
 
     if (availableWindowHeight > 0) {  //remove margins 12
       var newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12 //-0.6; // - for some dvcs, when css ladnscape card, like portrait, requires tiny 0. adjusment. review why
-      if(window.innerWidth>=1920){
-        newFooterHeight -= 0.6;
-      }
+
       this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
   }
