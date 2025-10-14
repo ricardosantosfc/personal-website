@@ -35,7 +35,7 @@ zoom:100%;
 .game-wrapper {
   position: relative;
   width: 70%; 
-  background-color: #202020;
+  background-color: var(--game-wrapper-border);
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
 }
@@ -45,12 +45,6 @@ zoom:100%;
     
   }
   
-
-  .navbar.game-active{ /* maybe just a bit of padding top*/
-    padding: 0;
-
-    background-color: #000;
-  }
 }
 
 
@@ -93,6 +87,17 @@ zoom:100%;
     position: relative;
     height: 40px;
     bottom: -4px;
+}
+
+.button-img {
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+  color: var(--what-controls-background);
 }
 
 .navbar-items {
@@ -139,6 +144,30 @@ zoom:100%;
   color: var(--white-navbar);
   pointer-events: none;
   cursor: default; /* Optional: shows it’s not clickable */
+}
+
+.button-img {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: flex-end; 
+  font-size: 1.5rem;
+}
+
+.navbar-item svg{
+stroke: var(--grey-icons);
+ transition: stroke 0.3s ease;
+}
+
+.navbar-item svg:hover{
+stroke: var(--white-navbar);
+}
+
+.hidden{
+  visibility: hidden;
 }
 
 .menu-anim {

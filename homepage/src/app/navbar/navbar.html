@@ -1,56 +1,62 @@
-<nav class="navbar" #navbar [class.game-active] = "isGameActive()">
+<nav class="navbar" #navbar [class.game-active]="isGameActive()">
 
   @if(isGameActive()){
-    <div class="game-wrapper" animate.enter="enter-animation">
-      <app-game></app-game>
-      <button class="btn-close-game" (click)="setGameActive()">X</button>
-    </div>
+  <div class="game-wrapper" animate.enter="enter-animation">
+    <app-game></app-game>
+    <button class="btn-close-game" (click)="setGameActive()">X</button>
+  </div>
   }@else {
-  
-    <!---hovering over any svg = part8.orange-->
-   <div class="navbar-logo composed-logo" (click)="handleLogoClick()" (mouseenter)="isHovering(true)" (mouseleave)="isHovering(false)">
-  <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="8" height="12" fill="#912727"/>
-  </svg>
 
-  <svg class="logo-part part2" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="3" height="3" fill="#3D6082"/>
-  </svg>
+  <!---hovering over any svg = part8.orange-->
+  <div class="navbar-logo composed-logo" (click)="handleLogoClick()" (mouseenter)="isHovering(true)"
+    (mouseleave)="isHovering(false)">
+    <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <rect width="8" height="12" fill="#912727" />
+    </svg>
 
-  <svg class="logo-part part3" width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 0H7V7H5.5L0 0Z" fill="var(--white-navbar)"/>
-  </svg>
+    <svg class="logo-part part2" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="3" height="3" fill="#3D6082" />
+    </svg>
 
-  <svg class="logo-part part4" width="10" height="3" viewBox="0 0 10 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0 0H10V3H0V0Z" fill="var(--white-navbar)"/>
-  </svg>
+    <svg class="logo-part part3" width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0H7V7H5.5L0 0Z" fill="var(--white-navbar)" />
+    </svg>
 
-  <svg class="logo-part part5" width="2" height="6" viewBox="0 0 2 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="2" height="6" fill="var(--white-navbar)"/>
-  </svg>
+    <svg class="logo-part part4" width="10" height="3" viewBox="0 0 10 3" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0H10V3H0V0Z" fill="var(--white-navbar)" />
+    </svg>
 
-  <!-- S -->
+    <svg class="logo-part part5" width="2" height="6" viewBox="0 0 2 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="2" height="6" fill="var(--white-navbar)" />
+    </svg>
 
-  <svg class="logo-part part6"   width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 6H0L1 9H13L14 6L11 0H9.5L12 6Z" fill="var(--white-navbar)"/>
-  </svg>
+    <!-- S -->
 
-  <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 0H1L0 3H6V0Z" fill="var(--white-navbar)"/>
-  </svg>
+    <svg class="logo-part part6" width="14" height="9" viewBox="0 0 14 9" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 6H0L1 9H13L14 6L11 0H9.5L12 6Z" fill="var(--white-navbar)" />
+    </svg>
 
-  <svg class="logo-part part8" [class.orange] = "hovering()" (click)="handleLogoPart8Click()" width="3" height="2" viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="3" height="2" fill="var(--fillColor)"/>
-  </svg>
-  
-  <svg class="logo-part part9" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="3" height="3" fill="#3D6082"/>
-  </svg>
-</div>
+    <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 0H1L0 3H6V0Z" fill="var(--white-navbar)" />
+    </svg>
+
+    <svg class="logo-part part8" [class.orange]="hovering()" (click)="handleLogoPart8Click()" width="3" height="2"
+      viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="3" height="2" fill="var(--fillColor)" />
+    </svg>
+
+    <svg class="logo-part part9" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="3" height="3" fill="#3D6082" />
+    </svg>
+  </div>
 
   <ul class="navbar-items">
-    <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> <!-- so only exactlythis is active-->
-      <a routerLink="/" >
+    <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <!-- so only exactlythis is active-->
+      <a routerLink="/">
         <span class="menu-anim">
           <span class="blue-stripe"></span>
           <span class="white-stripe"></span>
@@ -59,7 +65,7 @@
       </a>
     </li>
     <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/what" >
+      <a routerLink="/what">
         <span class="menu-anim">
           <span class="blue-stripe"></span>
           <span class="white-stripe"></span>
@@ -67,7 +73,38 @@
         <span class="menu-text">what</span>
       </a>
     </li>
+    @if((showThemeButton())){
+    <li class="navbar-item">
+      <button class="button-img" (click)="handleThemeButtonClick()" aria-label="Toggle theme">
+        <span class="menu-anim hidden">
+          <span class="blue-stripe"></span>
+          <span class="white-stripe"></span>
+        </span>
+        <span class="menu-text">
+          @if(!isLightMode()){
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="16" height="16" fill="none"
+            stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="6" cy="6" r="2.5" />
+            <path d="M6 10V12" />
+            <path d="M10 6H12" />
+            <path d="M0 6H2" />
+            <path d="M6 0V2" />
+            <path d="M9 2L10 3" />
+            <path d="M2 9L3 10" />
+            <path d="M3 2L2 3" />
+            <path d="M10 9L9 10" />
+          </svg>
+          }@else{
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+          </svg>
+          }
+        </span>
+      </button>
+    </li>
+    }
   </ul>
-  
-}
+
+  }
 </nav>

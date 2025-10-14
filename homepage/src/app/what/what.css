@@ -9,7 +9,7 @@
   padding: 1em 2em;
   border-radius: 6px;
   position: relative;
-  color: #dadada; /*#d2d2d2*/
+  color: var(--what-textcolor);
   font-family: "Montserrat", sans-serif;
    /* letter-spacing: 0.2px;*/
     /* word-spacing: 1px; */   
@@ -20,7 +20,7 @@
   position: relative;
   min-width: 80%;
   max-width: 100%;
-  background-color: #282828; /*#232323*/
+  background-color: var(--what-project-wrapper);
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
   margin-top: 1em;
@@ -133,12 +133,12 @@
 
   font-size: clamp(1.7rem, 3vw, 2rem);
   /*3em*/
-  font-weight: 300;
+  font-weight: var(--what-project-font-weight);
 
 }
 
 .project-description {
-  font-weight: 300;
+  font-weight: var(--what-project-font-weight);
   margin-top: 1em;
   font-size: clamp(1rem, 2.5vw, 1.1rem);
   /* 1.25em*/
@@ -149,6 +149,7 @@
 
 
 .project-stack{
+  font-weight: var(--what-project-stack-font-weight);
  padding-top: 1em;
    display: flex;
   gap: 10px;
@@ -159,8 +160,8 @@
   font-size: 0.7em;
   padding: 0.5em 0.5em;
   border-radius: 10px;
-  border: 2px solid #4a4a4a;
-  background-color: #2a2a2a;
+  border: 2px solid var(--what-stack-item-border);
+  background-color: var(--what-stack-item-background);
   
 }
 
@@ -186,7 +187,7 @@
   cursor: pointer;
   height: 1em;
   width: 1em;
-  background-color: rgb(70, 70, 70);
+  background-color: var(--what-controls-background);
   transition: background-color 0.3s ease;
   border-radius: 6px;
 }
@@ -215,7 +216,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: rgb(70, 70, 70);
+  color: var(--what-controls-background);
   transition: color 0.3s ease;
 }
 

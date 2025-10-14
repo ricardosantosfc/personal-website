@@ -15,8 +15,10 @@ export class Navbar {
   isTouchOnly = false; 
   isGameActive = signal(false);
   hovering = signal(false);
+  isLightMode = signal(false);
   hoverTimeout = 0;
   sizeService = inject(SizeService);
+  showThemeButton = signal(true);
 
   // somewhat hacky, but works - review for programatically setting up needed event handlers
   // atm 2 event listners: one for the part8, 1 for the full logo
@@ -25,16 +27,24 @@ export class Navbar {
   // alternatively, set only S logo clickable instead of whole logo on non hover, 
   ngOnInit(){
     this.isTouchOnly = !window.matchMedia('(any-hover: hover)').matches;
+    this.checkShowThemeButton();
   }
 
   @HostListener('window:resize')
   onResize() {
     this.sizeService.updateNavbarHeigth( this.navbar.nativeElement.parentElement!.offsetHeight)
+    this.checkShowThemeButton();
+  }
+
+  checkShowThemeButton(){
+    const shouldHide = window.matchMedia('(max-width: 767px) and (orientation: portrait)').matches;
+    this.showThemeButton.set(!shouldHide);
   }
 
 
   ngAfterViewInit(){
     this.sizeService.updateNavbarHeigth( this.navbar.nativeElement.parentElement!.offsetHeight) //non float
+
   }
 
   handleLogoPart8Click(){ 
@@ -48,6 +58,13 @@ export class Navbar {
     if(this.isTouchOnly===true){
       this.setGameActive();
     }
+  }
+
+  handleThemeButtonClick(){
+      const body = document.body; //find btter way without accesing dom directly
+  body.classList.toggle('light-theme');
+  this.isLightMode.set(!this.isLightMode())
+
   }
 
   setGameActive() {

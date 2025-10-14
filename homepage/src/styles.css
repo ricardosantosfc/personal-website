@@ -1,10 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 body{
-    background-color: rgb(50, 50, 50); /*37, 50, 229*/
+    background-color: var(--background-color);  
+    transition: background-color 0.3s ease;
+}
+
+div{
+  transition: background-color 0.3s ease;
 }
 
 :root {
+  --background-color: rgb(50, 50, 50); /*37, 50, 229*/
   --content-background: #0f0f0f;
   --white-navbar: rgb(226, 226, 226);
   --white-faded: #e0e0e0;
@@ -12,6 +18,44 @@ body{
   --black-dialog: #1c1c1c;   /*#131313 #303030 #151515 #1a1a1a */
   --white-dialog: #bcbcbc;
   --grey-what-project-background: #1c1c1c;
+  --game-wrapper-border: #202020;
+  --game-background: #202020;
+  --who-canvas-wrapper-border:#232323;
+  --who-dialog-border: #303030;
+  --who-button-hover-textcolor: black;
+  --who-button-hover-border: #d2d2d2;
+  --what-textcolor: #dadada; /*#d2d2d2*/
+  --what-project-wrapper: #282828; /*#232323*/
+  --what-stack-item-background: #303030;
+  --what-stack-item-border: #343434; /*#4a4a4a;*/
+  --what-controls-background: rgb(70, 70, 70);
+
+  --what-project-font-weight: 300;
+  --what-project-stack-font-weight: 400;
 }
 
+body.light-theme {
+   --background-color: rgb(190, 190, 190); 
+  --content-background: #eaeaea;
+  --white-navbar: #2f2f2f;
+  --white-faded: #2a2a2a;
+  --grey-icons: rgb(125, 124, 124);
+  --black-dialog: #ebebeb;
+  --white-dialog: #1c1c1c;
+  --grey-what-project-background: #dbdbdb;
+  --game-wrapper-border: #dcdcdc;
+  --game-background: #2e2e2e;
+  --who-canvas-wrapper-border: #e0e0e0;
+  --who-dialog-border: #cfcfcf;
+  --who-button-hover-textcolor: white;
+  --who-button-hover-border: #4a4a4a;
+  --what-textcolor: #202020;
+  --what-project-wrapper: #c2c2c2;
+  --what-stack-item-background: #e6e6e6;
+  --what-stack-item-border: #cccccc;
+  --what-controls-background: rgb(172, 172, 172);
+
+  --what-project-font-weight: 400;
+  --what-project-stack-font-weight: 500;
+}
 /*rever cor dialog box*/

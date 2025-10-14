@@ -5,3 +5,6 @@ canvas {
   cursor: default;
 }
 
+.game-background{
+background-color: var(--game-background);
+}

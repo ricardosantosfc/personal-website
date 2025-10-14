@@ -12,11 +12,11 @@
 
 }
 
-.game-wrapper {
+.canvas-wrapper {
   position: relative;
   width: 80%;
 
-  background-color: #232323;
+  background-color: var(--who-canvas-wrapper-border);
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
   margin-top: 1em;
@@ -90,7 +90,7 @@ canvas.accepting-clicks {
   background-color: var(--black-dialog);
   font-size: 1.2em;
   /* smallerin mobile, maybe---------------------------------------------*/
-  border: 2px solid #303030;
+  border: 2px solid var(--who-dialog-border);
   border-radius: 6px;
   border-top-left-radius: 0px;
   box-sizing: border-box;
@@ -102,7 +102,7 @@ canvas.accepting-clicks {
   margin-bottom: -1px;
   padding: 0.3em 0.9em;
   background-color: var(--black-dialog);
-  border: 2px solid #303030;
+  border: 2px solid var(--who-dialog-border);
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -163,7 +163,7 @@ canvas.accepting-clicks {
 .btn-resume {
   text-align: center;
   color: var(--white-dialog);
-  border: 0.1em solid #303030;
+  border: 0.1em solid var(--who-dialog-border);
   border-radius: 4px;
   font-size: 1.2rem;
   font-family: 'Consolas', monospace;
@@ -175,9 +175,9 @@ canvas.accepting-clicks {
 }
 
 .btn-resume:hover {
-border: 0.1em solid #d2d2d2;
+border: 0.1em solid var(--who-button-hover-border);
   background-color: var(--white-faded);
-  color: black;
+  color: var(--who-button-hover-textcolor);
 }
 
 .footer {
@@ -188,7 +188,7 @@ border: 0.1em solid #d2d2d2;
 @media (max-width:768px) {
 
   /* fill whole screen*/
-  .game-wrapper {
+  .canvas-wrapper {
     width: 100%;
   }
 
