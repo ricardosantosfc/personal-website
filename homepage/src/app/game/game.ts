@@ -104,6 +104,18 @@ export class Game {
 
   }
 
+  ngOnInit(){
+    this.duckImg.src = 'duck.svg';
+    this.shadowImg.src = "shadow.svg"
+    this.skyImg.src = 'skycompressed.png';
+    this.waterImg.src = 'water1compressed.png'
+    this.waterImg2.src = 'water2compressed.png'
+    this.waterImg3.src = 'water3compressed.png'
+
+    this.duckGameOverImg.src = 'duck_game_over.svg';
+    this.obstacleImg.src = 'obstacle_grey.svg';
+  }
+
   ngAfterViewInit() {
 
     this.maxScore = this.gameService.getMaxScore();
@@ -154,19 +166,10 @@ export class Game {
 
   loadAssets() {
 
-    this.duckImg.src = 'duck.svg';
-    this.duckImg.onload = () => {
-      this.positionDuck();
-    };
+   // this.duckImg.onload = () => {
+   //   this.positionDuck();
+   // };
 
-    this.shadowImg.src = "shadow.svg"
-    this.skyImg.src = 'skycompressed.png';
-    this.waterImg.src = 'water1compressed.png'
-    this.waterImg2.src = 'water2compressed.png'
-    this.waterImg3.src = 'water3compressed.png'
-
-    this.duckGameOverImg.src = 'duck_game_over.svg';
-    this.obstacleImg.src = 'obstacle_grey.svg';
     this.obstacleImg.onload = () => {
       this.obstacleWidth = this.obstacleImg.naturalWidth;
       this.showControls();
