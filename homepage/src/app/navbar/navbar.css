@@ -155,19 +155,17 @@ zoom:100%;
   display: flex;
   align-items: flex-end; 
   font-size: 1.5rem;
+    padding-left: 31px;
+    --icon-color: var(--grey-icons); /* new var to change svg on parent hover. might also use for duck orange */
+}
+
+.button-img:hover{
+ --icon-color: var(--white-navbar);
 }
 
 .navbar-item svg{
-stroke: var(--grey-icons);
+stroke: var(--icon-color);
  transition: stroke 0.3s ease;
-}
-
-.navbar-item svg:hover{
-stroke: var(--white-navbar);
-}
-
-.hidden{
-  visibility: hidden;
 }
 
 .menu-anim {

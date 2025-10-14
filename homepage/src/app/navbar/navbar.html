@@ -76,14 +76,10 @@
     @if((showThemeButton())){
     <li class="navbar-item">
       <button class="button-img" (click)="handleThemeButtonClick()" aria-label="Toggle light/dark theme">
-        <span class="menu-anim hidden">
-          <span class="blue-stripe"></span>
-          <span class="white-stripe"></span>
-        </span>
         <span class="menu-text">
           @if(!isLightMode()){
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="16" height="16" fill="none"
-            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">
+            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
             <circle cx="6" cy="6" r="2.5" />
             <path d="M6 10V12" />
             <path d="M10 6H12" />
