@@ -3,7 +3,8 @@
         <div class="project-content" (mouseenter)="hoverable() && animateImages()" (mouseleave)="hoverable() && stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">
-                    <img alt="this image depicts a folder-like object with an icon that represents the project. Depending on the project and on the device used to access the website, this image may transition to a slideshow of screenshoots from the project." ngSrc={{currImage()}} width="893" height="548" priority [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()" (load)="handleImageLoad()">
+                    <img alt="this image depicts a folder-like object with an icon that represents the project. This image may transition to a slideshow of screenshoots from the project." 
+                    ngSrc={{currImage()}} width="893" height="548" priority [style.opacity] = "currOpacityImage()" (transitionend)="handleOpacityTransitionEnd()" (load)="handleImageLoad()">
                 </div>
                 <div class="project-text" #projectText > <!-- need to handle both title and description, more accurate on overflow-->
                     <div class="project-title"> {{currTitle()}} </div>
