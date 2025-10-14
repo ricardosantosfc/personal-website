@@ -150,7 +150,9 @@ export class Game {
 
     // setting duckPosX on resize means postionDucktoo
     this.duckPosX = this.width * 0.1048; //this needs tobe done after a resize, after a game over 
-    this.positionDuck();
+    this.duckImg.onload = () => {
+      this.positionDuck();
+    }
     if (this.width <= 768) { // review, maybe shouldn be triggered in resize while game is running
       this.spawnTimer = 1000;
     }
