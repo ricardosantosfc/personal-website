@@ -75,7 +75,7 @@
     </li>
     @if((showThemeButton())){
     <li class="navbar-item">
-      <button class="button-img" (click)="handleThemeButtonClick()" aria-label="Toggle theme">
+      <button class="button-img" (click)="handleThemeButtonClick()" aria-label="Toggle light/dark theme">
         <span class="menu-anim hidden">
           <span class="blue-stripe"></span>
           <span class="white-stripe"></span>
@@ -83,7 +83,7 @@
         <span class="menu-text">
           @if(!isLightMode()){
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="16" height="16" fill="none"
-            stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true">
+            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">
             <circle cx="6" cy="6" r="2.5" />
             <path d="M6 10V12" />
             <path d="M10 6H12" />
@@ -95,9 +95,11 @@
             <path d="M10 9L9 10" />
           </svg>
           }@else{
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M1.99994 8.52667C2.10481 9.66147 2.5307 10.7429 3.22778 11.6445C3.92485 12.5461 4.86428 13.2305 5.93614 13.6177C7.008 14.0049 8.16795 14.0787 9.28028 13.8307C10.3926 13.5827 11.4113 13.023 12.2171 12.2172C13.023 11.4113 13.5827 10.3927 13.8307 9.28033C14.0787 8.16801 14.0048 7.00806 13.6176 5.9362C13.2305 4.86434 12.5461 3.92491 11.6445 3.22784C10.7429 2.53076 9.66141 2.10487 8.52661 2C9.191 2.89884 9.51071 4.0063 9.42759 5.12094C9.34447 6.23559 8.86404 7.28337 8.07368 8.07373C7.28332 8.86409 6.23553 9.34452 5.12089 9.42765C4.00624 9.51077 2.89879 9.19106 1.99994 8.52667Z" />
           </svg>
           }
         </span>
