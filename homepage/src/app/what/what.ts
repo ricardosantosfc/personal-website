@@ -39,7 +39,7 @@ export class What {
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
       stack: ["Angular"],
-      github: "https://github.com/ricardosantosfc/homepage"
+      github: "https://github.com/ricardosantosfc/personal-website"
     },
 
   ];
