@@ -118,6 +118,10 @@ export class Game {
     //this.obstacleImg.src = 'obstacle_grey.svg';
   //}
 
+  ngOnInit(){
+    this.animate = this.animate.bind(this);
+  }
+
   ngAfterViewInit() {
 
     this.maxScore = this.gameService.getMaxScore();
@@ -265,6 +269,12 @@ export class Game {
     this.obstaclesToDestroyCount = 0;
     this.score = 0;
 
+    //prepare font for game
+    this.ctx!.font = "20px VT323, monospace";
+    this.ctx!.fillStyle = "#ffffffff";
+    this.ctx!.textBaseline = "top";
+    this.ctx!.textAlign = "left";
+
     this.gameState = GameState.Running;
     this.spawnObstacles(this.currObstacleSpeed);
     this.animate();
@@ -297,11 +307,7 @@ export class Game {
       this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
-      this.ctx!.font = "20px VT323, monospace";
-      this.ctx!.fillStyle = "#ffffffff";
-      this.ctx!.textBaseline = "top";
-      this.ctx!.textAlign = "left";
-      this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, 10, 10);
+      this.ctx!.fillText(`Score : ${this.score}   Max : ${this.maxScore}`, 10, 10);
 
       this.obstacles.forEach((obstacle): void => {
         obstacle.x -= this.currObstacleSpeed;
@@ -332,7 +338,7 @@ export class Game {
       }
 
       this.currObstacleSpeed += this.speedIncrease;
-      this.animationFrameId = requestAnimationFrame(() => this.animate());
+      this.animationFrameId = requestAnimationFrame(this.animate);
     }
   }
 
