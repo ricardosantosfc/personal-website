@@ -12,44 +12,64 @@
     (mouseleave)="isHovering(false)">
     <svg class="logo-part part1" width="8" height="12" viewBox="0 0 8 12" fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <rect width="8" height="12" fill="#912727" />
+      <rect width="8" height="12" rx="1" fill="#912727" />
     </svg>
 
     <svg class="logo-part part2" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="3" height="3" fill="#3D6082" />
+      <rect width="3" height="3" rx="1" fill="#3D6082" />
     </svg>
 
     <svg class="logo-part part3" width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0H7V7H5.5L0 0Z" fill="var(--white-navbar)" />
-    </svg>
+  <g transform="scale(1.22, 1) translate(-12.755, -12)">
+    <path d="M14.0575 12H18C18.5523 12 19 12.4477 19 13V18C19 18.5523 18.5429 19 17.9906 19C17.6837 19 17.3893 18.8591 17.1997 18.6178L13.2711 13.6178C12.7556 12.9617 13.223 12 14.0575 12Z" fill="var(--white-navbar)" />
+  </g>
+</svg>
 
-    <svg class="logo-part part4" width="10" height="3" viewBox="0 0 10 3" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0H10V3H0V0Z" fill="var(--white-navbar)" />
-    </svg>
+
+    <svg class="logo-part part4" width="10" height="3" viewBox="0 0 10 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="10" height="3" rx="1" fill="var(--white-navbar)" />
+</svg>
+
 
     <svg class="logo-part part5" width="2" height="6" viewBox="0 0 2 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="2" height="6" fill="var(--white-navbar)" />
+      <rect width="2" height="6" rx="1" fill="var(--white-navbar)" />
     </svg>
 
     <!-- S -->
 
-    <svg class="logo-part part6" width="14" height="9" viewBox="0 0 14 9" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 6H0L1 9H13L14 6L11 0H9.5L12 6Z" fill="var(--white-navbar)" />
-    </svg>
+    <svg class="logo-part part6" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0, 0) scale(1)">
+    <g transform="scale(1.037, 1) translate(-23.4, -10)">
+      <path d="M33.5 16H24.3874C23.7049 16 23.2229 16.6687 23.4387 17.3162L23.7721 18.3162C23.9082 18.7246 24.2903 19 24.7208 19H35.2792C35.7097 19 36.0918 18.7246 36.2279 18.3162L36.869 16.393C36.9529 16.1414 36.9334 15.8667 36.8148 15.6295L34.1957 10.3915C34.0758 10.1516 33.8306 10 33.5623 10C33.0569 10 32.7142 10.5141 32.9086 10.9806L34.4231 14.6154C34.6975 15.2741 34.2136 16 33.5 16Z" fill="var(--white-navbar)" />
+    </g>
+  </g>
+</svg>
 
-    <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(-32, -5)">
+    <path d="M38 5H33.7208C33.2903 5 32.9082 5.27543 32.7721 5.68377L32 8H38V5Z" fill="var(--white-navbar)" />
+  </g>
+</svg>
+
+
+   <!--- <svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6 0H1L0 3H6V0Z" fill="var(--white-navbar)" />
-    </svg>
+    </svg>-->
+
+    <!--<svg class="logo-part part7" width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="scale(1.079, 1) translate(-32.44, -5)">
+    <path d="M37 5H33.7208C33.2903 5 32.9082 5.27543 32.7721 5.68377L32.4387 6.68377C32.2229 7.3313 32.7049 8 33.3874 8H37C37.5523 8 38 7.55228 38 7V6C38 5.44772 37.5523 5 37 5Z" fill="var(--white-navbar)" />
+  </g>
+</svg>
+-->
 
     <svg class="logo-part part8" [class.orange]="hovering()" (click)="handleLogoPart8Click()" width="3" height="2"
       viewBox="0 0 3 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="3" height="2" fill="var(--fillColor)" />
+      <rect width="3" height="2"  fill="var(--fillColor)" />
     </svg>
 
     <svg class="logo-part part9" width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="3" height="3" fill="#3D6082" />
+      <rect width="3" height="3" rx="1" fill="#3D6082" />
     </svg>
   </div>
 

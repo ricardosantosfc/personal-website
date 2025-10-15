@@ -303,7 +303,7 @@ stroke: var(--icon-color);
 
 
 .part8:hover{ 
-  transform: scale(1.25); cursor: pointer;
+  transform: scale(1.45); cursor: pointer;
 }
 }
 
@@ -314,5 +314,5 @@ stroke: var(--icon-color);
 }
 
 .part8.orange { 
-     --fillColor: #ED5F13;  
+     --fillColor: var(--orange-navbar);  
 }
