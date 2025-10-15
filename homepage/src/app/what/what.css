@@ -288,7 +288,7 @@
   }
 }
 
-@media (orientation: landscape) and (min-width: 1024px) and (min-height: 720px) {
+@media (orientation: landscape) and (min-width: 1024px) and (min-height: 600px) {
   .project-main {
     flex-wrap: nowrap;
     margin-top: 2em;
@@ -324,7 +324,7 @@
 
   }
 .project-image-wrapper img {
-    max-height: 65vh; 
+    max-height: 33vh; /*65vh*/
    
   width: auto;
      aspect-ratio: 893 / 548;
