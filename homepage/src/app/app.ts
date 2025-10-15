@@ -9,5 +9,8 @@ import { RouterOutlet } from "@angular/router";
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('homepage');
+
+   ngOnInit() {
+    console.log("looking for an easter egg or something?\nwell...I won´t quack under pressure, but I can tell you it's not here!\n\noh wait...\n\nthis an easter egg too???")
+  }
 }
