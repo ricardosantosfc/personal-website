@@ -118,9 +118,6 @@ export class Game {
     //this.obstacleImg.src = 'obstacle_grey.svg';
   //}
 
-  ngOnInit(){
-    this.animate = this.animate.bind(this);
-  }
 
   ngAfterViewInit() {
 
@@ -309,7 +306,7 @@ export class Game {
 
       this.ctx!.fillText(`Score : ${this.score}   Max : ${this.maxScore}`, 10, 10);
 
-      this.obstacles.forEach((obstacle): void => {
+      this.obstacles.forEach((obstacle,index): void => {
         obstacle.x -= this.currObstacleSpeed;
 
         if (obstacle.hasSpawnedNext === false && obstacle.x < this.width / 1.13) {
@@ -323,12 +320,15 @@ export class Game {
           this.ctx!.drawImage(this.shadowImg, obstacle.x, obstacle.y + this.shadowImg.naturalHeight + 36);
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
 
+          if(index<3){ //duck will always only be able to hit first 2 incoming, 1 more as margin for not destroyed
+            if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX - this.obstacleFrontHitboxOffset < obstacle.x && obstacle.x < this.duckEndPosX + this.obstacleBackHitboxOffset)) {
+              this.gameOver();
+              return;
+           }
+          }
         }
 
-        if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX - this.obstacleFrontHitboxOffset < obstacle.x && obstacle.x < this.duckEndPosX + this.obstacleBackHitboxOffset)) {
-          this.gameOver();
-          return;
-        }
+
       });
 
       //clear out of canvas obstacles if any. count should at most be 1, but to account for frame loss..
@@ -338,10 +338,9 @@ export class Game {
       }
 
       this.currObstacleSpeed += this.speedIncrease;
-      this.animationFrameId = requestAnimationFrame(this.animate);
+      this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
   }
-
   gameOver() {
 
     this.gameState = GameState.GameOver;
