@@ -64,6 +64,8 @@ export class Game {
 
   private animationFrameId = 0;
 
+  private loadedAssetCounter = 0
+
 
 
   @HostListener('window:resize')
@@ -104,17 +106,17 @@ export class Game {
 
   }
 
-  ngOnInit(){
-    this.duckImg.src = 'duck.svg';
-    this.shadowImg.src = "shadow.svg"
-    this.skyImg.src = 'skycompressed.png';
-    this.waterImg.src = 'water1compressed.png'
-    this.waterImg2.src = 'water2compressed.png'
-    this.waterImg3.src = 'water3compressed.png'
+ // ngOnInit(){
+    //this.duckImg.src = 'duck.svg';
+    //this.shadowImg.src = "shadow.svg"
+    //this.skyImg.src = 'skycompressed.png';
+    //this.waterImg.src = 'water1compressed.png'
+    //this.waterImg2.src = 'water2compressed.png'
+    //this.waterImg3.src = 'water3compressed.png'
 
-    this.duckGameOverImg.src = 'duck_game_over.svg';
-    this.obstacleImg.src = 'obstacle_grey.svg';
-  }
+    //this.duckGameOverImg.src = 'duck_game_over.svg';
+    //this.obstacleImg.src = 'obstacle_grey.svg';
+  //}
 
   ngAfterViewInit() {
 
@@ -150,9 +152,14 @@ export class Game {
 
     // setting duckPosX on resize means postionDucktoo
     this.duckPosX = this.width * 0.1048; //this needs tobe done after a resize, after a game over 
-    this.duckImg.onload = () => {
-      this.positionDuck();
-    }
+    //this.duckImg.onload = () => { //also probelm here, on resize this will not be tirggered
+    this.positionDuck(); //this is redundant on ngafterinit
+    //}
+    this.obstacleWidth = this.obstacleImg.naturalWidth; //also redundant
+    //this.obstacleImg.onload = () =>{
+     // this.obstacleWidth = this.obstacleImg.naturalWidth;
+   // }
+  
     if (this.width <= 768) { // review, maybe shouldn be triggered in resize while game is running
       this.spawnTimer = 1000;
     }
@@ -171,13 +178,44 @@ export class Game {
    // this.duckImg.onload = () => {
    //   this.positionDuck();
    // };
+    // once all loadex how controls
 
-    this.obstacleImg.onload = () => {
-      this.obstacleWidth = this.obstacleImg.naturalWidth;
-      this.showControls();
-    };
+   // this.obstacleImg.onload = () => {
+    //  this.obstacleWidth = this.obstacleImg.naturalWidth;
+     // this.showControls();
+    //};
+
+    this.loadAllImages();
 
   }
+
+  private async loadAllImages(): Promise<void> {
+  await Promise.all([
+      this.loadImage(this.duckImg, 'duck.svg'),
+      this.loadImage(this.shadowImg, 'shadow.svg'),
+      this.loadImage(this.skyImg, 'skycompressed.png'),
+      this.loadImage(this.waterImg, 'water1compressed.png'),
+      this.loadImage(this.waterImg2, 'water2compressed.png'),
+      this.loadImage(this.waterImg3, 'water3compressed.png'),
+      this.loadImage(this.duckGameOverImg, 'duck_game_over.svg'),
+      this.loadImage(this.obstacleImg, 'obstacle_grey.svg')
+    ]);
+    this.positionDuck();
+    this.obstacleWidth = this.obstacleImg.naturalWidth;
+    this.showControls(); // Safe to call now
+}
+
+
+ private loadImage(img: HTMLImageElement, src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    img.onload = () => resolve();
+    img.onerror = (err) => reject(err);
+    img.src = src;
+    
+  });
+}
+
+
 
   positionDuck() {
     const nh = this.duckImg.naturalHeight; //37.8 per figma
