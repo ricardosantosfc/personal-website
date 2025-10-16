@@ -65,7 +65,7 @@ export class Who {
       nextDialogIndex: 5
     },
     {
-      text: "That being said, I'm always up to learn new things, especially if they're out of my comfort zone!",
+      text: "That being said, I'm always eager to learn new things, especially if they're out of my comfort zone!",
       spriteAlternations: 10,
       sprites: [11, 12],
       endSprite: 12,
@@ -200,12 +200,14 @@ export class Who {
   isCanvasAcceptingClicks = signal(true);
   isInteracting = signal(true);
 
+  hoverable= signal(true);
+  
   private isAnimating = false; //to redraw ends sprite on resize if not
 
   private spritesheetImg = new Image();
   private spriteSizeIncrease = 80;
 
-  private currDialogIndex = 0;
+  currDialogIndex = 0;
   currDialogText = signal("");
   private frameCount = 0;
   private currAlternatingTimes = -1;
@@ -240,6 +242,10 @@ export class Who {
     this.handleCanvasClick();
   }
 }
+
+  ngOnInit(){
+    this.hoverable.set(window.matchMedia('(hover: hover)').matches);
+  }
 
   //16+32+16
   ngAfterViewInit() {

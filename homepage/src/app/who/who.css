@@ -33,6 +33,31 @@ canvas {
 
 }
 
+.canvas-overlay-image {
+  position: absolute;
+  bottom: 26px;
+  right: 30px;
+  width: 24px;  
+  height: auto;
+    pointer-events: none; 
+  z-index: 10;   
+}
+
+@keyframes fadeBlink {
+  0%, 100% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 0; }
+  70% { opacity: 1; }
+  90% { opacity: 0; }
+
+}
+
+.hint-fade {
+  animation: fadeBlink 8s forwards;
+}
+
 canvas.accepting-clicks {
   cursor: pointer;
   pointer-events: auto;
