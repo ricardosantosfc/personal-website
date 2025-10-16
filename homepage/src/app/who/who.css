@@ -49,9 +49,6 @@ canvas {
   30% { opacity: 0; }
   40% { opacity: 1; }
   60% { opacity: 0; }
-  70% { opacity: 1; }
-  90% { opacity: 0; }
-
 }
 
 .hint-fade {
