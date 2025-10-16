@@ -64,7 +64,8 @@ export class Game {
 
   private animationFrameId = 0;
 
-  private loadedAssetCounter = 0
+  private handpointerImg = new Image();
+  private arrowUpImg = new Image();
 
 
 
@@ -199,7 +200,9 @@ export class Game {
       this.loadImage(this.waterImg2, 'water2compressed.png'),
       this.loadImage(this.waterImg3, 'water3compressed.png'),
       this.loadImage(this.duckGameOverImg, 'duck_game_over.svg'),
-      this.loadImage(this.obstacleImg, 'obstacle_grey.svg')
+      this.loadImage(this.obstacleImg, 'obstacle_grey.svg'),
+      this.loadImage(this.handpointerImg, '/icons/hand-pointer.svg'),
+      this.loadImage(this.arrowUpImg, '/icons/arrow-up.svg')
     ]);
     this.positionDuck();
     this.obstacleWidth = this.obstacleImg.naturalWidth;
@@ -247,15 +250,52 @@ export class Game {
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height / 2);
 
-
     responsiveFontSize = this.getResponsiveFontSize(25);
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
-    this.ctx!.textBaseline = "bottom";
-    this.ctx!.textAlign = "center";
-    this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play", this.width / 2, this.height - 10);
+    this.showControlsAux(", w, or s to play", responsiveFontSize);
 
     this.gameState = GameState.ShowingControls;
     this.canvasRef.nativeElement.style.cursor = "pointer";
+
+  }
+
+  showControlsAux(text: string, responsiveFontSize:number){
+ 
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
+    this.ctx!.textBaseline = "bottom";
+    this.ctx!.textAlign = "left"; // center manually
+
+    const iconSize = responsiveFontSize;
+    const spacing = 1; //review spacing
+    const commaText = ",";
+    const y = this.height - 10;
+
+    // Measure individual widths
+    const commaWidth = this.ctx!.measureText(commaText).width;
+    const textWidth = this.ctx!.measureText(text).width;
+    const handWidth = iconSize;
+    const arrowWidth = iconSize;
+
+    // Total layout width
+    const totalWidth =
+      handWidth + spacing +
+      commaWidth + spacing +
+      arrowWidth + spacing +
+      textWidth;
+
+    // Centered starting X
+    var x = (this.width - totalWidth) / 2;
+
+    //review xpos
+    this.ctx!.drawImage(this.handpointerImg, x, y - iconSize+4, iconSize-8, iconSize-7);
+    x += handWidth + spacing;
+
+    this.ctx!.fillText(commaText, x-10, y);
+    x += commaWidth + spacing;
+
+    this.ctx!.drawImage(this.arrowUpImg, x-2, y - iconSize +4, iconSize-7, iconSize-7);
+    x += arrowWidth + spacing;
+
+    this.ctx!.fillText(text, x-8, y);
 
   }
 
@@ -378,9 +418,9 @@ export class Game {
     this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, this.width / 2, this.height / 2);
 
     responsiveFontSize = this.getResponsiveFontSize(25);
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
-    this.ctx!.textBaseline = "bottom";
-    this.ctx!.fillText("🖯, 🖢, 🠝, w, or s to play again", this.width / 2, this.height - 10);
+    
+    this.showControlsAux(", w, or s to play again", responsiveFontSize);
+
     this.canvasRef.nativeElement.style.cursor = "pointer";
 
   }

@@ -303,7 +303,7 @@ stroke: var(--icon-color);
 
 
 .part8:hover{ 
-  transform: scale(1.45); cursor: pointer;
+  transform: scale(1.55); cursor: pointer;
 }
 }
 
