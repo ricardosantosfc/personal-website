@@ -257,7 +257,7 @@ export class What {
         this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
         this.currOpacityImage.set(1);
         this.currImageToAnimateIndex = 1;
-      }, 500);
+      }, 700);
 
     }
   }
