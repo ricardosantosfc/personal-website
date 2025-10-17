@@ -323,7 +323,7 @@ export class Who {
 
     //mihgt have to cancel out curr animate here if clicks are accepted wihlle animating
 
-    if (this.isInteracting() === false) { //really wonky. refactoring needed
+    if (this.isInteracting() === false) { //really wonky. refactoring needed state mchn
       this.enableDialogBoxAndName();
       this.isInteracting.set(true);
     }
@@ -343,6 +343,8 @@ export class Who {
         this.ctx!.clearRect(0, 0, this.width, this.height);
         this.isInteracting.set(false);
         return;
+      }else if(this.currDialogIndex ===16 && !this.hoverable()){
+        this.hoverable.set(true); //so hint only plays once per init
       }
       this.isCanvasAcceptingClicks.set(false);
       this.showDialog();

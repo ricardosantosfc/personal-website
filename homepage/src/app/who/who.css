@@ -35,24 +35,34 @@ canvas {
 
 .canvas-overlay-image {
   position: absolute;
-  bottom: 26px;
-  right: 30px;
-  width: 24px;  
+
   height: auto;
     pointer-events: none; 
   z-index: 10;   
 }
 
+.overlay-image-bottom{
+  bottom: 0.75em;
+  right: 30px; 
+  width: 3em;  
+}
+
+.overlay-image-center{
+   left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width:4em;
+}
+
 @keyframes fadeBlink {
   0%, 100% { opacity: 0; }
-  10% { opacity: 1; }
-  30% { opacity: 0; }
-  40% { opacity: 1; }
-  60% { opacity: 0; }
+  25%{opacity: 1;}
+  50%{opacity: 0;}
+  75%{opacity: 1;}
 }
 
 .hint-fade {
-  animation: fadeBlink 8s forwards;
+  animation: fadeBlink 4s forwards;
 }
 
 canvas.accepting-clicks {

@@ -2,7 +2,11 @@
     <div class="canvas-wrapper" animate.enter="enter-animation">
         <div class="background" [class.background-image-me]="!isInteracting()">
             @if(!hoverable() && (currDialogIndex === 0 || currDialogIndex === 15 )){
-                <img src="/icons/hand-pointer-dialog1.svg" class="canvas-overlay-image hint-fade" alt="Tap hint icon for non-hoverable devices"  />
+                <img src="/icons/hand-pointer-dialog-shadow.svg"  class="canvas-overlay-image hint-fade" 
+             
+                [class.overlay-image-bottom]="currDialogIndex === 0"
+                [class.overlay-image-center]="currDialogIndex === 15"
+                 alt="Tap hint icon for non-hoverable devices"/>
             }
             <div class="button-container" [class.not-shown]="!isButtonShown()">
                 <a class="btn-resume " [class.not-shown]="!isButtonsResumeShown()"
