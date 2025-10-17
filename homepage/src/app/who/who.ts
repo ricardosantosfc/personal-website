@@ -244,7 +244,7 @@ export class Who {
 }
 
   ngOnInit(){
-    this.hoverable.set(window.matchMedia('(hover: hover)').matches);
+    this.hoverable.set(window.matchMedia('(hover: hover) and (pointer: fine) ').matches);
   }
 
   //16+32+16
