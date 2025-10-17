@@ -38,8 +38,6 @@ export class Game {
   private offsetSkyWaterY = 15; //push water up
   private backgroundFrameCount = 0;
 
-  private shadowImg = new Image();
-
   private duckImg = new Image();
   private duckGameOverImg = new Image();
   private currDuckPosY = 0;
@@ -193,14 +191,13 @@ export class Game {
 
   private async loadAllImages(): Promise<void> {
   await Promise.all([
-      this.loadImage(this.duckImg, 'duck.svg'),
-      this.loadImage(this.shadowImg, 'shadow.svg'),
+      this.loadImage(this.duckImg, 'duck_shadow1.svg'),
       this.loadImage(this.skyImg, 'skycompressed.png'),
       this.loadImage(this.waterImg, 'water1compressed.png'),
       this.loadImage(this.waterImg2, 'water2compressed.png'),
       this.loadImage(this.waterImg3, 'water3compressed.png'),
-      this.loadImage(this.duckGameOverImg, 'duck_game_over.svg'),
-      this.loadImage(this.obstacleImg, 'obstacle_grey.svg'),
+      this.loadImage(this.duckGameOverImg, 'duck_game_over_shadow1.svg'),
+      this.loadImage(this.obstacleImg, 'obstacle_grey_shadow1.svg'),
       this.loadImage(this.handpointerImg, '/icons/hand-pointer.svg'),
       this.loadImage(this.arrowUpImg, '/icons/arrow-up.svg')
     ]);
@@ -232,7 +229,7 @@ export class Game {
   showControls() {
 
     this.drawBackground(this.width, this.height);
-    this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
+
     this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
     //console.log(this.height);
@@ -341,7 +338,7 @@ export class Game {
     if (this.gameState === GameState.Running) {
       this.ctx!.clearRect(0, 0, this.width, this.height);
       this.drawBackground(this.width, this.height);
-      this.ctx!.drawImage(this.shadowImg, this.duckPosX, this.currDuckPosY + this.shadowImg.naturalHeight + 36);
+
       this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
       this.ctx!.fillText(`Score : ${this.score}   Max : ${this.maxScore}`, 10, 10);
@@ -357,7 +354,6 @@ export class Game {
           this.obstaclesToDestroyCount++; //curr index 0 obstacle
           this.score++;
         } else {
-          this.ctx!.drawImage(this.shadowImg, obstacle.x, obstacle.y + this.shadowImg.naturalHeight + 36);
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
 
           if(index<3){ //duck will always only be able to hit first 2 incoming, 1 more as margin for not destroyed
