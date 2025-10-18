@@ -173,23 +173,7 @@ export class Game {
   }
 
 
-  loadAssets() {
-
-   // this.duckImg.onload = () => {
-   //   this.positionDuck();
-   // };
-    // once all loadex how controls
-
-   // this.obstacleImg.onload = () => {
-    //  this.obstacleWidth = this.obstacleImg.naturalWidth;
-     // this.showControls();
-    //};
-
-    this.loadAllImages();
-
-  }
-
-  private async loadAllImages(): Promise<void> {
+  private async loadAssets(): Promise<void> {
   await Promise.all([
       this.loadImage(this.duckImg, 'duck_shadow1.svg'),
       this.loadImage(this.skyImg, 'skycompressed.png'),
@@ -199,7 +183,8 @@ export class Game {
       this.loadImage(this.duckGameOverImg, 'duck_game_over_shadow1.svg'),
       this.loadImage(this.obstacleImg, 'obstacle_grey_shadow1.svg'),
       this.loadImage(this.handpointerImg, '/icons/hand-pointer.svg'),
-      this.loadImage(this.arrowUpImg, '/icons/arrow-up.svg')
+      this.loadImage(this.arrowUpImg, '/icons/arrow-up.svg'),
+      document.fonts.ready
     ]);
     this.positionDuck();
     this.obstacleWidth = this.obstacleImg.naturalWidth;
