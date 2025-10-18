@@ -39,7 +39,7 @@ zoom:100%;
   padding: 0.5rem 0.5rem;
   border-radius: 6px;
 }
-@media (hover: none) { /* increas cnavas height on mobile landscape*/
+@media (pointer: coarse) { /* increas cnavas height on mobile landscape*/
   .game-wrapper {
     width: 100%;
     

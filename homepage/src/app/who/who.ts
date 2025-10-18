@@ -244,7 +244,7 @@ export class Who {
 }
 
   ngOnInit(){
-    this.hoverable.set(window.matchMedia('(hover: hover) and (pointer: fine) ').matches);
+    this.hoverable.set(window.matchMedia('(pointer: fine)').matches); //mouse is main pointer
   }
 
   //16+32+16
