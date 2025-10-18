@@ -103,9 +103,16 @@ export class What {
   ngAfterViewInit() {
 
     //this.showProject(0)
-    
-    this.resizeFooter();
-    this.hoverable.set(window.matchMedia('(hover: hover)').matches);
+
+    // fonts might not be ready yet. this one seems redundant, 
+    // but required for avoiding annoying flash when second resizefooter triggers
+    // space bar might however be momementarily shown, but still less bothersome than flash
+    this.resizeFooter(); 
+
+    document.fonts.ready.then(() => { 
+      this.resizeFooter(); 
+    });
+    this.hoverable.set(window.matchMedia('(pointer: fine').matches);
   }
 
   checkProjectTextOverflow() { //when called by resize, not entirely accurate (due to no debounce prob), but not for less, so not that problematic. having one sperate for portrait and landscape would prob prevent this as well
@@ -269,7 +276,7 @@ export class What {
     const availableWindowHeight = window.innerHeight - (this.sizeService.getNavbarHeight() + whoContentHeight! + 12); //includes margins
 
     if (availableWindowHeight > 0) {  //remove margins 12
-      var newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12 //-0.6; // - for some dvcs, when css ladnscape card, like portrait, requires tiny 0. adjusment. review why
+      var newFooterHeight = this.footer.nativeElement.offsetHeight + availableWindowHeight - 12 
 
       this.footer.nativeElement.style.height = `${newFooterHeight}px`
     }
