@@ -72,7 +72,7 @@ canvas.accepting-clicks {
 
 /* height: 74vh; 480px*/
 .background {
-  background-image: url("/bkg5.png");
+  background-image: url("/who/bkg-who0.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -93,7 +93,7 @@ canvas.accepting-clicks {
 }
 
 .background-image-me {
-  background-image: url("/bkg5me2.png");
+  background-image: url("/who/bkg-who1.png");
   transition: background-image 0.1s ease-in-out;
 }
 

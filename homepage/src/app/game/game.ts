@@ -32,9 +32,9 @@ export class Game {
   private controlSet = new Set(['w', 's', 'ArrowUp']) //arrow up might still be problemtaic?
 
   private skyImg = new Image();
-  private waterImg = new Image();
+  private waterImg0 = new Image();
+  private waterImg1 = new Image();
   private waterImg2 = new Image();
-  private waterImg3 = new Image();
   private offsetSkyWaterY = 15; //push water up
   private backgroundFrameCount = 0;
 
@@ -105,19 +105,6 @@ export class Game {
 
   }
 
- // ngOnInit(){
-    //this.duckImg.src = 'duck.svg';
-    //this.shadowImg.src = "shadow.svg"
-    //this.skyImg.src = 'skycompressed.png';
-    //this.waterImg.src = 'water1compressed.png'
-    //this.waterImg2.src = 'water2compressed.png'
-    //this.waterImg3.src = 'water3compressed.png'
-
-    //this.duckGameOverImg.src = 'duck_game_over.svg';
-    //this.obstacleImg.src = 'obstacle_grey.svg';
-  //}
-
-
   ngAfterViewInit() {
 
     this.maxScore = this.gameService.getMaxScore();
@@ -175,15 +162,15 @@ export class Game {
 
   private async loadAssets(): Promise<void> {
   await Promise.all([
-      this.loadImage(this.duckImg, 'duck_shadow1.svg'),
-      this.loadImage(this.skyImg, 'skycompressed.png'),
-      this.loadImage(this.waterImg, 'water1compressed.png'),
-      this.loadImage(this.waterImg2, 'water2compressed.png'),
-      this.loadImage(this.waterImg3, 'water3compressed.png'),
-      this.loadImage(this.duckGameOverImg, 'duck_game_over_shadow1.svg'),
-      this.loadImage(this.obstacleImg, 'obstacle_grey_shadow1.svg'),
-      this.loadImage(this.handpointerImg, '/icons/hand-pointer.svg'),
-      this.loadImage(this.arrowUpImg, '/icons/arrow-up.svg'),
+      this.loadImage(this.duckImg, '/game/duck.svg'),
+      this.loadImage(this.skyImg, '/game/sky.png'),
+      this.loadImage(this.waterImg0, '/game/water0.png'),
+      this.loadImage(this.waterImg1, '/game/water1.png'),
+      this.loadImage(this.waterImg2, '/game/water2.png'),
+      this.loadImage(this.duckGameOverImg, '/game/duck_game_over.svg'),
+      this.loadImage(this.obstacleImg, '/game/obstacle.svg'),
+      this.loadImage(this.handpointerImg, '/game/hand-pointer-game.svg'),
+      this.loadImage(this.arrowUpImg, '/game/arrow-up.svg'),
       document.fonts.ready
     ]);
     this.positionDuck();
@@ -413,13 +400,13 @@ export class Game {
     this.ctx!.drawImage(this.skyImg, 0, 0, width, midY1 + 1 - this.offsetSkyWaterY);
 
     if (this.backgroundFrameCount <= 12) {
-      this.ctx!.drawImage(this.waterImg, 0, height, width, midY1 - height - this.offsetSkyWaterY);
+      this.ctx!.drawImage(this.waterImg0, 0, height, width, midY1 - height - this.offsetSkyWaterY);
       this.backgroundFrameCount++;
     } else if (this.backgroundFrameCount <= 24) {
-      this.ctx!.drawImage(this.waterImg2, 0, height, width, midY1 - height - this.offsetSkyWaterY);
+      this.ctx!.drawImage(this.waterImg1, 0, height, width, midY1 - height - this.offsetSkyWaterY);
       this.backgroundFrameCount++;
     } else if (this.backgroundFrameCount <= 36) {
-      this.ctx!.drawImage(this.waterImg3, 0, height, width, midY1 - height - this.offsetSkyWaterY);
+      this.ctx!.drawImage(this.waterImg2, 0, height, width, midY1 - height - this.offsetSkyWaterY);
       this.backgroundFrameCount++;
       if (this.backgroundFrameCount == 37) { //needs to be done imeddiatly so next frame is already
         this.backgroundFrameCount = 0;

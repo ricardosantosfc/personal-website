@@ -2,7 +2,7 @@
     <div class="canvas-wrapper" animate.enter="enter-animation">
         <div class="background" [class.background-image-me]="!isInteracting()">
             @if(!hoverable() && (currDialogIndex === 0 || currDialogIndex === 15 )){
-                <img src="/icons/hand-pointer-dialog-shadow.svg"  class="canvas-overlay-image hint-fade" 
+                <img src="/who/hand-pointer-who.svg"  class="canvas-overlay-image hint-fade" 
              
                 [class.overlay-image-bottom]="currDialogIndex === 0"
                 [class.overlay-image-center]="currDialogIndex === 15"
@@ -10,13 +10,13 @@
             }
             <div class="button-container" [class.not-shown]="!isButtonShown()">
                 <a class="btn-resume " [class.not-shown]="!isButtonsResumeShown()"
-                    href="/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
+                    href="/who/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
                     (click)="handleChoiceButtonClick(10)">
                     Take the resume</a>
                 <button class="btn-resume " [class.not-shown]="!isButtonsResumeShown()"
                     (click)="handleChoiceButtonClick(11)">Don't take it</button>
                 <a class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
-                    href="/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
+                    href="/who/cv_Ricardo_Santos.pdf" download="Ricardo_Santos_Resume.pdf"
                     (click)="handleChoiceButtonClick(17)">Can I get your resume?</a>
                 <button class="btn-resume " [class.not-shown]="!isButtonsEndShown()"
                     (click)="handleChoiceButtonClick(18)">How can I contact you?</button>

@@ -24,8 +24,8 @@ export class What {
   projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
     {
       id: 0,
-      images: ["/projects/savedforest0stroke6.png", "/projects/savedforest11.png", "/projects/savedforest22.png",
-        "/projects/savedforest33.png", "/projects/savedforest44.png", "/projects/savedforest55.png"],
+      images: ["/what/savedforest0.png", "/what/savedforest1.png", "/what/savedforest2.png",
+        "/what/savedforest3.png", "/what/savedforest4.png", "/what/savedforest5.png"],
       title: "saveDforest",
       description:
         "A serious game for promoting environmentally sustainable behaviors through empathy, embedded in a web app.",
@@ -35,7 +35,7 @@ export class What {
     },
     {
       id: 1,
-      images: ["/projects/homepage1stroke2.png"],
+      images: ["/what/personal-website0.png"],
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
       stack: ["Angular"],
@@ -50,7 +50,7 @@ export class What {
 
   private sizeService = inject(SizeService);
 
-  currImage = signal("/projects/savedforest0stroke6.png");
+  currImage = signal("/what/savedforest0.png");
   currImagesToAnimate = 5;
   currImageToAnimateIndex = 1;
   currOpacityImage = signal(1);
