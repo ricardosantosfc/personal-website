@@ -35,7 +35,7 @@ export class What {
     },
     {
       id: 1,
-      images: ["/what/personal-website0.png"],
+      images: ["/what/personal-website.png"],
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
       stack: ["Angular"],
