@@ -1,4 +1,4 @@
-![Logo](./assets/logo.png)
+![Logo](./repo-assets/logo.png)
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white) 
 
 
