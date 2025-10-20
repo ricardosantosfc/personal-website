@@ -84,13 +84,6 @@ canvas.accepting-clicks {
   display: grid;
 }
 
-@media (orientation: landscape) and (hover: none) {
-
-  /* increas cnavas height on mobile landscape*/
-  .background {
-    height: 93vh;
-  }
-}
 
 .background-image-me {
   background-image: url("/who/bkg-who1.png");
@@ -187,10 +180,23 @@ canvas.accepting-clicks {
   padding-right: 12px;
   max-width: 97%;
 
+  max-height: 60.5vh; /* based on bakcground height*/
+  overflow-y: auto;  
 
 
 }
 
+@media (orientation: landscape) and (hover: none) {
+
+  /* increas cnavas height on mobile landscape*/
+  .background {
+    height: 93vh;
+  }
+
+  .button-container {
+      max-height: 89vh;
+  }
+}
 
 .btn-resume {
   text-align: center;
