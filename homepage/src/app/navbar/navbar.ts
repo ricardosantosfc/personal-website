@@ -91,6 +91,15 @@ export class Navbar {
       }, 500); 
     }
   }
+
+  
+  handleTouchOnlyNavbarClick(){
+   clearTimeout(this.hoverTimeout);
+      this.hovering.set(true);
+      this.hoverTimeout = setTimeout(() => {
+        this.hovering.set(false);
+      }, 2000); 
+    }
   
 }
 

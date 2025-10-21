@@ -73,7 +73,7 @@
     </svg>
   </div>
 
-  <ul class="navbar-items">
+  <ul class="navbar-items" (click)="isTouchOnly && handleTouchOnlyNavbarClick()">
     <li class="navbar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <!-- so only exactlythis is active-->
       <a routerLink="/">
