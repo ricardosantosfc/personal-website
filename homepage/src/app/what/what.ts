@@ -67,7 +67,8 @@ export class What {
   currGithub = signal("https://github.com/ricardosantosfc/saveDforest");
   isLinkShown = signal(true);
   isGithubShown = signal(true);
-  isAnimatingEntrance = signal(true);
+  isAnimatingEntrance = signal(true); //remains true until next project shown, when it turns false until proj image is loaded. then true again
+  currOpacityProjectWrapper= signal(1);
 
   currProjectTextHeight = -1; //could be much better by having landscape and portrait, thne switch case, but much more coplex
 
@@ -166,9 +167,12 @@ export class What {
   showProjectWithEntranceAnimation(index: number) {
     this.isAnimatingEntrance.set(false);
 
+    //set opacity to 0 to avoid annoying old image staying and new image popping in much later
+    // and enter animation will only be triggered once the new image has been loaded on HandleImageLoad
+    this.currOpacityProjectWrapper.set(0); 
+
     requestAnimationFrame(() => {
       this.showProject(index)
-      this.isAnimatingEntrance.set(true);
     });
   }
 
@@ -241,6 +245,13 @@ export class What {
   }
 
   handleImageLoad() {
+    if(!this.isAnimatingEntrance()){ //Entrance anim wiating for load
+
+      this.isAnimatingEntrance.set(true);
+      this.currOpacityProjectWrapper.set(1); //animation keyframes override this, so no need to wait for animation to end to set
+      return;
+    }
+
     if (this.isChangingImage) {
       this.isChangingImage = false;
       this.lastImageSwitchTime = performance.now();
