@@ -1,5 +1,5 @@
 <div class="what-content" #whatContent>
-    <div class=project-wrapper [style.opacity] = "currOpacityProjectWrapper()" [class.enter-animation]="isAnimatingEntrance() ===true" (animationstart)="handleEntranceAnimationStart()" (animationend)="!hoverable() && animateImages()"> 
+    <div class=project-wrapper [style.opacity] = "currOpacityProjectWrapper()" [class.enter-animation]="isAnimatingEntrance()" (animationstart)="handleEntranceAnimationStart()" (animationend)="!hoverable() && animateImages()"> 
         <div class="project-content" (mouseenter)="hoverable() && animateImages()" (mouseleave)="hoverable() && stopAnimatingImages()">
             <div class="project-main">
                 <div class="project-image-wrapper">

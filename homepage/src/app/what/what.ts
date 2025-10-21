@@ -67,8 +67,8 @@ export class What {
   currGithub = signal("https://github.com/ricardosantosfc/saveDforest");
   isLinkShown = signal(true);
   isGithubShown = signal(true);
-  isAnimatingEntrance = signal(true); //remains true until next project shown, when it turns false until proj image is loaded. then true again
-  currOpacityProjectWrapper= signal(1);
+  isAnimatingEntrance = signal(false); //remains true until next project shown, when it turns false until proj image is loaded. then true again
+  currOpacityProjectWrapper= signal(0); //set to 1 after image loaded
 
   currProjectTextHeight = -1; //could be much better by having landscape and portrait, thne switch case, but much more coplex
 
