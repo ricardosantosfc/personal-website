@@ -109,6 +109,15 @@ export class Game {
 
     this.maxScore = this.gameService.getMaxScore();
     this.scaleCanvas();
+
+    this.ctx!.font = `11px 'Consolas', monospace`;
+    this.ctx!.fillStyle = "#ddddddff";
+    this.ctx!.textBaseline = "middle";
+    this.ctx!.textAlign = "center";
+    this.ctx!.fillText("Sir Splashy Squackson is warming up...", this.width / 2, this.height / 1.5);
+    
+    this.drawLoadingSpinner();
+    
     this.loadAssets();
 
   }
@@ -159,6 +168,19 @@ export class Game {
     }
   }
 
+  private drawLoadingSpinner() : void{
+    
+    this.ctx!.beginPath();
+    this.ctx!.lineWidth = 6;
+    this.ctx!.strokeStyle = '#ddddddff'; 
+
+    //to avoid creating another property, uses backgroundframecount as a counter, which is zero'd on showcontrols.
+    this.ctx!.arc(this.width / 2,this.height/2 , 30, 0, Math.PI * (0.05 + this.backgroundFrameCount)); 
+    this.ctx!.stroke();
+    this.backgroundFrameCount+= 0.01;
+    
+    this.animationFrameId = requestAnimationFrame(() => this.drawLoadingSpinner());
+  }
 
   private async loadAssets(): Promise<void> {
   await Promise.all([
@@ -199,6 +221,10 @@ export class Game {
   }
 
   showControls() {
+
+    //stop loading anim, reset counter used in anim
+    cancelAnimationFrame(this.animationFrameId);
+    this.backgroundFrameCount = 0;
 
     this.drawBackground(this.width, this.height);
 
