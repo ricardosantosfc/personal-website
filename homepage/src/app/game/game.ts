@@ -193,7 +193,7 @@ export class Game {
       this.loadImage(this.obstacleImg, '/game/obstacle.svg'),
       this.loadImage(this.handpointerImg, '/game/hand-pointer-game.svg'),
       this.loadImage(this.arrowUpImg, '/game/arrow-up.svg'),
-      document.fonts.ready
+      document.fonts.load("20px VT323")
     ]);
     this.positionDuck();
     this.obstacleWidth = this.obstacleImg.naturalWidth;
