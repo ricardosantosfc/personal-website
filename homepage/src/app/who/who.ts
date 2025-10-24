@@ -9,7 +9,7 @@ interface Dialogs {
   sprites: number[]; //spirtes?: 
   endSprite: number; //the sprite on which to end the animation
   nextDialogIndex: number; //index of the nex t dialog
-  enableButtons?: number;
+  showChoiceButtonsCategory?: number;
 }
 @Component({
   selector: 'app-who',
@@ -98,7 +98,7 @@ export class Who {
       sprites: [17, 18],
       endSprite: 18,
       nextDialogIndex: 10,
-      enableButtons: 0
+      showChoiceButtonsCategory: 0
     },
     {
       text: "Here you go! Thank you. ",
@@ -149,7 +149,7 @@ export class Who {
       sprites: [5, 6],
       endSprite: 6,
       nextDialogIndex: 16,
-      enableButtons: 1
+      showChoiceButtonsCategory: 1
     },
     {
       text: "Sure! Here!",
@@ -192,9 +192,8 @@ export class Who {
   private sizeService = inject(SizeService);
 
   //state - showButtons, notInteracting, Interacting
-  isButtonShown = signal(false);
-  isButtonsResumeShown = signal(false);
-  isButtonsEndShown = signal(false);
+
+  showChoiceButtonsCategory = signal(-1);
   isNameShown = signal(false);
   isDialogShown = signal(false); //better to start as false so it doesnt flash when finished initial 
   isCanvasAcceptingClicks = signal(true);
@@ -327,9 +326,8 @@ export class Who {
       this.enableDialogBoxAndName();
       this.isInteracting.set(true);
     }
-    if (this.dialogs[this.currDialogIndex].enableButtons !== undefined) { //enable buttons
-      this.disableDialogBoxAndName();
-      this.enableChoiceButtons(this.dialogs[this.currDialogIndex].enableButtons!);
+    if (this.dialogs[this.currDialogIndex].showChoiceButtonsCategory !== undefined) { //enable buttons
+      this.enableChoiceButtons(this.dialogs[this.currDialogIndex].showChoiceButtonsCategory!);
     } else {
       this.currDialogIndex = this.dialogs[this.currDialogIndex].nextDialogIndex;
       if (this.currDialogIndex === 2) {
@@ -362,14 +360,10 @@ export class Who {
     this.isDialogShown.set(false);
   }
 
-  enableChoiceButtons(category: number) { //isButtonShown(0,1,2) replace single signal
+  enableChoiceButtons(category: number) { 
 
-    this.isButtonShown.set(true);
-    if (category === 0) {
-      this.isButtonsResumeShown.set(true);
-    } else {
-      this.isButtonsEndShown.set(true);
-    }
+    this.disableDialogBoxAndName();
+    this.showChoiceButtonsCategory.set(category);
     this.isCanvasAcceptingClicks.set(false);
   }
 
@@ -377,12 +371,10 @@ export class Who {
   handleChoiceButtonClick(nextDialogIndex: number) {
 
     this.currDialogIndex = nextDialogIndex;
-    this.showDialog();
-    this.isButtonsEndShown.set(false);
-    this.isButtonsResumeShown.set(false);
-    this.isButtonShown.set(false);
+    this.showChoiceButtonsCategory.set(-1); //hide container
     this.enableDialogBoxAndName();
-
+    this.showDialog();
+    
   }
 
   showDialog() {

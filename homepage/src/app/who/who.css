@@ -198,7 +198,7 @@ canvas.accepting-clicks {
   }
 }
 
-.btn-resume {
+.btn-choice {
   text-align: center;
   color: var(--white-dialog);
   border: 0.1em solid var(--who-dialog-border);
@@ -212,7 +212,7 @@ canvas.accepting-clicks {
   background-color: var(--black-dialog);
 }
 
-.btn-resume:hover {
+.btn-choice:hover {
 border: 0.1em solid var(--who-button-hover-border);
   background-color: var(--white-faded);
   color: var(--who-button-hover-textcolor);
@@ -240,7 +240,7 @@ border: 0.1em solid var(--who-button-hover-border);
     font-size: 1.1em !important;
   }
 
-  .btn-resume {
+  .btn-choice {
     font-size: 1.1em !important;
   }
 }
