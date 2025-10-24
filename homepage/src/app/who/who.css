@@ -42,8 +42,8 @@ canvas {
 }
 
 .overlay-image-bottom{
-  bottom: 0.75em;
-  right: 30px; 
+  bottom: 0.25em;
+  right: 22px; 
   width: 3em;  
 }
 
@@ -79,17 +79,35 @@ canvas.accepting-clicks {
   justify-items: center;
   width: 100%;
   height: 65.5vh;
-  transition: background-image 0.1s ease-in-out;
-  /* on firefox doesnt work*/
   display: grid;
+
+  position: relative;
+  overflow: hidden; 
 }
 
 
-.background-image-me {
+.background::after {
   background-image: url("/who/bkg-who1.png");
-  transition: background-image 0.1s ease-in-out;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+
+  position: absolute;
+  content: "";
+
+  inset: 0;
+  
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out; 
+  pointer-events: none; 
+  
 }
 
+.background.image-me::after { /* turn ::after opaque*/
+  opacity: 1;
+  transition: opacity 0s linear; 
+  
+}
 
 .dialog-container {
 
@@ -99,9 +117,9 @@ canvas.accepting-clicks {
 
   
   position: absolute;
-  bottom: 1em;
-  left: 1em;
-  right: 1em;
+  bottom: 0.5em;
+  left: 0.5em;
+  right: 0.5em;
   font-family: 'Consolas', monospace; /*Incosolata - no letter spacing change,  Consolas*/
   letter-spacing: -0.7px;
   color: var(--white-dialog);
@@ -170,14 +188,14 @@ canvas.accepting-clicks {
 
 .button-container {
   position: absolute;
-  bottom: 1.5em;
+  bottom: 1em;
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 1px;
+  padding-right: 1px;
   max-width: 97%;
 
   max-height: 60.5vh; /* based on bakcground height*/
