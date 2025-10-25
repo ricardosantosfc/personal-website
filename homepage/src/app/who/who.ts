@@ -156,14 +156,14 @@ export class Who {
       spriteAlternations: 1,
       sprites: [13, 17, 18, 19, 20],
       endSprite: 30,
-      nextDialogIndex: 15
+      nextDialogIndex: 22
     },
     {
       text: "You can reach out to me through email or LinkedIn. Just click on the icons down below.",
       spriteAlternations: 8,
       sprites: [7, 8],
       endSprite: 8,
-      nextDialogIndex: 15
+      nextDialogIndex: 22
     },
     {
       text: "Well, besides working on this website, I've been learning how to use React and Three.js. I've also been refreshing my SQL skills.",
@@ -177,7 +177,7 @@ export class Who {
       spriteAlternations: 9,
       sprites: [31, 32],
       endSprite: 32,
-      nextDialogIndex: 15
+      nextDialogIndex: 22
     },
     {
       text: "Sure, no problem!",
@@ -185,6 +185,14 @@ export class Who {
       sprites: [25, 26],
       endSprite: 26,
       nextDialogIndex: 2
+    },
+    {
+      text: "Anything else I can help you with?",
+      spriteAlternations: 5,
+      sprites: [5, 6],
+      endSprite: 6,
+      nextDialogIndex: 22,
+      showChoiceButtonsCategory: 1
     },
   ];
 
