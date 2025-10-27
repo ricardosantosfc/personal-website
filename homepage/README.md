@@ -1,7 +1,7 @@
 # Homepage
 The Angular project is contained in this folder.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1; that being said, you do **NOT** need to have Angular CLI globally installed on your machine to run this project.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1; that being said, you do **NOT** need to have Angular CLI globally installed on your machine to run it.
 
 [**Node.js** and **npm**](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs) are required to install dependencies and run the project.<br/>For a list of compatible versions, refer to the official [Angular documentation](https://angular.dev/reference/versions).
 
