@@ -1,41 +1,36 @@
 # Homepage
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1; note that you do **NOT** need to have Angular CLI globally installed on your machine to run this project.
+
+Node.js (and npm) are required to install dependencies and run the project; for a list of compatible versions, refer to the official [Angular documentation](https://angular.dev/reference/versions).
+If this is your first time installing Node, I recommend installing it through a [version manager](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm), as it enables switching between different Node and npm versions across different projects.
+
+
+## Install dependencies
+
+To install project dependecies, run:
+
+```bash
+npm install
+```
 
 ## Development server
 
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, your default browser will be opened on `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 
 To build the project run:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This will compile the project and store the build artifacts in the `dist/` directory. By default, the production build optimizes the application for performance and speed.
