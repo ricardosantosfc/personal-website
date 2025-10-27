@@ -20,7 +20,7 @@ npm install
 To start a local development server, run:
 
 ```bash
-npm start
+npm run start
 ```
 
 Once the server is running, your default browser will be opened on `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
