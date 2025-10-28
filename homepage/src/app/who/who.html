@@ -6,7 +6,12 @@
                     [class.overlay-image-bottom]="currDialogIndex === 0"
                     [class.overlay-image-center]="currDialogIndex === 15" alt="Tap hint icon for non-hoverable devices" />
             }
-
+                <canvas [attr.tabindex]="isCanvasAcceptingClicks() ? '0' : null"
+                aria-label="This is an interactable canvas wherein a dialog between you and me is simulated." #canvas
+                [class.accepting-clicks]="isCanvasAcceptingClicks()" (click)="handleCanvasClick()"
+                (keydown)="handleCanvasKeydown($event)">
+                </canvas>
+                
             @if(showChoiceButtonsCategory() !== -1){
                 <div class="button-container">
 
@@ -34,10 +39,7 @@
                 </div>
             }
 
-            <canvas [attr.tabindex]="isCanvasAcceptingClicks() ? '0' : null"
-                aria-label="This is an interactable canvas wherein a dialog between you and me is simulated." #canvas
-                [class.accepting-clicks]="isCanvasAcceptingClicks()" (click)="handleCanvasClick()"
-                (keydown)="handleCanvasKeydown($event)"></canvas>
+           
 
             <div class="dialog-container">
                 <div class="dialog-box-name" [class.not-shown]="!isNameShown()"> Ricardo Santos</div>
