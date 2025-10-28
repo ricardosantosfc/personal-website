@@ -23,11 +23,13 @@
   margin-bottom: 1em;
 }
 
-/* because background::after messes up canvas outline, so instead make wrapper show focus*/
-.canvas-wrapper.canvas-active:focus-within {
-  outline: 5px solid var(--focus-outline);
+.canvas-wrapper.canvas-active :focus-visible {
+  outline: none; 
 }
 
+.canvas-wrapper.canvas-active:has(:focus-visible) {
+  outline: 5px solid var(--focus-outline);
+}
 
 canvas {
   display: block;
@@ -237,9 +239,9 @@ canvas.accepting-clicks {
   background-color: var(--black-dialog);
 }
 
-.btn-choice:focus{
+.btn-choice:focus-visible{
   outline: 5px solid var(--focus-outline); /*crank up outline so its mroe visible*/
-
+  outline-offset: -4px;
 }
 
 .btn-choice:hover {
