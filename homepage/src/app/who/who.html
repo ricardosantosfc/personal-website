@@ -1,5 +1,5 @@
 <div class="who-content" #whoContent>
-    <div class="canvas-wrapper" animate.enter="enter-animation">
+    <div class="canvas-wrapper" animate.enter="enter-animation"  [class.canvas-active]="isCanvasAcceptingClicks()"> <!-- for tab outline-->
         <div class="background" [class.image-me]="!isInteracting()">
             @if(!hoverable() && (currDialogIndex === 0 || currDialogIndex === 15 )){
                 <img src="/who/hand-pointer-who.svg" class="canvas-overlay-image hint-fade"

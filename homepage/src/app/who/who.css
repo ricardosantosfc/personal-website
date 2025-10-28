@@ -23,6 +23,11 @@
   margin-bottom: 1em;
 }
 
+/* because background::after messes up canvas outline, so instead make wrapper show focus*/
+.canvas-wrapper.canvas-active:focus-within {
+  outline: 5px solid var(--focus-outline);
+}
+
 
 canvas {
   display: block;
@@ -196,6 +201,8 @@ canvas.accepting-clicks {
   align-items: flex-start;
   padding-left: 1px;
   padding-right: 1px;
+  padding-top:5px; /* so focus outline isnt clipped due to overflow-y*/
+  padding-bottom: 5px;
   max-width: 97%;
 
   max-height: 60.5vh; /* based on bakcground height*/
@@ -228,6 +235,11 @@ canvas.accepting-clicks {
   cursor: pointer;
   text-decoration: none;
   background-color: var(--black-dialog);
+}
+
+.btn-choice:focus{
+  outline: 5px solid var(--focus-outline); /*crank up outline so its mroe visible*/
+
 }
 
 .btn-choice:hover {
