@@ -17,7 +17,7 @@ Source code is located in the [`/homepage`](https://github.com/ricardosantosfc/p
 
 ## Installing, running and building
 
-Refer to the README in `/homepage`.
+Refer to the README in [`/homepage`](https://github.com/ricardosantosfc/personal-website/tree/main/homepage#homepage).
 
 ## Tools, platforms, credits and mentions
 
