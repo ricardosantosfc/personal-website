@@ -21,7 +21,7 @@ Refer to the README in [`/homepage`](https://github.com/ricardosantosfc/personal
   
 - As I was struggling a bit initially trying to figure out how to make the minigame using just vanilla TypeScript, I made a quick standalone prototype with [Unity v2023.1.12f1](https://unity.com). It turned out to be a good call, as it helped me lay down the core gameplay mechanics and basic object structure using a workflow I'm quite comfortable with.
   
-- Both "my avatar" and the background for the minigame were modeled, textured, animated and rendered with [Blender v3.2](https://www.blender.org/). Rock textures from [Poly Haven](https://polyhaven.com/a/aerial_rocks_04). Sky HDRI also from a free resource library i've unfortunately lost track of. Avatar face texture from irl me (technically sourced from my parents, thanks mom, thanks dad)
+- Both "my avatar" and the background for the minigame were modeled, textured, animated and rendered with [Blender v3.2](https://www.blender.org/). Rock textures from [Poly Haven](https://polyhaven.com/a/aerial_rocks_04). Sky HDRI also from a free resource library i've unfortunately lost track of. Avatar face texture from IRL me (technically sourced from my parents, thanks mom, thanks dad)
   
 - [Krita v5.2.11](https://krita.org/pt-pt/download/) was used for color grading, generating the avatar sprites' outlines, and layering the back facing avatar sprite on the room background.
   
