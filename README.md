@@ -5,11 +5,7 @@
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white) 
 
-My personal website, built with Angular.
-
-## Overview
- 
-The website consists of a single-page static site with two routes.
+My personal website, built with Angular. It consist of a single-page static site with two routes.
  
 Despite already being familiar with Angular, I still tried to challenge myself by not using any external library whatsover, just vanilla Angular and Typescript. I also tried to keep the components modifiable and extensible so they can be easily updated with more content in the future.
 
