@@ -7,7 +7,7 @@
 
 My personal website, built with Angular. It consist of a single-page static site with two routes.
  
-Despite already being familiar with Angular, I still tried to challenge myself by not using any external library whatsover, just vanilla Angular and Typescript. I also tried to keep the components modifiable and extensible so they can be easily updated with more content in the future.
+Despite already being familiar with Angular, I still tried to challenge myself by not using any external library whatsover, just vanilla Angular and TypeScript. I also tried to keep the components modifiable and extensible so they can be easily updated with more content in the future.
 
 Source code is located in the [`/homepage`](https://github.com/ricardosantosfc/personal-website/tree/main/homepage) directory. It still needs some refactoring and cleanup at the moment, so proceed with caution! 
 
@@ -19,7 +19,7 @@ Refer to the README in [`/homepage`](https://github.com/ricardosantosfc/personal
 
 - [Figma](https://www.figma.com/) was used for moodboarding and designing the logo, minigame characters, "what" project images, site layout, and some icons.
   
-- As I was struggling a bit initially trying to figure out how to make the minigame using just vanilla Typescript, I made a quick standalone prototype with [Unity v2023.1.12f1](https://unity.com). It turned out to be a good call, as it helped me lay down the core gameplay mechanics and basic object structure using a workflow I'm quite comfortable with.
+- As I was struggling a bit initially trying to figure out how to make the minigame using just vanilla TypeScript, I made a quick standalone prototype with [Unity v2023.1.12f1](https://unity.com). It turned out to be a good call, as it helped me lay down the core gameplay mechanics and basic object structure using a workflow I'm quite comfortable with.
   
 - Both "my avatar" and the background for the minigame were modeled, textured, animated and rendered with [Blender v3.2](https://www.blender.org/). Rock textures from [Poly Haven](https://polyhaven.com/a/aerial_rocks_04). Sky HDRI also from a free resource library i've unfortunately lost track of. Avatar face texture from irl me (technically sourced from my parents, thanks mom, thanks dad)
   
