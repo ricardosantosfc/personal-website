@@ -36,7 +36,7 @@ Refer to the README in [`/homepage`](https://github.com/ricardosantosfc/personal
 - Additional icons from [Bootstrap Icons](https://icons.getbootstrap.com/).
 - Personal website inspiration from [Guillaume Gouessan](https://guillaumegouessan.com/), [David Heckoff](https://david-hckh.com/), [Henry Heffernan](https://henryheffernan.com/), [Bryant Smith](https://bryantcodes.art/), and [Jesse Zhou](https://www.jesse-zhou.com/), to name a few.
 
-## Additional considerations, trivia, misc, etc etc (just me babbling, you don't actually have to read all this!)
+## Additional considerations, trivia, misc... (just me babbling, you don't actually have to read all this!)
 
 - I originally planned to make a fully 3D-based website using React and Three.js, but ultimately realized it would take me a while to come up with something that I'd be happy with as I'm still quite inexperienced at both. 
 - I don't know if it's just because of infinite scroll fatigue or something, but non-scrollable websites have become really appealing to me these past couple years. I thus tried to keep the website non-scrollable whenever possbile, even on mobile devices, while also still retaining the default HTML margins. Making sure the content didn't overflow was challenging for some devices; I ended up logging the dimensions of some DOM elements over and over just to figure out what was causing overflow - for example, for the "what" route project "cards", the font not loading immediately during initialization sometimes threw div dimensions off. 
