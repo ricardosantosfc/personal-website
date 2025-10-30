@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
-import { SizeService } from '../size-service';
+import { SizeService } from '../services/size-service';
 import { NgOptimizedImage } from '@angular/common';
 
 
@@ -21,7 +21,7 @@ interface Project {
 })
 export class What {
 
-  projects: Project[] = [ // [style] doesnt work with spaces inside the  strings
+  projects: Project[] = [ 
     {
       id: 0,
       images: ["/what/savedforest0.png", "/what/savedforest1.png", "/what/savedforest2.png",
@@ -103,7 +103,7 @@ export class What {
 
   ngAfterViewInit() {
 
-    //this.showProject(0)
+    //this.showProject(0) not needed, already set when props are declared
 
     // fonts might not be ready yet. this one seems redundant, 
     // but required for avoiding annoying flash when second resizefooter triggers
@@ -219,7 +219,6 @@ export class What {
 
       this.isChangingImage = true;
       this.currOpacityImage.set(0);
-      //this.lastImageSwitchTime = timestamp;
 
     }
 
@@ -245,7 +244,7 @@ export class What {
   }
 
   handleImageLoad() {
-    if(!this.isAnimatingEntrance()){ //Entrance anim wiating for load
+    if(!this.isAnimatingEntrance()){ //Entrance anim waiting for load
 
       this.isAnimatingEntrance.set(true);
       this.currOpacityProjectWrapper.set(1); //animation keyframes override this, so no need to wait for animation to end to set
@@ -261,7 +260,7 @@ export class What {
   }
 
 
-  stopAnimatingImages() { //on swithc, enter animation automatically triggers a mouse leave, 
+  stopAnimatingImages() { //on switch, enter animation automatically triggers a mouse leave, 
 
     if (this.animationFrameId !== 0) {
 
@@ -270,7 +269,7 @@ export class What {
       this.isChangingImage = false;
 
       this.currOpacityImage.set(0);
-      setTimeout(() => { //easier to do this through timeout rather than trnastionevent listeners.
+      setTimeout(() => { //easier to do this through timeout rather than transtion event listeners.
         this.lastImageSwitchTime = 0;
         this.currImage.set(this.projects[this.currProjectIndex]!.images[0]);
         this.currOpacityImage.set(1);

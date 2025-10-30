@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+//service for keeping up with navbar height for footer resize calculations
 @Injectable({
   providedIn: 'root'
 })

@@ -1,6 +1,13 @@
 import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
-import { GameService } from '../game-service';
-import { GameState } from '../game-state';
+import { GameService } from '../services/game-service';
+
+const enum GameState {
+  Loading,
+  ShowingControls,
+  Running,
+  GameOver,
+  ShowingGameOverCanvas
+}
 
 interface Obstacle {
   x: number;

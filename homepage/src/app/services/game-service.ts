@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+
 //simple serivce for storing and updating maxScore 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '@angular/core';
-import { WhoService } from '../who-service';
-import { SizeService } from '../size-service';
+import { WhoService } from '../services/who-service';
+import { SizeService } from '../services/size-service';
 import { Footer } from "../footer/footer";
 
 interface Dialogs {
@@ -9,7 +9,7 @@ interface Dialogs {
   sprites: number[]; //spirtes?: 
   endSprite: number; //the sprite on which to end the animation
   nextDialogIndex: number; //index of the nex t dialog
-  showChoiceButtonsCategory?: number;
+  showChoiceButtonsCategory?: number; //should show choice buttons afterwards, and if so, which "category"
 }
 @Component({
   selector: 'app-who',
@@ -27,7 +27,7 @@ export class Who {
   private width = 0;
   private height = 0;
 
-  //closed mouth = uneven sptrites, excpet for 33,34
+  //closed mouth = uneven sprites, except for 33,34
   private dialogs: Dialogs[] = [
     {
       text: "...",
@@ -51,7 +51,7 @@ export class Who {
       nextDialogIndex: 3
     },
     {
-      text: "I enjoy creating full-stack applications with rich, highly interactive frontends...", //apps interesctions diff
+      text: "I enjoy creating full-stack applications with rich, highly interactive frontends...",
       spriteAlternations: 9,
       sprites: [7, 8],
       endSprite: 8,
@@ -79,7 +79,7 @@ export class Who {
       nextDialogIndex: 7
     },
     {
-      text: "... Just give me a second please...",
+      text: "... Just give me a second please...", //both this one and the next "..." one would be better if next uto, after timeout
       spriteAlternations: 4,
       sprites: [13, 14],
       endSprite: 14,
@@ -108,14 +108,14 @@ export class Who {
       nextDialogIndex: 13
     },
     {
-      text: "No problem! If you change your mind, just ask and i'll give it to you. ", //oh right! you already have it
+      text: "No problem! If you change your mind, just ask and i'll give it to you. ", 
       spriteAlternations: 8,
       sprites: [21, 22],
       endSprite: 22,
       nextDialogIndex: 12
     },
     {
-      text: "... ", //oh right! you already have it
+      text: "... ", 
       spriteAlternations: 0,
       sprites: [24],
       endSprite: 24,
@@ -144,7 +144,7 @@ export class Who {
       nextDialogIndex: 16
     },
     {
-      text: "Hi again! is there anything I can help you with?", //------btns again
+      text: "Hi again! is there anything I can help you with?", 
       spriteAlternations: 7,
       sprites: [5, 6],
       endSprite: 6,
@@ -172,7 +172,7 @@ export class Who {
       endSprite: 10,
       nextDialogIndex: 20
     },
-    { /* 𝘄𝗵𝗮𝘁 might not be supportted by some dievices*/
+    { 
       text: "If you'd like to learn more about some of the projects i've worked on, click on the [what] link up above.",
       spriteAlternations: 9,
       sprites: [31, 32],
@@ -212,7 +212,7 @@ export class Who {
   private isAnimating = false; //to redraw ends sprite on resize if not
 
   private spritesheetImg = new Image();
-  private spriteSizeIncrease = 80;
+  private spriteSizeIncrease = 80; //so sprites are drawn a bit larger
 
   currDialogIndex = 0;
   currDialogText = signal("");
@@ -254,7 +254,7 @@ export class Who {
     this.hoverable.set(window.matchMedia('(pointer: fine)').matches); //mouse is main pointer
   }
 
-  //16+32+16
+
   ngAfterViewInit() {
     this.resizeFooter()
     this.scaleCanvas();
@@ -391,7 +391,7 @@ export class Who {
     this.animate();
     this.isAnimating = true;
     this.currDialogText.set(this.dialogs[this.currDialogIndex].text);
-    this.isCanvasAcceptingClicks.set(true); // should be at the end of animate
+    this.isCanvasAcceptingClicks.set(true); // so user doesnt need to wait for animation to end
   }
 
   animate() { //somewhat contrived, review
@@ -420,7 +420,6 @@ export class Who {
       currSpritePosX = this.dialogs[this.currDialogIndex].endSprite;
       this.drawSprite(currSpritePosX);
       this.isAnimating = false;
-      //tirgger lcik here if ===6 after timeout
       return;
 
     }

@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, inject, signal, ViewChild } from '
 import { RouterLink } from '@angular/router';
 import { RouterLinkActive } from "@angular/router";
 import { Game } from "../game/game";
-import { SizeService } from '../size-service';
+import { SizeService } from '../services/size-service';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +31,15 @@ export class Navbar {
 
   @HostListener('window:resize')
   onResize() {
-    this.sizeService.updateNavbarHeigth(this.navbar.nativeElement.parentElement!.offsetHeight)
+
+    //for devices where footer size is adjusted to fill screen, 
+    // if game is activated-> resize-> resize back to original -> close game,
+    // wrong footer dimensions due to resize being handled while the navbar has game dimensions.
+    // so neglect it, dont update service. 
+    if(!this.isGameActive()){
+      this.sizeService.updateNavbarHeigth(this.navbar.nativeElement.parentElement!.offsetHeight)
+    }
+    
     this.checkShowThemeButton();
   }
 
