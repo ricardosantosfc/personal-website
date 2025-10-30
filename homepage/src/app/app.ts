@@ -11,6 +11,6 @@ import { RouterOutlet } from "@angular/router";
 export class App {
 
    ngOnInit() {
-    console.log("looking for an easter egg?\nI won´t quack under pressure, but I can tell you it's not here!")
+    console.log("looking for an easter egg or something?\nI won´t quack under pressure, but I can tell you it's not here!\n\nWell you know, I mean, technically, uh... You see, it's not here if you uh... this is not meant to, uh... don't count this an easter egg too, ok?")
   }
 }
