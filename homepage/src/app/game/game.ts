@@ -29,13 +29,13 @@ export class Game {
 
   private gameState = GameState.Loading;
 
-  private controlSet = new Set(['w', 's', 'ArrowUp']) //arrow up might still be problemtaic?
+  private controlSet = new Set(['w', 's', 'ArrowUp']) //arrowup will still trigger a scroll up if user is not at the top
 
   private skyImg = new Image();
   private waterImg0 = new Image();
   private waterImg1 = new Image();
   private waterImg2 = new Image();
-  private offsetSkyWaterY = 15; //push water up
+  private offsetSkyWaterY = 15; //push water up so it seamlessly interesects sky
   private backgroundFrameCount = 0;
 
   private duckImg = new Image();
@@ -46,10 +46,9 @@ export class Game {
   private duckEndPosX = 0; //so occupies 10-61, but for good measure do it programmatically
 
   private obstacleImg = new Image();
-  private obstacleOffsetPosY = 0; // 2.5 for barrels // to "anchor" obstacles in lanes
-  private obstacleWidth = 0; // 20 per figma
-  private obstacleFrontHitboxOffset = 25; //for duck obstacles, increase htibox when htting the front of the obstacle
-  private obstacleBackHitboxOffset = -15; //for duck obstacles, decrease hitbox when hitting the backof the obstacle (so beak still gets a pass)
+  private obstacleWidth = 0;
+  private obstacleFrontHitboxOffset = 25; //for obstacles, increase htibox when htting the front of the obstacle
+  private obstacleBackHitboxOffset = -15; //for obstacles, decrease hitbox when hitting the backof the obstacle (so beak still gets a pass)
 
   private obstaclesToDestroyCount = 0;
   private spawnTimer = 500;
@@ -57,8 +56,8 @@ export class Game {
   private obstacles: Obstacle[] = [];
   private currObstacleSpeed = 3.0; // px per frame
   private initialObstacleSpeed = 3.0;
-  private speedIncrease = 0.005; //0.01
-  private spawnTimeoutId: any;
+  private speedIncrease = 0.005;
+  private spawnTimeoutId = 0;
 
   private animationFrameId = 0;
 
@@ -71,7 +70,7 @@ export class Game {
   onResize() {
 
     this.scaleCanvas();
-    //and if non animating = non running, redraw canvas
+    //and if non animating => non running, redraw canvas
     if (this.gameState === GameState.ShowingGameOverCanvas) {
       this.showGameOverCanvas();
     } else if (this.gameState === GameState.ShowingControls) {
@@ -79,10 +78,9 @@ export class Game {
     }
   }
 
-  //handle controls
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (this.controlSet.has(event.key)) { //will override space and key up down scrolling
+    if (this.controlSet.has(event.key)) {
       this.handleClick();
     }
 
@@ -115,9 +113,9 @@ export class Game {
     this.ctx!.textBaseline = "middle";
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("Sir Splashy Squackson is warming up...", this.width / 2, this.height / 1.5);
-    
+
     this.drawLoadingSpinner();
-    
+
     this.loadAssets();
 
   }
@@ -130,35 +128,16 @@ export class Game {
     // Get wrapper size — from the parent element!
     const parent = canvas.parentElement!;
     const parentRect = parent.getBoundingClientRect();
-    //console.log("game canvas viewport " + window.innerHeight);
-    if(parentRect.height> window.innerHeight){ 
-      
-      //console.log("heihgth canvas adjust")
-      canvas.style.height = `${window.innerHeight-20}px`
+
+    if (parentRect.height > window.innerHeight) {
+      canvas.style.height = `${window.innerHeight - 20}px`
     }
 
-      this.width = parentRect.width;
+    this.width = parentRect.width;
     this.height = parentRect.height;
     // Set canvas internal resolution
     canvas.width = this.width * dpi;
     canvas.height = this.height * dpi;
-
-    //console.log(this.duckPosX/this.width); // for this.widht  0.1048
-    //console.log(this.spawnTimer/canvas.width); 0.2992 as canvaswidth ->500
-
-    // setting duckPosX on resize means postionDucktoo
-    this.duckPosX = this.width * 0.1048; //this needs tobe done after a resize, after a game over 
-    //this.duckImg.onload = () => { //also probelm here, on resize this will not be tirggered
-    this.positionDuck(); //this is redundant on ngafterinit
-    //}
-    this.obstacleWidth = this.obstacleImg.naturalWidth; //also redundant
-    //this.obstacleImg.onload = () =>{
-     // this.obstacleWidth = this.obstacleImg.naturalWidth;
-   // }
-  
-    if (this.width <= 768) { // review, maybe shouldn be triggered in resize while game is running
-      this.spawnTimer = 1000;
-    }
 
     // Scale drawing context
     ctx?.scale(dpi, dpi);
@@ -166,24 +145,44 @@ export class Game {
     if (ctx) {
       this.ctx = ctx;
     }
+
+    // setting duckPosX on resize means postionDucktoo
+    this.duckPosX = this.width * 0.1048;
+
+    if (this.gameState !== GameState.Loading) { //redundant on ngAfterInit, as its called after load promises fullfilled
+      this.positionDuck();
+      this.obstacleWidth = this.obstacleImg.naturalWidth;
+    }
+
+    if (this.gameState === GameState.Running) { //styles are reset as well, must set it back
+      this.ctx!.font = "20px VT323, monospace";
+      this.ctx!.fillStyle = "#ffffffff";
+      this.ctx!.textBaseline = "top";
+      this.ctx!.textAlign = "left";
+    }
+
+    if (this.width <= 768) {
+      this.spawnTimer = 1000;
+    }
+
   }
 
-  private drawLoadingSpinner() : void{
-    
+  private drawLoadingSpinner(): void {
+
     this.ctx!.beginPath();
     this.ctx!.lineWidth = 6;
-    this.ctx!.strokeStyle = '#ddddddff'; 
+    this.ctx!.strokeStyle = '#ddddddff';
 
     //to avoid creating another property, uses backgroundframecount as a counter, which is zero'd on showcontrols.
-    this.ctx!.arc(this.width / 2,this.height/2 , 30, 0, Math.PI * (0.05 + this.backgroundFrameCount)); 
+    this.ctx!.arc(this.width / 2, this.height / 2, 30, 0, Math.PI * (0.05 + this.backgroundFrameCount));
     this.ctx!.stroke();
-    this.backgroundFrameCount+= 0.01;
-    
+    this.backgroundFrameCount += 0.01;
+
     this.animationFrameId = requestAnimationFrame(() => this.drawLoadingSpinner());
   }
 
   private async loadAssets(): Promise<void> {
-  await Promise.all([
+    await Promise.all([
       this.loadImage(this.duckImg, '/game/duck.svg'),
       this.loadImage(this.skyImg, '/game/sky.png'),
       this.loadImage(this.waterImg0, '/game/water0.png'),
@@ -198,19 +197,17 @@ export class Game {
     this.positionDuck();
     this.obstacleWidth = this.obstacleImg.naturalWidth;
     this.showControls(); // Safe to call now
-}
+  }
 
 
- private loadImage(img: HTMLImageElement, src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    img.onload = () => resolve();
-    img.onerror = (err) => reject(err);
-    img.src = src;
-    
-  });
-}
+  private loadImage(img: HTMLImageElement, src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = (err) => reject(err);
+      img.src = src;
 
-
+    });
+  }
 
   positionDuck() {
     const nh = this.duckImg.naturalHeight; //37.8 per figma
@@ -230,9 +227,6 @@ export class Game {
 
     this.ctx!.drawImage(this.duckImg, this.duckPosX, this.currDuckPosY);
 
-    //console.log(this.height);
-    //fontScale = baseFontSize / baseCanvasWidth; // 0.02095 fro 955
-
     this.ctx!.font = "20px VT323, monospace";
     this.ctx!.fillStyle = "#ffffffff";
     this.ctx!.textBaseline = "top";
@@ -240,7 +234,7 @@ export class Game {
     this.ctx!.fillText("Score : " + 0 + "   " + "Max : " + this.maxScore, 10, 10);
 
     var responsiveFontSize = this.getResponsiveFontSize(40);
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; 
     this.ctx!.textBaseline = "middle";
     this.ctx!.textAlign = "center";
     this.ctx!.fillText("Speed through the duckway!", this.width / 2, this.height / 2);
@@ -253,14 +247,14 @@ export class Game {
 
   }
 
-  showControlsAux(text: string, responsiveFontSize:number){
- 
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //20px 20/955
+  showControlsAux(text: string, responsiveFontSize: number) {
+
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; 
     this.ctx!.textBaseline = "bottom";
-    this.ctx!.textAlign = "left"; // center manually
+    this.ctx!.textAlign = "left"; // will be centered manually
 
     const iconSize = responsiveFontSize;
-    const spacing = 1; //review spacing
+    const spacing = 1; 
     const commaText = ",";
     const y = this.height - 10;
 
@@ -277,20 +271,18 @@ export class Game {
       arrowWidth + spacing +
       textWidth;
 
-    // Centered starting X
     var x = (this.width - totalWidth) / 2;
 
-    //review xpos
-    this.ctx!.drawImage(this.handpointerImg, x, y - iconSize+4, iconSize-8, iconSize-7);
+    this.ctx!.drawImage(this.handpointerImg, x, y - iconSize + 4, iconSize - 8, iconSize - 7);
     x += handWidth + spacing;
 
-    this.ctx!.fillText(commaText, x-10, y);
+    this.ctx!.fillText(commaText, x - 10, y);
     x += commaWidth + spacing;
 
-    this.ctx!.drawImage(this.arrowUpImg, x-2, y - iconSize +4, iconSize-7, iconSize-7);
+    this.ctx!.drawImage(this.arrowUpImg, x - 2, y - iconSize + 4, iconSize - 7, iconSize - 7);
     x += arrowWidth + spacing;
 
-    this.ctx!.fillText(text, x-8, y);
+    this.ctx!.fillText(text, x - 8, y);
 
   }
 
@@ -323,12 +315,12 @@ export class Game {
 
       const newObstacle: Obstacle = {
         x: this.width,
-        y: random == 0 ? this.initialDuckPosY - this.obstacleOffsetPosY : this.initialDuckPosY - this.obstacleOffsetPosY - 56, //w offset to anchor them on the lanes
+        y: random == 0 ? this.initialDuckPosY : this.initialDuckPosY - 56,
         hasSpawnedNext: false
       };
 
       this.obstacles.push(newObstacle);
-    }, this.spawnTimer / speed); // will decrease prportionally with the obstacles speed increase
+    }, this.spawnTimer / speed); // will decrease proportionally to obstacles speed increase
   }
 
   animate() {
@@ -341,7 +333,7 @@ export class Game {
 
       this.ctx!.fillText(`Score : ${this.score}   Max : ${this.maxScore}`, 10, 10);
 
-      this.obstacles.forEach((obstacle,index): void => {
+      this.obstacles.forEach((obstacle, index): void => {
         obstacle.x -= this.currObstacleSpeed;
 
         if (obstacle.hasSpawnedNext === false && obstacle.x < this.width / 1.13) {
@@ -354,11 +346,11 @@ export class Game {
         } else {
           this.ctx!.drawImage(this.obstacleImg, obstacle.x, obstacle.y);
 
-          if(index<3){ //duck will always only be able to hit first 2 incoming, 1 more as margin for not destroyed
-            if ((this.currDuckPosY - this.obstacleOffsetPosY == obstacle.y) && (this.duckPosX - this.obstacleFrontHitboxOffset < obstacle.x && obstacle.x < this.duckEndPosX + this.obstacleBackHitboxOffset)) {
+          if (index < 3) { //duck will always only be able to hit first 2 incoming, 1 more as margin for not destroyed
+            if ((this.currDuckPosY == obstacle.y) && (this.duckPosX - this.obstacleFrontHitboxOffset < obstacle.x && obstacle.x < this.duckEndPosX + this.obstacleBackHitboxOffset)) {
               this.gameOver();
               return;
-           }
+            }
           }
         }
 
@@ -399,20 +391,19 @@ export class Game {
 
     this.ctx!.fillStyle = "#ffffffff";
     var responsiveFontSize = this.getResponsiveFontSize(40);
-    //also need to set it here in case of a reszie
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
+
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; 
     this.ctx!.textAlign = "center";
     this.ctx!.textBaseline = "top";
     this.ctx!.fillText("Ya blew it!!", this.width / 2, 10);
-    /**quit ducking around, ya quacked under pressure, etc etc */
 
     var responsiveFontSize = this.getResponsiveFontSize(32);
-    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; //30px 30/955
+    this.ctx!.font = `${responsiveFontSize}px VT323, monospace`; 
     this.ctx!.textBaseline = "middle";
     this.ctx!.fillText("Score : " + this.score + "   " + "Max : " + this.maxScore, this.width / 2, this.height / 2);
 
     responsiveFontSize = this.getResponsiveFontSize(25);
-    
+
     this.showControlsAux(", w, or s to play again", responsiveFontSize);
 
     this.canvasRef.nativeElement.style.cursor = "pointer";
@@ -450,7 +441,7 @@ export class Game {
     }
   }
 
-  getResponsiveFontSize(baseFontSize: number): number { //based on canvas prop, r
+  getResponsiveFontSize(baseFontSize: number): number { //props based on my laptop
     const baseWidth = 954.95;
     const baseHeight = 389.99;
 

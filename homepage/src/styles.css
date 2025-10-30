@@ -34,6 +34,7 @@ div{
 
   --what-project-font-weight: 300;
   --what-project-stack-font-weight: 400;
+  
   --focus-outline: rgb(240, 240, 240);
 }
 
@@ -64,4 +65,3 @@ body.light-theme {
 
   --focus-outline: rgb(13, 13, 13);
 }
-/*rever cor dialog box*/

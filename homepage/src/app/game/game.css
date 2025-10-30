@@ -1,7 +1,7 @@
 canvas {
   display: block;
   width: 100%;
-  height: 390px; /* previously was 300, but zoom 130 led to 390px on desktop (not on mobile tho )- make innerheight on mobile landscape*/
+  height: 390px; 
   cursor: default;
 }
 

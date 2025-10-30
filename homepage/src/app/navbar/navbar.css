@@ -1,4 +1,4 @@
-/*review*/
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -8,7 +8,7 @@
     border-radius: 6px;
 }
 
-.navbar.game-active{ /* might need additional class for mobile to accomodate tap buttons*/
+.navbar.game-active{ 
 
 zoom:100%; 
   justify-content: center;  
@@ -59,13 +59,13 @@ zoom:100%;
 }
 
 
-@media screen and (min-width: 768px) { /* scale to 130 zoom autoamitcally*/
+@media screen and (min-width: 768px) { /* scale to 108 zoom autoamitcally*/
     .navbar {
-     zoom: 108%; /* 130 previously*/
+     zoom: 108%; 
     }
 }
 
-@media screen and (max-width: 767px) and (orientation: portrait) { /* scale to 130 zoom autoamitcally*/
+@media screen and (max-width: 767px) and (orientation: portrait) { 
     .navbar {
          justify-content: center;
         gap: clamp(1rem, 25vw, 6rem);
@@ -75,13 +75,6 @@ zoom:100%;
         padding-right: 0;
     }
 }
-
-/*
-@media screen and (max-width: 767px) { /* scale to 130 zoom autoamitcally/
-    .menu-anim {
-     width: 0;
-    }
-} */
 
 .navbar-logo img {
     position: relative;
@@ -102,13 +95,11 @@ zoom:100%;
 
 .navbar-items {
     display: flex;
-    gap: 2em; /*1em*/
+    gap: 2em; 
     list-style: none;
     margin: 0;
     padding: 0;
-    /*
-  position: relative;
-  top: 2px; */
+
 }
 
 .navbar-item a {
@@ -143,7 +134,7 @@ zoom:100%;
 .navbar-item.active a {
   color: var(--white-navbar);
   pointer-events: none;
-  cursor: default; /* Optional: shows it’s not clickable */
+  cursor: default; 
 }
 
 .button-img {
@@ -156,7 +147,7 @@ zoom:100%;
   align-items: flex-end; 
   font-size: 1.5rem;
     padding-left: 31px;
-    --icon-color: var(--grey-icons); /* new var to change svg on parent hover. might also use for duck orange */
+    --icon-color: var(--grey-icons); 
 }
 
 .button-img:hover{
@@ -233,9 +224,9 @@ stroke: var(--icon-color);
 .navbar-item.active .blue-stripe,
 .navbar-item.active .white-stripe {
   opacity: 0 !important;
-  transform: none !important; /* or whatever resets */
+  transform: none !important; 
   transition-delay: 0s !important;
-  pointer-events: none; /* optional, prevent interaction */
+  pointer-events: none; 
 }
 
 /* Keep underline visible */
@@ -270,7 +261,7 @@ stroke: var(--icon-color);
 
 }
 
-.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part9{ /* to only 1-5?*/
+.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part9{ 
   transition: transform 0.3s ease, fill 0.3s ease;
   
 }
@@ -293,7 +284,7 @@ stroke: var(--icon-color);
 }
 
 .part1:hover, .part3:hover, .part4:hover, .part5:hover, .part6:hover,
-.part7:hover, .part9:hover { /* to only 1-5?*/
+.part7:hover, .part9:hover { 
   transform: translateY(-3px) scale(1.05);
 }
 

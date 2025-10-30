@@ -2,7 +2,6 @@
   margin-top: 0.5em;
   display: flex;
   flex-direction: column;
-  /*justify-content: space-between;*/
   justify-content: center;
   align-items: center;
   background-color: var(--content-background);
@@ -11,8 +10,6 @@
   position: relative;
   color: var(--what-textcolor);
   font-family: "Montserrat", sans-serif;
-   /* letter-spacing: 0.2px;*/
-    /* word-spacing: 1px; */   
   font-weight: 500;
 }
 
@@ -25,15 +22,7 @@
   border-radius: 6px;
   margin-top: 1em;
   margin-bottom: 0.5em;
-  /*transition: box-shadow 0.3s ease;*/
 }
-
-/*
-.project-wrapper:hover {
-
-  box-shadow: 0px 10px 50px 2px rgb(15, 15, 15)
-}
-*/
 
 .project-list {
   margin: 0;
@@ -45,8 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  background-color: var(--grey-what-project-background); /*#151515*/
-  /*#0f0f0f*/
+  background-color: var(--grey-what-project-background);
   padding: 2em;
   justify-content: center;
 }
@@ -56,13 +44,10 @@
   margin-top: 2em;
   display: flex;
   flex-wrap: nowrap;
-  /* wrap for mobile*/
   align-items: center;
   justify-content: center;
   column-gap: 3.5rem;
 }
-
-
 
 .enter-animation {
   animation: slide-fade 1s;
@@ -87,27 +72,10 @@
   justify-content: flex-end;
 }
 
-/*
-.project-content {
-  display: flex;
-  flex-wrap: wrap; 
-  align-items: center; /* flex start befor
-  gap: 3.5rem;
-  background-color: #0f0f0f;
-  padding: 2em;
-
-  justify-content: center;
-}
-*/
-
-
-
-
 .project-image-wrapper img {
-  /* box-sizing: border-box*/
   width: 100%;
   height: 20vw;
-  object-fit: contain; 
+  object-fit: contain;
   display: block;
   transition: opacity 0.7s ease-in-out;
 }
@@ -115,24 +83,16 @@
 
 
 .project-text {
-  /* box-sizing: border-box*/
   width: 50vh;
-    align-self: flex-start;   
-  margin-top: 2rem; 
-  display: flex; 
+  align-self: flex-start;
+  margin-top: 2rem;
+  display: flex;
   flex-direction: column;
-  /*margin-top: -2vh;
-  /*top: -2vh; /* will overflow on wrap*/
-  /*position: relative;
-
-  /* max-width: 60vh*/
-
 }
 
 .project-title {
 
   font-size: clamp(1.7rem, 3vw, 2rem);
-  /*3em*/
   font-weight: var(--what-project-font-weight);
 
 }
@@ -141,28 +101,27 @@
   font-weight: var(--what-project-font-weight);
   margin-top: 1em;
   font-size: clamp(1rem, 2.5vw, 1.1rem);
-  /* 1.25em*/
   line-height: 1.6;
   white-space: pre-line;
 
 }
 
 
-.project-stack{
+.project-stack {
   font-weight: var(--what-project-stack-font-weight);
- padding-top: 1em;
-   display: flex;
+  padding-top: 1em;
+  display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.stack-item{
+.stack-item {
   font-size: 0.7em;
   padding: 0.5em 0.5em;
   border-radius: 10px;
   border: 2px solid var(--what-stack-item-border);
   background-color: var(--what-stack-item-background);
-  
+
 }
 
 
@@ -193,7 +152,7 @@
 }
 
 .dot-active {
-   cursor: default;
+  cursor: default;
   background-color: var(--white-faded);
 }
 
@@ -209,7 +168,7 @@
 
 
 .button-img {
- padding: 8px;
+  padding: 8px;
   background: none;
   border: none;
   cursor: pointer;
@@ -221,7 +180,6 @@
 }
 
 
-/*@media (any-hover: hover) {*/
 .icon-link {
   color: var(--grey-icons);
   transition: color 0.3s ease;
@@ -250,8 +208,10 @@
     flex-wrap: wrap;
     margin-top: 0;
   }
-.project-image-wrapper img {
-    height: calc((100vw - 10em) * (548/893)) /* equals auto. em comes from padding of all : project content (4), wrapper(1), content(4), and body(1) */
+
+  .project-image-wrapper img {
+    height: calc((100vw - 10em) * (548/893))
+      /* equals auto. em comes from padding of all : project content (4), wrapper(1), content(4), and body(1) */
 
   }
 
@@ -262,23 +222,24 @@
 }
 
 @media (orientation: portrait) and (max-width: 505px) {
-.project-description {
-    order: 1; 
+  .project-description {
+    order: 1;
   }
 
   .project-stack {
-    order: 2; 
+    order: 2;
   }
-  
+
 }
 
-@media (orientation: landscape)  { /*(max-aspect-ratio: 4/2)*/
+@media (orientation: landscape) {
   .project-main {
     flex-wrap: wrap;
     margin-top: 0;
   }
-.project-image-wrapper img {
-    height: 90vh; 
+
+  .project-image-wrapper img {
+    height: 90vh;
 
   }
 
@@ -293,41 +254,45 @@
     flex-wrap: nowrap;
     margin-top: 2em;
   }
-.project-image-wrapper img {
-      width: 100%;
-  height: 20vw;
+
+  .project-image-wrapper img {
+    width: 100%;
+    height: 20vw;
 
   }
 
   .project-text {
-      width: 50vh;
-        align-self: flex-start;   
-  margin-top: 2.5vh; 
+    width: 50vh;
+    align-self: flex-start;
+    margin-top: 2.5vh;
   }
-  
+
 }
-  
 
-/*for card like portrait in lasndscape - understand aspectratio min to applytryout*/
 
-@media (orientation: landscape) and (min-width: 1920px) {  
+/*for card like portrait in lasndscape */
+
+@media (orientation: landscape) and (min-width: 1920px) {
 
   .project-content {
     gap: 2em;
   }
+
   .project-wrapper {
     max-width: 40vw;
     min-width: 5px;
   }
+
   .project-main {
     flex-wrap: wrap;
 
   }
-.project-image-wrapper img {
-    max-height: 33vh; /*65vh*/
-   
-  width: auto;
-     aspect-ratio: 893 / 548;
+
+  .project-image-wrapper img {
+    max-height: 33vh;
+
+    width: auto;
+    aspect-ratio: 893 / 548;
 
   }
 
@@ -336,14 +301,7 @@
     width: 100%;
   }
 
-  .project-stack{
- padding-top: 1em;
+  .project-stack {
+    padding-top: 1em;
+  }
 }
-}
-
-
-/*
-.project-main {
-  gap: 2.5rem;
-}*/
-
