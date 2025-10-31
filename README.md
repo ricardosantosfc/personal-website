@@ -9,7 +9,7 @@ My personal website, built with Angular. It consist of a single-page static site
  
 Despite already being familiar with Angular, I still tried to challenge myself by not using any external library whatsover, just vanilla Angular and TypeScript. I also tried to keep the components modifiable and extensible so they can be easily updated with more content in the future.
 
-Source code is located in the [`/homepage`](https://github.com/ricardosantosfc/personal-website/tree/main/homepage) directory. It still needs some refactoring and cleanup at the moment, so proceed with caution! 
+Source code is located in the [`/homepage`](https://github.com/ricardosantosfc/personal-website/tree/main/homepage) directory. It still needs some refactoring and cleanup, so proceed with caution! 
 
 ## Installing, running and building
 
