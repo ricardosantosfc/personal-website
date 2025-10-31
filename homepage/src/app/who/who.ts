@@ -137,7 +137,7 @@ export class Who {
       nextDialogIndex: 15
     },
     {
-      text: "", //----------------------------- no dialog box. click on cnavas. iflenght text = 0 back to 15
+      text: "",
       spriteAlternations: 0,
       sprites: [37],
       endSprite: 37, //empty sprite
@@ -225,12 +225,6 @@ export class Who {
   @HostListener('window:resize')
   onResize() {
 
-    /** //needs debouncing
-     setTimeout(()=> {
-      this.resizeFooter();
-     },500);
-     */
-
     this.footer.nativeElement.style.height = 'auto';
     this.resizeFooter();
     this.scaleCanvas();
@@ -317,8 +311,6 @@ export class Who {
 
   drawSprite(spritePosX: number) {
     //x spritestart, yspritestart (from top), x spritesize, yspritesize, x canvas start, y canvasstart ,dimensions in canvas 
-    /* this.ctx!.drawImage(this.spritesheetImg, 512 * 0, 0, 512, 512, 
-              ((this.width - this.height)-10) / 2, -10, this.height+10, this.height+10)*/
 
     this.ctx!.drawImage(this.spritesheetImg, 512 * spritePosX, 0, 512, 512,
       ((this.width - this.height) - this.spriteSizeIncrease) / 2, -this.spriteSizeIncrease,
