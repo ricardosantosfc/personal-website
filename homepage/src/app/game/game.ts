@@ -48,7 +48,8 @@ export class Game {
   private duckImg = new Image();
   private duckGameOverImg = new Image();
   private currDuckPosY = 0;
-  private initialDuckPosY = 0;
+  private initialDuckPosY = 0; // will be calculated based on canvas height
+  private shiftDuckPosY = 56; //when duck moves, this value wil be inc/dec based on current lane
   private duckPosX = 100; //x offset, w = 51, //also needs to be proportional to the canvas width
   private duckEndPosX = 0; //so occupies 10-61, but for good measure do it programmatically
 
@@ -315,14 +316,14 @@ export class Game {
   spawnObstacles(speed: number) {
     this.spawnTimeoutId = setTimeout(() => {
 
-      //gen random 0 or 1 to place on bottom or top lane
+      //gen random 0 or 1 to place on top lane (=initialDuckPos) or bottom (initialDuckPosY - shiftDuck)
       const minCeiled = Math.ceil(0);
       const maxFloored = Math.floor(2);
       const random = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 
       const newObstacle: Obstacle = {
         x: this.width,
-        y: random == 0 ? this.initialDuckPosY : this.initialDuckPosY - 56,
+        y: random == 0 ? this.initialDuckPosY : this.initialDuckPosY - this.shiftDuckPosY,
         hasSpawnedNext: false
       };
 
@@ -443,9 +444,9 @@ export class Game {
   moveDuck() {
 
     if (this.currDuckPosY === this.initialDuckPosY) {
-      this.currDuckPosY -= 56;
+      this.currDuckPosY -= this.shiftDuckPosY;
     } else {
-      this.currDuckPosY += 56
+      this.currDuckPosY += this.shiftDuckPosY
     }
   }
 
