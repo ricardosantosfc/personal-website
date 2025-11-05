@@ -423,19 +423,20 @@ export class Game {
 
     this.ctx!.drawImage(this.skyImg, 0, 0, width, midY1 + 1 - this.offsetSkyWaterY);
 
+    var currWaterImg;
     if (this.backgroundFrameCount <= 12) {
-      this.ctx!.drawImage(this.waterImg0, 0, height, width, midY1 - height - this.offsetSkyWaterY);
-      this.backgroundFrameCount++;
+      currWaterImg = this.waterImg0;
     } else if (this.backgroundFrameCount <= 24) {
-      this.ctx!.drawImage(this.waterImg1, 0, height, width, midY1 - height - this.offsetSkyWaterY);
-      this.backgroundFrameCount++;
+      currWaterImg = this.waterImg1;
     } else if (this.backgroundFrameCount <= 36) {
-      this.ctx!.drawImage(this.waterImg2, 0, height, width, midY1 - height - this.offsetSkyWaterY);
+      currWaterImg = this.waterImg2;
+    }
+      this.ctx!.drawImage(currWaterImg!, 0, height, width, midY1 - height - this.offsetSkyWaterY);
       this.backgroundFrameCount++;
       if (this.backgroundFrameCount == 37) { //needs to be done imeddiatly so next frame is already
         this.backgroundFrameCount = 0;
       }
-    } //frameCount is inc on resizes but not problematic
+     //frameCount is inc on resizes but not problematic
 
   }
 
