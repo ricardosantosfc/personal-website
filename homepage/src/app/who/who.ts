@@ -3,7 +3,7 @@ import { WhoService } from '../services/who-service';
 import { SizeService } from '../services/size-service';
 import { Footer } from "../footer/footer";
 
-interface Dialogs {
+interface Dialog {
   text: string;
   spriteAlternations: number; //times to alternate aimating between the sprites before end sprite
   sprites: number[]; //spirtes?: 
@@ -28,7 +28,7 @@ export class Who {
   private height = 0;
 
   //closed mouth = uneven sprites, except for 33,34
-  private dialogs: Dialogs[] = [
+  private dialogs: Dialog[] = [
     {
       text: "...",
       spriteAlternations: 0,
@@ -166,7 +166,7 @@ export class Who {
       nextDialogIndex: 22
     },
     {
-      text: "Well, besides working on this website, I've been learning how to use React and Three.js. I've also been refreshing my SQL skills.",
+      text: "Lately I've been experimenting with React and Three.js. I've also been refreshing my SQL skills.",
       spriteAlternations: 14,
       sprites: [9, 10],
       endSprite: 10,

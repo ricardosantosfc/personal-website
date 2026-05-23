@@ -35,6 +35,17 @@ export class What {
     },
     {
       id: 1,
+      images: ["/what/soiroom0.png", "/what/soiroom1.png", "/what/soiroom2.png",
+        "/what/soiroom3.png"],
+      title: "SÓI ROOM",
+      description:
+        "A virtual space built to showcase works resulting from my creative hobbies.",
+      stack: ["React", "Three.js"],
+      github: "https://github.com/ricardosantosfc/SOI-ROOM",
+      link: "https://soi-room.pages.dev/"
+    },
+    {
+      id: 2,
       images: ["/what/personal-website.png"],
       title: "Personal website",
       description: "My personal website, which you're browsing right now.",
