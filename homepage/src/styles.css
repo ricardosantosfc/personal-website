@@ -38,6 +38,7 @@ div{
   --what-project-stack-font-weight: 400;
   
   --focus-outline: rgb(240, 240, 240);
+  --what-project-img-filter: brightness(0.9) contrast(1.05) /*0.9 1.05,  0.96 1.1*/
 }
 
 body.light-theme {
@@ -68,4 +69,5 @@ body.light-theme {
   --what-project-stack-font-weight: 500;
 
   --focus-outline: rgb(13, 13, 13);
+  --what-project-img-filter: brightness(1.15) contrast(1.05) /*1.2 0.95, 1.15 1.05*/
 }
